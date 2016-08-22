@@ -204,6 +204,7 @@
     <Content Include="ModuleName\Inventory\TransactionPage\frm_item_requisition.aspx" />
     <Content Include="ModuleName\Inventory\TransactionPage\WebFormFormat.aspx" />
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\ERPApplicationPublish.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -363,7 +364,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>51160</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:45565/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
