@@ -66,7 +66,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2016 12:45:26</publishTime>
     </File>
     <File Include="bin/ERPWebApplication.dll">
-      <publishTime>08/22/2016 15:48:52</publishTime>
+      <publishTime>08/23/2016 17:59:41</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Membership.OpenAuth.dll">
       <publishTime>08/21/2016 12:45:27</publishTime>
@@ -99,7 +99,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2016 12:45:08</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>08/22/2016 12:50:54</publishTime>
+      <publishTime>08/23/2016 16:52:22</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png">
       <publishTime>08/21/2016 12:45:14</publishTime>
@@ -264,7 +264,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2016 12:45:14</publishTime>
     </File>
     <File Include="Default.aspx">
-      <publishTime>08/22/2016 12:56:28</publishTime>
+      <publishTime>08/23/2016 17:11:55</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>08/21/2016 12:45:08</publishTime>
@@ -315,10 +315,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2016 12:45:08</publishTime>
     </File>
     <File Include="ModuleName/Inventory/TransactionPage/frm_item_issue.aspx">
-      <publishTime>08/22/2016 12:04:07</publishTime>
+      <publishTime>08/23/2016 17:11:28</publishTime>
     </File>
     <File Include="ModuleName/Inventory/TransactionPage/frm_item_requisition.aspx">
-      <publishTime>08/22/2016 12:04:21</publishTime>
+      <publishTime>08/23/2016 17:11:40</publishTime>
     </File>
     <File Include="ModuleName/Inventory/TransactionPage/WebFormFormat.aspx">
       <publishTime>08/22/2016 12:04:26</publishTime>
@@ -408,10 +408,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2016 12:45:13</publishTime>
     </File>
     <File Include="Site.Master">
-      <publishTime>08/22/2016 13:27:54</publishTime>
+      <publishTime>08/23/2016 17:30:51</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/22/2016 15:48:52</publishTime>
+      <publishTime>08/23/2016 17:59:42</publishTime>
     </File>
   </ItemGroup>
 </Project>

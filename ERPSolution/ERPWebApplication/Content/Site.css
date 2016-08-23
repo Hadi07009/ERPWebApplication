@@ -94,7 +94,14 @@ h5, h6 {
 ----------------------------------------------------------*/
 .content-wrapper {
     margin: 0 auto;    
-    max-width: 960px;
+    max-width: 960px;   
+    
+    
+}
+/*Edited*/
+.content-wrapperHeader {
+    margin: 0 auto;    
+    max-width: 1325px;
     /*max-width: inherit;*/
     
     
@@ -112,12 +119,26 @@ h5, h6 {
         padding-left: 10px;
         padding-top: 30px;
     }
+/*Edited*/
+    .main-contentHeader {
+        background: url("../Images/accent.png") no-repeat;
+        padding-left: 10px;
+        padding-top: 30px;
+    }
 
     .featured + .main-content {
         background: url("../Images/heroAccent.png") no-repeat;
     }
+/*Edited*/
+    .featuredHeader + .main-contentHeader {
+        background: url("../Images/heroAccent.png") no-repeat;
+    }
 
 header .content-wrapper {
+    padding-top: 20px; 
+}
+/*Edited*/
+header .content-wrapperHeader {
     padding-top: 20px; 
 }
     
@@ -215,8 +236,26 @@ ul#menu {
     background-color: #fff;
      
 }
+/*Edited*/
+.featuredHeader {
+    
+    background-color: #fff;
+     
+}
 
     .featured .content-wrapper {
+        background-color: #7ac0da;
+        background-image: -ms-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
+        background-image: -o-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
+        background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #7ac0da), color-stop(1, #a4d4e6));
+        background-image: -webkit-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
+        background-image: linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
+        color: #3e5667;
+        /*padding: 20px 40px 30px 40px;*/
+        padding: 5px 40px 3px 3px; /*edited*/
+    }
+/*Edited*/
+    .featured .content-wrapperHeader {
         background-color: #7ac0da;
         background-image: -ms-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
         background-image: -o-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
@@ -642,13 +681,27 @@ tr.pager td {
     .featured + .main-content {
         background-position: 10px 0;
     }
+/*Edited*/
+    .main-contentHeader,
+    .featuredHeader + .main-contentHeader {
+        background-position: 10px 0;
+    }
 
     .content-wrapper {
         padding-right: 10px;
         padding-left: 10px;
     }
+/*Edited*/
+    .content-wrapperHeader {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
 
     .featured .content-wrapper {
+        padding: 10px;
+    }
+/*Edited*/
+    .featuredHeader .content-wrapperHeader {
         padding: 10px;
     }
 
@@ -739,3 +792,6 @@ tr.pager td {
         }
 }
 /* END: Mobile Styles */
+
+
+

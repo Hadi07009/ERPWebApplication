@@ -4,14 +4,14 @@
 
 
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
-    <section class="featured">
+    <%--<section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
                 <h2><%: Title %>.</h2>
             </hgroup>
 
         </div>
-    </section>
+    </section>--%>
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <div id="wrapper" style="margin: 0 auto">
