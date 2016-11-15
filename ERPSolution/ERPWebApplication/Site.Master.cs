@@ -67,6 +67,15 @@ namespace ERPWebApplication
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                if (Page.Title == "Log in")
+                {
+                    NavigationMenu.Visible = false;
+                    
+                }
+                
+            }
 
         }
     }

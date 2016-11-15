@@ -1,0 +1,93 @@
+﻿.default_alertWindow
+{
+	border: 2px solid gray; 
+    font-family:'Khmer UI';
+    font-size:16px /* this is the border around the alert window */
+}
+.default_titleBar
+{
+	/* title bar settings */
+	color: gray;
+	font-family:'Khmer UI';
+    font-size:16px;/* the bottom border of your title bar, the border that separates it from the content area */
+	 border:1px solid #dddddd; 
+    background-image: -webkit-gradient(
+	linear,
+	color-stop(0, #D9DBD7),
+	color-stop(1, #FFFFFF)
+);
+background-image: -o-linear-gradient(left top, #D9DBD7 0%, #FFFFFF 100%);
+background-image: -moz-linear-gradient(left top, #D9DBD7 0%, #FFFFFF 100%);
+background-image: -webkit-linear-gradient(left top, #D9DBD7 0%, #FFFFFF 100%);
+background-image: -ms-linear-gradient(left top, #D9DBD7 0%, #FFFFFF 100%);
+background-image: linear-gradient(to left top, #D9DBD7 0%, #FFFFFF 100%);    
+	line-height: 25px; /* if you have an icon, you probably want to set this as the same size or a bit larger than the icon size */
+	padding: 5px;
+}
+
+
+.default_titleBarLeftIcon
+{
+	/* left icon settings */
+	/*background: transparent url(information.png) no-repeat;
+	width: 16px;
+	height: 16px;*/
+}
+.default_titleBarRightIcon
+{
+	/* right icon settings */
+	/* background: transparent url(/icons/cancel.png) no-repeat;
+	width: 16px;
+	height: 16px; */
+}
+
+
+.default_contentArea
+{
+	/* the contente area, where the actual message text is shown */
+	color: gray;
+	font-family:'Khmer UI';
+    font-size:14px;
+	overflow: auto;  /* setting this to auto will make scrollbars appear if the message text is too long for the height attribute, assuming you set it */
+	padding: 5px;
+	background-color:white; /* your background color.  the button area background color should be set the same as well */
+}
+
+.default_buttonArea
+{
+	/* the button area, the div that your buttons are placed into */
+	text-align: right; /* if you want you buttons to the left or center of the alert box, change this setting */
+	background-color: #f1f1f1; /* your background color.  the content area background color should be set the same as well */
+	padding: 5px 5px 5px 25px;
+  
+}
+
+
+.default_okButton
+{
+	
+
+   
+   padding: 5px 5px 5px 25px;
+  border: none;
+  height :29px;
+  color:#fff;
+   /*width:15px;*/
+  text-decoration:none;
+  cursor:pointer;
+  background:#a5c8e5 url(accept.png) no-repeat scroll 5px center;
+  font-family:'Khmer UI';
+  
+
+
+}
+.default_cancelButton
+{
+	/* cancel button settings, if present */
+	background: url(cancel.png);
+	padding-left: 15px;
+	margin-right: 5px;
+	background-repeat: no-repeat;
+	background-position: center left;
+	height: 35px;
+}

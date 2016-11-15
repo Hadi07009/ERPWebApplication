@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERPWebApplication", "ERPWebApplication\ERPWebApplication.csproj", "{FC8B0C08-18E6-419E-988D-3FC9A6EA2C34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlLibrary", "ControlLibrary\ControlLibrary.csproj", "{15893837-BAE5-4468-9E28-FFA2ED2900B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{FC8B0C08-18E6-419E-988D-3FC9A6EA2C34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC8B0C08-18E6-419E-988D-3FC9A6EA2C34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC8B0C08-18E6-419E-988D-3FC9A6EA2C34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15893837-BAE5-4468-9E28-FFA2ED2900B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15893837-BAE5-4468-9E28-FFA2ED2900B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15893837-BAE5-4468-9E28-FFA2ED2900B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15893837-BAE5-4468-9E28-FFA2ED2900B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

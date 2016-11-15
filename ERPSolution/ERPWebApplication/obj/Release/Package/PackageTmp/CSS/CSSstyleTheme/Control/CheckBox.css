@@ -1,0 +1,25 @@
+﻿.cssCheckBox 
+{
+    font-family: 'Lao UI';
+    font-size:12pt;
+    font-weight: normal;
+    text-align: Left;
+    color:gray;   
+    display:ruby;
+    border-style:none;
+   
+   
+}
+
+.cssCheckListBox 
+{
+    font-family: 'Lao UI';
+    font-size:12pt;
+    font-weight: normal;
+    text-align: Left;
+    color:gray;   
+    display:ruby;
+    border-style:none;
+    text-indent:15px;
+   
+}

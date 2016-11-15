@@ -2,6 +2,10 @@
 <%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
+   
+    <header>
+        <link href="../CSS/CSSstyleTheme/CommonCSS/Control.css" rel="stylesheet" />
+    </header>
     <hgroup class="title">
         <h1><%: Title %>.</h1>
     </hgroup>
@@ -26,17 +30,17 @@
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="field-validation-error" ErrorMessage="The password field is required." />
                         </li>
                         <li>
-                            <asp:CheckBox runat="server" ID="RememberMe" />
+                            <asp:CheckBox runat="server" ID="RememberMe" CssClass="checkbox" />
                             <asp:Label runat="server" AssociatedControlID="RememberMe" CssClass="checkbox">Remember me?</asp:Label>
                         </li>
                     </ol>
-                    <asp:Button runat="server" CommandName="Login" Text="Log in" />
+                    <asp:Button runat="server" CommandName="Login" Text="Log in" CssClass="btnStyle1" ID="btnLogin" OnClick="btnLogin_Click" />
                 </fieldset>
             </LayoutTemplate>
         </asp:Login>
         <p>
-            <asp:HyperLink runat="server" ID="RegisterHyperLink" ViewStateMode="Disabled">Register</asp:HyperLink>
-            if you don't have an account.
+            <%--<asp:HyperLink runat="server" ID="RegisterHyperLink" ViewStateMode="Disabled">Register</asp:HyperLink>
+            if you don't have an account.--%>
         </p>
     </section>
 
@@ -45,3 +49,4 @@
         <uc:OpenAuthProviders runat="server" ID="OpenAuthLogin" />
     </section>
 </asp:Content>
+

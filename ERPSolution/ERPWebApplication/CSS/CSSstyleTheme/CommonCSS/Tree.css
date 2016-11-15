@@ -1,0 +1,57 @@
+﻿.treeNode {
+    background-color:#eeeeee;
+    border-color: #eeeeee;
+    border: solid 1px #eeeeee;
+    font: 15px Arial, Sans-Serif;
+    width: 100%;
+    height: 100%;
+    font-weight: bold;
+}
+
+.rootNode {
+    background-color:#eeeeee;
+    border-color: #eeeeee;
+    border: solid 1px #eeeeee;
+    font: 15px Arial, Sans-Serif;
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    width: 100%;
+    border-bottom: Solid 1px black;
+}
+
+.leafNode {
+    border-color: #eeeeee;
+    border: solid 1px #eeeeee;
+    font: 15px Arial, Sans-Serif;
+    width: 100%;
+    height: 100%;
+    background-color: #eeeeee;
+}
+
+.selectedNode {
+    background-color:#eeeeee;
+    border-color: #eeeeee;
+    border: solid 1px #eeeeee;
+    font: 15px Arial, Sans-Serif;
+    width: 100%;
+    height: 100%;
+}
+
+.parentNode {
+    background-color:#eeeeee;
+    border-color: #eeeeee;
+    border: solid 1px #eeeeee;
+    font: 15px Arial, Sans-Serif;
+    width: 100%;
+    height: 100%;
+}
+
+.hoverNode {
+    background-color:brown;
+    border-color: brown;
+    border: solid 1px brown;
+    font: 15px Arial, Sans-Serif;
+    width: 100%;
+    height: 100%;
+}

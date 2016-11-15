@@ -1,0 +1,63 @@
+﻿/* TAB menu   
+----------------------------------------------------------*/
+
+div.hideSkiplink
+{    
+    background-color:#611088;
+    width:100%;
+    height:40px;
+    vertical-align:middle;
+}
+
+div.menu
+{
+    padding: 0px 0px 0px 0px;
+}
+
+div.menu ul
+{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+    height:25px;
+    background-color:#F1F1F1;
+}
+
+div.menu ul li a, div.menu ul li a:visited
+{   
+    background-color: #f1f1f1;    
+    border: 0px white solid;   
+    /*color: white;*/
+
+    font-family: "Segoe UI","wf_segoe-ui_normal","Arial",sans-serif;
+    font-size: 1.1em;
+    
+    display: block;
+    line-height: 1.8em;
+    padding: 8px 20px;
+    text-decoration:none;
+    white-space: nowrap;
+    height:25px;
+    vertical-align:top;
+}
+
+div.menu ul li a:hover
+{
+    /*background-color:blue;*/
+    /*color: white;*/
+    text-decoration: none;
+    height:25px;
+    background-color: #D9D9D9;
+    transition: background-color 0s ease 0s;
+}
+
+div.menu ul li a:active
+{
+    background-color: #465c71;
+    color: #cfdbe6;
+    text-decoration: none;
+}
+
+
+

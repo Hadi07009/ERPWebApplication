@@ -1,0 +1,75 @@
+﻿/*
+* Created By Shemeer NS 
+* This Code is created for demo purpose and uploaded in Codeproject
+* My Other Articles in codeproject - http://www.codeproject.com/script/Articles/MemberArticles.aspx?amid=3175840
+* */
+.grid
+{
+    font-family: tahoma;
+    font-size: 12px;
+    border: solid 1px #7f7f7f;
+    border-collapse: collapse;
+    color: #333333;
+    width: 100%;
+}
+.grid th
+{
+    border-color: #989898 #cbcbcb #989898 #989898;
+    border-style: solid solid solid none;
+    border-width: 1px 1px 1px 1px;
+    color: Menu;
+    padding: 4px 5px 4px 10px;
+    vertical-align: bottom;
+    text-align: left;
+    background-color: Highlight;
+}
+.grid td
+{
+    color: #333333;
+    padding: 4px 1px 4px 1px;
+    border-bottom: solid 1px #BBD9EE;
+    padding: 4px 5px 4px 10px;
+}
+.gridRow
+{
+    background-color: #B1DEDC;
+}
+
+.gridAltRow
+{
+    background-color: #D1EDE9;
+}
+
+.gridEditRow
+{
+    background-color: #0DC6DE;
+}
+.gridFooterRow
+{
+    background-color: #E8ECED;
+}
+.grid tr.gridRow:hover, .grid tr.gridAltRow:hover
+{
+    font-family: tahoma;
+    font-size: 12px;
+    border: solid 1px #7f7f7f;
+    border-collapse: collapse;
+    background-color: #99BBE1;
+}
+
+.hCursor
+{
+    cursor: pointer;
+    cursor: hand;
+}
+.gridHeader
+{
+    border-color: #989898 #cbcbcb #989898 #989898;
+    border-style: solid solid solid none;
+    border-width: 1px 1px 1px 1px;
+    color: Menu;
+    padding: 4px 5px 4px 10px;
+    vertical-align: bottom;
+    text-align: left;
+    background-color: Highlight;    
+ }

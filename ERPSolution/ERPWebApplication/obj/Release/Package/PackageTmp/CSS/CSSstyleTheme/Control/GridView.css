@@ -1,0 +1,57 @@
+﻿.GridviewScrollHeader TH, .GridviewScrollHeader TD 
+{ 
+    height:27px;
+    text-align:left;
+     border:1px solid #dddddd; 
+    background-image:-webkit-gradient(
+	linear,
+	color-stop(0, #D9DBD7),
+	color-stop(1, #FFFFFF)
+);
+background-image: -o-linear-gradient(left top, #D9DBD7 0%, #FFFFFF 100%);
+background-image: -moz-linear-gradient(left top, #D9DBD7 0%, #FFFFFF 100%);
+background-image: -webkit-linear-gradient(left top, #D9DBD7 0%, #FFFFFF 100%);
+background-image: -ms-linear-gradient(left top, #D9DBD7 0%, #FFFFFF 100%);
+background-image: linear-gradient(to left top, #D9DBD7 0%, #FFFFFF 100%);    
+padding:5px;
+
+
+}
+.GridviewScrollItem TD {
+    cursor: default;
+    padding: 5px;
+    background-color: #FFFFFF;
+    text-align: left;
+    height: 27px;
+  /*max-width:0;
+    white-space:normal;*/
+   
+} 
+.GridviewScrollPager  
+{ 
+    border: 1px solid #dddddd; 
+    background-color: #FFFFFF; 
+} 
+.GridviewScrollPager TD 
+{ 
+  
+    padding-top: 3px; 
+    font-size: 14px; 
+    padding-left: 5px; 
+    padding-right: 5px; 
+} 
+.GridviewScrollPager A 
+{ 
+    color: #dddddd; 
+}
+.GridviewScrollPager SPAN
+
+{
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+}
+
+

@@ -1,0 +1,13 @@
+  DataTable dtcount = new DataTable();
+            dtcount = DataProcess.GetData(connectionStringreq, SqlGenerateForItemRequisition.GetDataRequisitionHdr(txtRefNo.Text));
+
+            if (dtcount.Rows.Count > 0)
+            {
+
+                if (Convert.ToInt32(dtcount.Rows[0]["CompletionStatus"]) == 1)
+                {
+                   return  "Data Already Submitted.";
+                }
+             
+            }
+

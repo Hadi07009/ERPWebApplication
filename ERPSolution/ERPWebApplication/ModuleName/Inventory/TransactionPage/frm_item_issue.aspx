@@ -1,24 +1,12 @@
 ﻿<%@ Page Title="ITEM ISSUE" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="frm_item_issue.aspx.cs" Inherits="ERPWebApplication.ModuleName.Inventory.TransactionPage.frm_item_issue" %>
 
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
-
-<asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
-    <%--<section class="featured">
-        <div class="content-wrapperHeader">
-            <hgroup class="title">
-                <h2><%: Title %>.</h2>
-            </hgroup>
-            
-        </div>
-    </section>--%>
-</asp:Content>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <div id="wrapper" style="margin: 0 auto">
         <asp:UpdatePanel ID="uppnl1" runat="server">
-             <ContentTemplate>
-                 <table class="auto-style1" style="width: 100%">
+            <ContentTemplate>
+                <table class="auto-style1" style="width: 100%">
 
                     <tr>
                         <td class="auto-style24">
@@ -33,38 +21,28 @@
                                 <tr>
                                     <td class="auto-style228">&nbsp;</td>
                                     <td class="auto-style128">
-                                        <asp:Panel ID="pnlsearch" runat="server" Height="16px" Style="background-color: #006EC7; color: white;" Width="798px">
-                                            <div class="heading" style="background-color: #3366CC">
-                                                <asp:ImageButton ID="header_ToggleImage1" runat="server" AlternateText="collapse" ImageUrl="~/images/collapse.jpg" />
+                                        <asp:Panel ID="pnlsearch" runat="server" Style="background-color: #006EC7; color: white;" Width="798px">
+                                            <div class="heading" style="background-color: #3366CC; height: 20px">
+                                                <asp:ImageButton ID="header_ToggleImage1" Width="7px" Height="10px" runat="server" AlternateText="collapse" ImageUrl="~/images/collapse.jpg" />
 
                                                 Search Requisition
                                             </div>
                                         </asp:Panel>
                                     </td>
-                                    <td class="auto-style225">
-                                        <asp:LinkButton ID="lnkhome" runat="server" PostBackUrl="~/Frm_home_page.aspx">Home Page</asp:LinkButton>
-                                    </td>
+                                    <td class="auto-style225">&nbsp;</td>
                                 </tr>
                                 <tr>
                                     <td class="auto-style228">&nbsp;</td>
                                     <td class="auto-style128" colspan="2">
 
                                         <asp:Panel ID="pnlsearchrequisition" runat="server">
-                                            <table class="auto-style90">
+                                            <table>
                                                 <tr>
-                                                    <td class="auto-style230"></td>
-                                                    <td class="auto-style231"></td>
-                                                    <td class="auto-style232"></td>
-                                                    <td class="auto-style233"></td>
-                                                    <td class="auto-style233"></td>
-                                                    <td class="auto-style233"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="auto-style216">&nbsp;</td>
+                                                    <td>&nbsp;</td>
                                                     <td class="auto-style217">
-                                                        <asp:TextBox ID="txtsearchreq0" runat="server" Height="23px" Width="324px"></asp:TextBox>
+                                                        <asp:TextBox ID="txtsearchreq0" runat="server" Height="23px" Width="244px"></asp:TextBox>
                                                     </td>
-                                                    <td class="auto-style218">
+                                                    <td>
                                                         <asp:Button ID="btnsearch" runat="server" BackColor="#9CC2E5" Height="28px" OnClick="btnsearch_Click" Text="Search" Width="100px" />
                                                     </td>
                                                     <td>
@@ -108,7 +86,7 @@
 
                             <table class="auto-style1" id="tbladvsearch" runat="server">
                                 <tr>
-                                    <td class="auto-style155">&nbsp;</td>
+                                    <td class="auto-style1">&nbsp;</td>
                                     <td class="auto-style134">Item Requisition No:</td>
                                     <td class="auto-style190">
                                         <asp:TextBox ID="txtrequisitionid" runat="server" Width="220px"></asp:TextBox>
@@ -124,7 +102,7 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td class="auto-style155">&nbsp;</td>
+                                    <td class="auto-style1">&nbsp;</td>
                                     <td class="auto-style208">Item Name:</td>
                                     <td class="auto-style190">
                                         <asp:TextBox ID="txtitmcode" runat="server" Width="220px"></asp:TextBox>
@@ -138,7 +116,7 @@
                                     <td class="auto-style155">&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td class="auto-style155">&nbsp;</td>
+                                    <td class="auto-style1">&nbsp;</td>
                                     <td class="auto-style208">&nbsp;</td>
                                     <td class="auto-style190">&nbsp;</td>
                                     <td class="auto-style205">&nbsp;</td>
@@ -386,7 +364,7 @@
 
 
                 </table>
-                 <table class="auto-style1" id="tbldet" runat="server">
+                <table class="auto-style1" id="tbldet" runat="server">
 
 
 
@@ -615,10 +593,19 @@
 
 
                 </table>
-             </ContentTemplate>
+            </ContentTemplate>
         </asp:UpdatePanel>
 
     </div>
 
 </asp:Content>
+
+<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="HeadContent">
+    <style type="text/css">
+        .auto-style1 {
+            width: 4px;
+        }
+    </style>
+</asp:Content>
+
 

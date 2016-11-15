@@ -1,0 +1,402 @@
+﻿.btn{
+    border-radius:0px;
+}
+
+.CssBtnSearch
+{   
+font-size:10pt;
+border: none;
+height :30px;
+width:40px;
+color:#fff;  
+text-decoration:none;
+cursor:pointer;
+background:#a5c8e5 url(../Images/search.png) no-repeat scroll 5px center;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif; 
+
+}
+
+.CssBtnSearch:hover
+{  
+width:40px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:#3e93bf url(../Images/search.png) no-repeat scroll 5px center;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif; 
+}
+
+.CssBtnShowAll
+{ 
+  font-size:10pt;
+  border: none;
+  height :30px;
+  width:98px;
+  color:#fff;  
+  text-decoration:none;
+  cursor:pointer;
+  background: navy url(../Images/showall.png) no-repeat scroll 5px center;
+  font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+.CssBtnShowAll:hover
+{
+    border: none;
+width:98px;
+font-size: 10pt;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:#3e93bf url(../Images/showall.png) no-repeat scroll 5px center;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+.CssBtnRegular
+{
+    border: none;
+width:98px;
+font-size: 10pt;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:green url(../Images/addnew.png) no-repeat scroll 5px center;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif; 
+  
+}
+
+.CssBtnRegular:hover
+{
+    border: none;
+width:98px;
+font-size: 10pt;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:#3e93bf url(../Images/addnew.png) no-repeat scroll 5px center;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+
+}
+
+
+.CssBtnShowAllCol
+{   
+width:98px;
+font-size: 10pt;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:url(Images/showall.png) no-repeat scroll 5px center;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+.CssBtnShowAllCol:hover
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:#3e93bf;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+
+.CssBtnSave
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:gray;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+.CssBtnSave:hover
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:#3e93bf;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+
+.CssBtnSaveMore
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:#3e93bf;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+
+}
+
+.CssBtnSaveMore:hover
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:#3e93bf;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+
+}
+.CssBtnDelete
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:white;
+text-decoration:none;
+cursor:pointer;
+background:#3e93bf;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+.CssBtnDelete:hover
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:#3e93bf;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+.CssBtnAddNew
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:white;
+text-decoration:none;
+cursor:pointer;
+background:blue;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+.CssBtnAddNew:hover
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:#3e93bf;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+.CssBtnAddMore
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:white;
+text-decoration:none;
+cursor:pointer;
+background:Gray;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+.CssBtnAddMore:hover
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:#3e93bf;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+.CssBtnConfirm
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:white;
+text-decoration:none;
+cursor:pointer;
+background:green;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+.CssBtnConfirm:hover
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:#3e93bf;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+
+
+.CssBtnPrintAll
+{
+font-size: 10pt;
+border: None;
+background-color: #BDDAEA;
+color:#fff;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+height :30px;
+cursor:pointer;
+margin-left: 0px;
+width:98px;
+}
+
+.CssBtnPrintAll:hover
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:#3e93bf;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+.CssBtnCancel
+{
+font-size: 10pt;
+border: None;
+background-color: #aaa;
+color:#fff;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+height :30px;
+cursor:pointer;
+margin-left: 0px;
+width:98px;    
+}
+
+.CssBtnCancel:hover
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:#3e93bf;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+
+
+}
+
+
+.CssBtnPrint
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:#fff;
+text-decoration:none; 
+cursor:pointer;
+background:red url(../Images/print.png) no-repeat scroll 5px center;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+.CssBtnPrint:hover
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:#3e93bf url(../Images/print.png) no-repeat scroll 5px center;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+.CssBtnPrintAll
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:#fff;
+text-decoration:none; 
+cursor:pointer;
+background:gray url(../Images/print.png) no-repeat scroll 5px center;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+.CssBtnPrintAll:hover
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:gray;
+text-decoration:none;
+cursor:pointer;
+background:#3e93bf url(../Images/print.png) no-repeat scroll 5px center;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+
+.CssBtnShow
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:#fff;
+text-decoration:none; 
+cursor:pointer;
+background:skyblue;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+.CssBtnShow:hover
+{
+width:98px;
+font-size: 10pt;
+border: none;
+height :30px;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+background:#3e93bf;
+font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+

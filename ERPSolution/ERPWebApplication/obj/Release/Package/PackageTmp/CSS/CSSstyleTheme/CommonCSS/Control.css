@@ -1,0 +1,129 @@
+﻿.btnStyle1
+{
+    font-size: 9pt;
+	border: 1px Solid #41519A;
+	background-color: White;
+		/*color: #41519A;*/
+        color: green;
+		cursor:pointer;
+	margin-left: 0px;
+}
+
+.btn2
+{
+    font-size: 9pt;
+	border: 1px Solid #41519A;
+	background-color: White;
+		color: #41519A;
+		cursor:pointer;
+	margin-left: 0px;
+    text-align: left;
+}
+/*AutoComplete flyout */
+
+.autocomplete_completionListElement 
+{  
+	visibility : hidden;
+	margin : 0px!important;
+	color : windowtext;
+	border : buttonshadow;
+	border-width : 1px;
+	border-style : solid;
+	cursor :default;
+	overflow : auto;
+	height : 270px;
+    text-align : left; 
+    list-style-type : none;
+    background-color:#FFFFFF;
+}
+
+/* AutoComplete highlighted item */
+
+.autocomplete_highlightedListItem
+{
+	background-color: #ffff99;
+	color: black;
+	padding: 1px;
+	cursor:pointer;
+}
+
+/* AutoComplete item */
+
+.autocomplete_listItem 
+{
+	background-color : window;
+	color : windowtext;
+	padding : 1px;
+}
+
+.listMain
+{
+    background-image:url('images/wordWheelBack.gif');
+    background-repeat:repeat-x;
+    background-color:#FFFFFF;
+    z-index:1000;
+    width:245px !important;
+    max-height:210px;
+    text-align:inherit;
+    text-indent:-1;
+    list-style:none;
+    overflow-y:scroll;
+    scrollbar-arrow-color:#B89020;
+    scrollbar-base-color:#8E6E1C;
+    scrollbar-face-color:#B6C5D4;
+    scrollbar-3dlight-color:#8E6E1C;
+    scrollbar-highlight-color:#EED47D;
+    scrollbar-shadow-color:#959595;
+    scrollbar-darkshadow-color:#00337E;
+    margin-left:0px;
+    border-bottom:1px solid #B5C6D4;
+    border-left:1px solid #B5C6D4;
+    margin-top:0px;
+}
+.wordWheel.itemsMain
+{
+    background:none;
+    border-collapse:collapse;
+    color:#00337E;
+    white-space:nowrap;
+    text-align:inherit left;
+}
+.wordWheel.itemsSelected
+{
+    background-image:url('images/wordWheelSelectedIndexBack.gif');
+    background-repeat:repeat-x;
+    background-color:#EED47D;
+    color:#00337E;
+    border-top:1px solid #FFF8E8;
+    border-left:1px solid #FFF8E8;
+    border-bottom:1px solid #00337E;
+    border-right:1px solid #00337E;
+}
+
+.hideTitle{
+				visibility:hidden;
+               display:none;
+
+               }
+
+.heading {
+	padding: .2em 0 .2em 0;
+	font-weight:bold;
+	color: #41519A;	
+	background-color: #D3DEEF;
+    font-style: normal;
+    font-variant: normal;
+    font-size: 9pt;
+    line-height: normal;
+    font-family: verdana;
+    text-align: left;
+}
+
+.cpe {
+	background-color:white;
+}
+
+ 
+
+
+

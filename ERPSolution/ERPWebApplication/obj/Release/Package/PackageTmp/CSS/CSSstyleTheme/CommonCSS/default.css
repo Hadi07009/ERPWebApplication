@@ -1,0 +1,43 @@
+﻿
+.popuppanel
+{   
+    background-color:white;
+   font-size:small;
+   border-top-style:none;
+   border-top-width:0px;
+    border:1px dashed lightgray;
+    font-family :"Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif; 
+   
+}
+
+
+.PanelInnerBorder1
+{
+    height:2px;
+    background-color:#FFCC00;
+    margin-top:6px;
+}
+
+
+.PanelInnerBorder2
+{
+    height:2px;
+    background-color:#76b6ec;
+    margin-bottom:6px;
+}
+
+
+.CommonMessage
+{
+    padding:7px 0px 7px 0px;
+    font-family:Tahoma;
+    font-size:13px;
+    color:indigo;
+}
+
+
+.File_Upload {
+    height:32px;
+    background-color:#BDDAEA;
+}
+

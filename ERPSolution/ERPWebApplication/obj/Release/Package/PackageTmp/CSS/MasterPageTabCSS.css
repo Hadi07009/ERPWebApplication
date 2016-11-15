@@ -1,0 +1,60 @@
+﻿
+         
+  .ajax__myTabm .ajax__tab_header {  
+    font-family:Arial ;  
+    font-size: 13px; 
+     color: #0072B0;
+    border-bottom: solid 1px #D3D3D3;  
+ 
+}  
+  
+.ajax__myTabm .ajax__tab_outer {  
+    padding-right: 4px;  
+    height: 30px;  
+ 
+    margin-right: 0px;  
+    border-right: solid 1px #D3D3D3;  
+    border-top: solid 0px #D3D3D3;  
+   
+}  
+  
+.ajax__myTabm .ajax__tab_inner {  
+    padding-left: 3px;  
+   
+}  
+  
+.ajax__myTabm .ajax__tab_tab {  
+    height: 20px;  
+    padding: 4px;  
+    margin: 0;  
+}  
+.ajax__myTabm .ajax__tab_active .ajax__tab_outer {  
+   
+   border-right: solid 1px #D3D3D3;  
+  
+   color: #EFAA00;
+  
+      border-top :solid 1px #D3D3D3;
+      background-color:#E7F4FC
+  
+}  
+.ajax__myTabm .ajax__tab_active .ajax__tab_tab  
+{
+      
+     border-top :5px #333333; 
+}  
+  
+.ajax__myTabm .ajax__tab_body {  
+    font-family:Arial ;  
+    font-size: 10pt;  
+    
+    border: 0px solid #999999;  
+    border-top: 0px;  
+    padding: 8px;  
+    background-color: #ffffff;  
+     border-bottom: solid 1px #D3D3D3;
+     border-right :solid 1px #D3D3D3;
+
+ 
+
+}  

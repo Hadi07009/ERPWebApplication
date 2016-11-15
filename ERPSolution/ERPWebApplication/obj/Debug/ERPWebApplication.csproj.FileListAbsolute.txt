@@ -28,12 +28,51 @@ D:\ProjectArchives\Project\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.Open
 D:\ProjectArchives\Project\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.AspNet.xml
 D:\ProjectArchives\Project\ERPSolution\ERPWebApplication\obj\Debug\ERPWebApplication.dll
 D:\ProjectArchives\Project\ERPSolution\ERPWebApplication\obj\Debug\ERPWebApplication.pdb
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\ERPWebApplication.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\ERPWebApplication.pdb
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\AjaxControlToolkit.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\Antlr3.Runtime.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\AspNet.ScriptManager.jQuery.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\AspNet.ScriptManager.jQuery.UI.Combined.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.AspNet.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.Core.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OAuth.Consumer.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OAuth.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OpenId.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\EntityFramework.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\Microsoft.AspNet.Membership.OpenAuth.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\Microsoft.ScriptManager.MSAjax.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\Microsoft.ScriptManager.WebForms.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\Microsoft.Web.Infrastructure.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\System.Web.Optimization.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\System.Web.Providers.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\WebGrease.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\EntityFramework.xml
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.Core.xml
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OAuth.xml
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OAuth.Consumer.xml
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OpenId.xml
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.AspNet.xml
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\obj\Debug\ERPWebApplication.dll
+D:\DailyStatus\2016\August,2016\28-August-2016\ERPSolution\ERPWebApplication\obj\Debug\ERPWebApplication.pdb
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\ERPWebApplication.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\ERPWebApplication.pdb
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\AjaxControlToolkit.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\Antlr3.Runtime.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\AspNet.ScriptManager.jQuery.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\AspNet.ScriptManager.jQuery.UI.Combined.dll
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\CrystalDecisions.CrystalReports.Design.dll
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\CrystalDecisions.CrystalReports.Engine.dll
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\CrystalDecisions.Data.AdoDotNetInterop.dll
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\CrystalDecisions.ReportSource.dll
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\CrystalDecisions.Shared.dll
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\CrystalDecisions.VSDesigner.dll
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\CrystalDecisions.Web.dll
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\CrystalDecisions.Windows.Forms.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.AspNet.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.Core.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OAuth.Consumer.dll
@@ -41,11 +80,14 @@ D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApp
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OpenId.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\EntityFramework.dll
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\FlashControlV71.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\Microsoft.AspNet.Membership.OpenAuth.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\Microsoft.ScriptManager.MSAjax.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\Microsoft.ScriptManager.WebForms.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\Microsoft.Web.Infrastructure.dll
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\SAPBusinessObjects.WPF.Viewer.dll
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\SAPBusinessObjects.WPF.ViewerShared.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\System.Web.Optimization.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\System.Web.Providers.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\WebGrease.dll
@@ -58,3 +100,6 @@ D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApp
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.AspNet.xml
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\obj\Debug\ERPWebApplication.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\obj\Debug\ERPWebApplication.pdb
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\ControlLibrary.dll
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\ControlLibrary.pdb
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\obj\Debug\ERPWebApplication.csprojResolveAssemblyReference.cache

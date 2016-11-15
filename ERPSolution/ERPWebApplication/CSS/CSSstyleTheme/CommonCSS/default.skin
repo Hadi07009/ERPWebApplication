@@ -1,0 +1,8 @@
+
+<asp:TextBox Runat="server" Font-Names="Arial" Font-Size="10pt" Height="26px" ForeColor="#575757"></asp:TextBox>
+<asp:Linkbutton Runat="server" CssClass="NoUnderLine"  Font-Names="Arial" Font-Size="10pt" ForeColor="#575757" ></asp:Linkbutton>
+<asp:DropDownList Runat="server"  Font-Names="Arial" Font-Size="10pt"  Height="24px" ForeColor="#575757" ></asp:DropDownList> 
+
+<asp:Label Runat="server" Font-Names="Arial" Font-Size="10pt" ForeColor="#383838"></asp:Label>
+
+<asp:Panel runat="server" SkinId="LoginPanel" CssClass="loginpanel" />

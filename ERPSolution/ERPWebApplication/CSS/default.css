@@ -1,0 +1,204 @@
+﻿.NoUnderLine
+{
+  text-decoration: none;
+  
+}
+.NoUnderLine:hover
+
+{
+
+    text-decoration: underline;
+
+}
+
+.CssBtnSearch
+{
+    font-size: 10pt;
+	border: None;
+	background-color: #A8A8FF;
+	color: #333333;
+    font-family :Arial ;
+    height :26px;
+	cursor:pointer;
+	margin-left: 0px;
+
+}
+
+.CssBtnSearch:hover
+{
+    font-size: 9pt;
+	border-width: 1px;
+	border-color: #41519A;
+	background-color:#41519A;
+	color: white;
+	cursor: pointer;
+}
+
+
+.CssBtnShowAll
+{
+    font-size: 10pt;
+	border: None;
+	background-color: #9FD02D;
+	color: #333333;
+    font-family :Arial ;
+    height :26px;
+	cursor:pointer;
+	margin-left: 0px;
+
+}
+
+.CssBtnShowAll:hover
+{
+    font-size: 9pt;
+	border-width: 1px;
+	border-color: #41519A;
+	background-color:#41519A;
+	color: white;
+	cursor: pointer;
+}
+
+
+.CssBtnSave
+{
+    font-size: 10pt;
+	border: None;
+	background-color: #BDDAEA;
+	color: #333333;
+    font-family :Arial ;
+    height :26px;
+	cursor:pointer;
+	margin-left: 0px;
+
+}
+
+.CssBtnSave:hover
+{
+    font-size: 9pt;
+	border-width: 1px;
+	border-color: #41519A;
+	background-color:#41519A;
+	color: white;
+	cursor: pointer;
+}
+
+
+.CssBtnSaveMore
+{
+    font-size: 10pt;
+	border: None;
+	background-color: #BDDAEA;
+	color: #333333;
+    font-family :Arial ;
+    height :26px;
+	cursor:pointer;
+	margin-left: 0px;
+
+}
+
+.CssBtnSaveMore:hover
+{
+    font-size: 9pt;
+	border-width: 1px;
+	border-color: #41519A;
+	background-color:#41519A;
+	color: white;
+	cursor: pointer;
+}
+
+.CssBtnPrint
+{
+    font-size: 10pt;
+	border: None;
+	background-color: #BDDAEA;
+	color: #333333;
+    font-family :Arial ;
+    height :26px;
+	cursor:pointer;
+	margin-left: 0px;
+
+}
+
+.CssBtnPrint:hover
+{
+    font-size: 9pt;
+	border-width: 1px;
+	border-color: #41519A;
+	background-color:#41519A;
+	color: white;
+	cursor: pointer;
+}
+
+.CssBtnPrintAll
+{
+    font-size: 10pt;
+	border: None;
+	background-color: #BDDAEA;
+	color: #333333;
+    font-family :Arial ;
+    height :26px;
+	cursor:pointer;
+	margin-left: 0px;
+
+}
+
+.CssBtnPrintAll:hover
+{
+    font-size: 9pt;
+	border-width: 1px;
+	border-color: #41519A;
+	background-color:#41519A;
+	color: white;
+	cursor: pointer;
+}
+
+.CssBtnCancel
+{
+    font-size: 10pt;
+	border: None;
+	background-color: #BDDAEA;
+	color: #333333;
+    font-family :Arial ;
+    height :26px;
+	cursor:pointer;
+	margin-left: 0px;
+
+}
+
+.CssBtnCancel:hover
+{
+    font-size: 9pt;
+	border-width: 1px;
+	border-color: #41519A;
+	background-color:#41519A;
+	color: white;
+	cursor: pointer;
+}
+
+.CssBtnRegular
+{
+
+    font-size: 10pt;
+	border: None;
+	background-color: red;
+	color: #FFB7DB;
+    font-family :Arial ;
+    height :26px;
+	cursor:pointer;
+	margin-left: 0px;
+
+}
+
+.CssBtnRegular:hover
+{
+    font-size: 9pt;
+	border-width: 1px;
+	border-color: #41519A;
+	background-color:#41519A;
+	color: white;
+	cursor: pointer;
+}
+
+
+
+

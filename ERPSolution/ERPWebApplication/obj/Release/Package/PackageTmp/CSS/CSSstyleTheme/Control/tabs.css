@@ -1,0 +1,73 @@
+.tab 
+{
+    border: 0px solid #DDD;
+    padding-left:3px;
+}
+
+.tab .ajax__tab_body
+
+{
+    font-family:Arial ;  
+    font-size: 10pt;  
+    
+    border: 0px solid #999999;  
+    border-top: solid 1px #D3D3D3;  
+    padding:6px;  
+    border-bottom: solid 1px #D3D3D3;
+     /*border-right :solid 1px #D3D3D3;
+     border-left :solid 1px #D3D3D3;*/
+ }
+
+.tab .ajax__tab_header
+
+{
+    cursor:pointer;
+    font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+    font-size: 12pt; 
+    font-weight:bold;
+    color:gray;
+    
+    /*-webkit-box-shadow: 0 8px 6px -6px dimgray;
+	   -moz-box-shadow: 0 8px 6px -6px dimgray;
+	        box-shadow: 0 8px 6px -6px dimgray;*/
+
+    }
+
+.tab .ajax__tab_header .ajax__tab_active .ajax__tab_outer
+
+{
+    cursor:pointer;
+    height: auto;
+}
+
+.tab .ajax__tab_header .ajax__tab_active .ajax__tab_tab
+
+{
+    cursor:default;
+    height:auto;
+    /*border-bottom:1px solid blue;*/
+    border-top:1px solid blue;
+    color:Black;
+    font-size: 15pt;
+    /*background-color:silver;*/
+}
+
+.tab .ajax__tab_header .ajax__tab_active .ajax__tab_inner
+
+{
+    cursor:default;
+    border-bottom:2px solid #bbb;
+}
+
+.tab .ajax__tab_tab
+{
+    cursor: pointer;
+    padding:6px;
+    color:gray;
+    border-right: 0px solid  #E6E6E6;
+    border-left: 0px solid  #E6E6E6;
+   
+    
+}
+
+

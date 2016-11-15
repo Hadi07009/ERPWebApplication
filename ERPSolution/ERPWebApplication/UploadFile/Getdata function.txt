@@ -1,0 +1,40 @@
+ public static DataTable GetData(string ConnectionString, string QueryStr)
+        {
+            SqlConnection sqlConn = null;
+            DataTable dataTableObj = null;
+            try
+            {
+                string selectQuery = QueryStr;
+                sqlConn = new SqlConnection(ConnectionString);
+                sqlConn.Open();
+                SqlDataAdapter sqlDataAdapterObj = new SqlDataAdapter(selectQuery, sqlConn);
+                dataTableObj = new DataTable();
+                sqlDataAdapterObj.Fill(dataTableObj);
+
+            }
+            catch (SqlException sqlExceptionObject)
+            {
+            }
+            catch (Exception exceptionObject)
+            {
+            }
+            finally
+            {
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {
+                    sqlConn.Close();
+                }
+            }
+            return dataTableObj;
+        }
+==========================================================================
+
+ public static string GetItemDetail()
+        {
+            return "SELECT * FROM  LMaterialSetup";
+        }
+
+         public static string GetItemDetailSearch(string  itemID)
+        {
+            return "SELECT  ItemID, ItemCode FROM LMaterialSetup where (ItemID Like '" + itemID+ "') OR (ItemCode Like '" + itemID+ "')";
+        }

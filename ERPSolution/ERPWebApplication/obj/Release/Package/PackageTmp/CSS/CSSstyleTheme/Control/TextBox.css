@@ -1,0 +1,75 @@
+﻿
+.cssTextBox 
+{
+    font-family:Tahoma;
+    font-size:11pt;
+    font-weight:normal;
+    text-align:Left;
+    text-indent:5px;
+    color:gray; 
+    height:26px;
+    background-color:#FFFFFF;
+    border-style: groove;
+    }
+/*.cssTextBox:hover 
+{
+    font-family: Arial, 'DejaVu Sans' , 'Liberation Sans' , Freesans, sans-serif;
+    font-size:12pt;
+    font-weight:normal;
+    text-align:Left;
+    text-indent:5px;
+    height:26px;
+   color:#333333; 
+    background-color:#FFFFFF;
+    border-style:groove;
+    border-color:red;
+    /*width:100%;*/
+
+}*/
+.cssTextBox:focus
+{
+    font-family: Arial, 'DejaVu Sans' , 'Liberation Sans' , Freesans, sans-serif;
+   font-size:12pt;
+    font-weight:normal;
+    text-align:Left;
+    text-indent:5px;
+    height:26px;
+    color:#333333; 
+    background-color:#FFFFFF;
+    border-style:groove;
+    /*width:100%;*/
+    /*border-color:red;*/
+
+}
+
+
+
+
+.cssTextBoxGrid
+{
+    font-family: Arial, 'DejaVu Sans' , 'Liberation Sans' , Freesans, sans-serif;
+   font-size: 0.9em;
+    font-weight:normal;
+    text-align:Left;
+    text-indent:5px;
+     color:#333333; 
+    height:26px;
+    background-color:#FFFFFF;
+    border-style:none;
+   border-width:0px;
+    }
+
+.cssTextBoxGrid:focus
+{
+    font-family: Arial, 'DejaVu Sans' , 'Liberation Sans' , Freesans, sans-serif;
+   font-size: 0.9em;
+    font-weight:normal;
+    text-align:Left;
+    text-indent:5px;
+    height:26px;
+  color:#333333; 
+    background-color:#FFFFFF;
+    border-style:none;
+   border-width:0px;
+
+}
