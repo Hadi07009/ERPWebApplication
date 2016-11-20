@@ -140,6 +140,13 @@ namespace ERPWebApplication.AppClass.Model
                 } _entryUserName = value;
             }
         }
+        private int _knownValueID;
+
+        public int KnownValueID
+        {
+            get { return _knownValueID; }
+            set { _knownValueID = value; }
+        }
 
     }
 }

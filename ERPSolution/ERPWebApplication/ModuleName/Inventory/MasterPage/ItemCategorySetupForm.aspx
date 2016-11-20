@@ -10,9 +10,13 @@
         }
 
         .auto-style2 {
-            width: 109px;
+            width: 140px;
         }
-    </style>
+        .auto-style3 {
+            width: 142px;
+        }
+
+        </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <cc1:MessageBox ID="MessageBox1" runat="server" />
@@ -38,7 +42,7 @@
                             
                     </td>
                     <td colspan="2" style="float:right;margin-right:430px" >
-                        <div  style="position:fixed; width: 440px;background-color:#00817F;height:50px">
+                        <div  style="position:fixed; width: 425px;background-color:#00817F;height:50px">
                             <table style="width: 100%;">
                                         <tr>
                                             <td> 
@@ -82,10 +86,18 @@
                                                                 SelectedNodeStyle-CssClass="selectedNode"
                                                                 ParentNodeStyle-CssClass="parentNode"
                                                                 HoverNodeStyle-CssClass="hoverNode"
+
                                                                 
-                                                                runat="server" OnTreeNodePopulate="TreeViewCategory_TreeNodePopulate" 
-                                                                ImageSet="Msdn" 
-                                                                OnSelectedNodeChanged="TreeViewCategory_SelectedNodeChanged">
+                                                                
+                                                                runat="server" OnTreeNodePopulate="TreeViewCategory_TreeNodePopulate"
+                                                                OnSelectedNodeChanged="TreeViewCategory_SelectedNodeChanged"
+                                                                ImageSet="Msdn" ForeColor="#428BCA" Width="90%">
+                                                                <HoverNodeStyle CssClass="hoverNode" />
+                                                                <LeafNodeStyle CssClass="leafNode" />
+                                                                <NodeStyle CssClass="treeNode" />
+                                                                <ParentNodeStyle CssClass="parentNode" />
+                                                                <RootNodeStyle CssClass="rootNode" />
+                                                                <SelectedNodeStyle CssClass="selectedNode" />
                                                             </asp:TreeView>
                                                         </td>
                                                     </tr>
@@ -104,7 +116,7 @@
                                         </div>
                                     </td>
                                     <td >
-                                        <div style="height: 415px; width: 440px">
+                                        <div style="height: 415px; width: 425px">
                                             <asp:Panel ID="PanelRight" runat="server" BackColor="#E0E0E0" Width="100%">
                                                 <table style="width: 99%; margin-left: 5px; text-align: left">
                                                     
@@ -174,58 +186,7 @@
                                                         <td></td>
                                                         <td></td>
                                                     </tr>
-                                                    <tr>
-                                                        <td colspan="3">
-                                                            <asp:Panel ID="PanelSearch" runat="server">
-                                                                <table style="width: 100%;margin-left: 5px">
-                                                                    <tr>
-                                                                        <td class="auto-style2">
-                                                                            <asp:Label ID="Label5" Style="text-align: center" runat="server" Text="Search" BackColor="#FF8081" ForeColor="White" Font-Bold="true" Width="75px"></asp:Label>
-                                                                        </td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="auto-style2">
-                                                                            <asp:Label ID="Label6" runat="server" Text="Item Category"></asp:Label>
-                                                                        </td>
-                                                                        <td>:</td>
-                                                                        <td>
-                                                                            <asp:DropDownList ID="DropDownList1" runat="server">
-                                                                            </asp:DropDownList>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="auto-style2">
-                                                                            <asp:Label ID="Label7" runat="server" Text="Item Name"></asp:Label>
-                                                                        </td>
-                                                                        <td>:</td>
-                                                                        <td>
-                                                                            <asp:DropDownList ID="DropDownList2" runat="server">
-                                                                            </asp:DropDownList>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="auto-style2">
-                                                                            <asp:Label ID="Label8" runat="server" Text="Item Code"></asp:Label>
-                                                                        </td>
-                                                                        <td>:</td>
-                                                                        <td>
-                                                                            <asp:DropDownList ID="DropDownList3" runat="server">
-                                                                            </asp:DropDownList>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="auto-style2"></td>
-                                                                        <td></td>
-                                                                        <td style="text-align: left">
-                                                                            <asp:Button ID="Button1" runat="server" Text="Search Now" />
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </asp:Panel>
-                                                        </td>
-                                                    </tr>
+                                                    
                                                     <tr>
                                                         <td></td>
                                                         <td></td>
@@ -317,16 +278,6 @@
                                                 </tr>
 
                                                 <tr>
-                                                    <td>
-                                                        <asp:Label ID="Label12" runat="server" Text="Unit"></asp:Label>
-                                                    </td>
-                                                    <td>:</td>
-                                                    <td>
-                                                        <asp:DropDownList ID="ddlUnit" runat="server">
-                                                        </asp:DropDownList>
-                                                    </td>
-                                                </tr>
-                                                <tr>
                                                     <td></td>
                                                     <td></td>
                                                     <td>
@@ -354,79 +305,8 @@
                                                         <asp:Label ID="Label20" runat="server" AssociatedControlID="CheckBoxSameSupplier" CssClass="checkbox">Same Supplier</asp:Label>
                                                     </td>
                                                 </tr>
-                                            </table>
-                                        </div>
-                                    </td>
-                                    <td colspan="2">
-                                        <div style="padding-top: 0px; width: 500px">
-                                            <table style="width: 100%;">
                                                 <tr>
-                                                    <td>
-                                                        <asp:Label ID="Label15" runat="server" Text="Description"></asp:Label>
-                                                    </td>
-                                                    <td>:</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine" Width="300px"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:Label ID="Label16" runat="server" Text="H.S. Code "></asp:Label>
-                                                    </td>
-                                                    <td>:</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtHSCode" runat="server"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:Label ID="Label17" runat="server" Text="Opening Balance"></asp:Label>
-                                                    </td>
-                                                    <td>:</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtOpeningBalance" runat="server" onkeypress="return isNumberKey(event)"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:Label ID="Label18" runat="server" Text="Re-Order Level"></asp:Label>
-                                                    </td>
-                                                    <td>:</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtReOrderLevel" runat="server"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"></td>
-                                    <td colspan="2"></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4">
-                                        <table style="width: 75%; text-align: left">
+                                                    <td colspan="3"><table style="width: 50%; text-align: left">
                                             <tr>
                                                 <td colspan="4">
                                                     <asp:Label ID="Label27" runat="server" Text="Enter Account Information" ForeColor="#793F19" Width="500px"></asp:Label>
@@ -484,7 +364,110 @@
                                                     <asp:Label ID="Label32" runat="server" AssociatedControlID="CheckBoxSameAccount" CssClass="checkbox"> Same Account for all items</asp:Label>
                                                 </td>
                                             </tr>
-                                        </table>
+                                        </table></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    <td colspan="2">
+                                        <div style="padding-top: 0px; width: 500px">
+                                            <table style="width: 98%;">
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label ID="Label15" runat="server" Text="Description"></asp:Label>
+                                                    </td>
+                                                    <td>:</td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine" Width="250px"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label ID="Label16" runat="server" Text="H.S. Code "></asp:Label>
+                                                    </td>
+                                                    <td>:</td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtHSCode" runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3">
+                                                        <table style="width:100%;text-align:left">
+                                                            <tr>
+                                                                <td colspan="3">
+                                                                    <asp:Label ID="Label35" runat="server" ForeColor="#793F19" Text="Unit Information"></asp:Label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="auto-style3">
+                                                                    <asp:Label ID="Label17" runat="server" Text="Opening Balance"></asp:Label>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>
+                                                                    <asp:TextBox ID="txtOpeningBalance" runat="server" onkeypress="return isNumberKey(event)"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="auto-style3">
+                                                                    <asp:Label ID="Label12" runat="server" Text="Unit"></asp:Label>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>
+                                                                    <asp:DropDownList ID="ddlUnit" runat="server">
+                                                                    </asp:DropDownList>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="auto-style3">
+                                                                    <asp:Label ID="Label36" runat="server" Text="Break Up Quantity"></asp:Label>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>
+                                                                    <asp:TextBox ID="txtBreakUpQuantity" runat="server" onkeypress="return isNumberKey(event)"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="auto-style3">
+                                                                    <asp:Label ID="Label37" runat="server" Text="Break Up Unit"></asp:Label>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>
+                                                                    <asp:DropDownList ID="ddlBreakupUnit" runat="server">
+                                                                    </asp:DropDownList>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label ID="Label18" runat="server" Text="Re-Order Level"></asp:Label>
+                                                    </td>
+                                                    <td>:</td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtReOrderLevel" runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label ID="Label38" runat="server" Text="Minimum Quantity"></asp:Label>
+                                                    </td>
+                                                    <td>:</td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtMinimumQuantity" runat="server" onkeypress="return isNumberKey(event)"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
+                                        
                                     </td>
                                 </tr>
 

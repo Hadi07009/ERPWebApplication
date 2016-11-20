@@ -1,57 +1,71 @@
 ﻿.treeNode {
     background-color:#eeeeee;
-    border-color: #eeeeee;
-    border: solid 1px #eeeeee;
-    font: 15px Arial, Sans-Serif;
+    border-color: #eeeeee;   
+    font: 12px Arial, Sans-Serif;
     width: 100%;
-    height: 100%;
+    height: 22px;
     font-weight: bold;
+    /*border: Solid .5px gray;*/
+    color:#428BCA !important;
+      
 }
 
 .rootNode {
     background-color:#eeeeee;
     border-color: #eeeeee;
-    border: solid 1px #eeeeee;
-    font: 15px Arial, Sans-Serif;
+    /*border: solid .5px #eeeeee;*/
+    font: 12px Arial #428BCA, Sans-Serif;
     width: 100%;
-    height: 100%;
-    font-size: 18px;
-    width: 100%;
-    border-bottom: Solid 1px black;
+    height: 22px;
+    /*font-size: 18px;*/    
+    
+       
 }
 
 .leafNode {
     border-color: #eeeeee;
-    border: solid 1px #eeeeee;
-    font: 15px Arial, Sans-Serif;
+    /*border: solid .5px #eeeeee;*/
+    color:#00817F !important;
+    font: 12px Arial, Sans-Serif;
     width: 100%;
-    height: 100%;
+    height: 22px;
     background-color: #eeeeee;
+    
+    
 }
 
 .selectedNode {
-    background-color:#eeeeee;
-    border-color: #eeeeee;
-    border: solid 1px #eeeeee;
-    font: 15px Arial, Sans-Serif;
+    background-color:#428BCA;
+    border-color: #428BCA;
+    /*border: solid .5px #428BCA;*/
+    color:#eeeeee !important;
+    font: 12px Arial, Sans-Serif;
     width: 100%;
-    height: 100%;
+    height: 22px;
+     
 }
 
 .parentNode {
-    background-color:#eeeeee;
+    /*background-color:#eeeeee;
     border-color: #eeeeee;
-    border: solid 1px #eeeeee;
-    font: 15px Arial, Sans-Serif;
+    font: 12px Arial, Sans-Serif;
     width: 100%;
-    height: 100%;
+    height: 22px;
+    font-weight: bold;
+    border: Solid .5px gray;*/
+
 }
 
 .hoverNode {
-    background-color:brown;
-    border-color: brown;
-    border: solid 1px brown;
-    font: 15px Arial, Sans-Serif;
+    background-color:red;
+    /*border-color: #C7D1D6;*/
+    color:#eeeeee !important;
+    font: 12px Arial, Sans-Serif;
     width: 100%;
-    height: 100%;
+    height: 22px;
+    font-weight: bold;
+    /*border: Solid .5px gray;*/
+    cursor:pointer;
+    
+      
 }

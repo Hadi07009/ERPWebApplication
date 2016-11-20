@@ -8,7 +8,7 @@ namespace ERPWebApplication.AppClass.DataAccess
 {
     public class ItemSetupController
     {
-        internal void Save(string connectionString, ItemSetup objItemSetup, ItemCategorySetup objItemCategorySetup)
+        internal void Save(string connectionString, ItemSetup objItemSetup)
         {
             try
             {
@@ -30,22 +30,12 @@ namespace ERPWebApplication.AppClass.DataAccess
                                         objItemSetup.CoaStockAccNo + "," +
                                         objItemSetup.CoacgsAccNo + "," +
                                         objItemSetup.CoaSalesRetAccNo + ",'" +
-                                        objItemSetup.EntryUserName + "',"+
-                                        objItemCategorySetup.CompanyID + "," +
-                                        objItemCategorySetup.BranchID + "," +
-                                        objItemCategorySetup.CategoryTypeID + ",'" +                                        
-                                        objItemCategorySetup.CategoryName + "'," +
-                                        objItemCategorySetup.ParentCategoryID + "," +
-                                        objItemCategorySetup.StartingItemCode + "," +
-                                        objItemCategorySetup.EndingItemCode + "," +
-                                        objItemCategorySetup.SeqNo + "," +
-                                        objItemCategorySetup.TierNo + "," +
-                                        objItemCategorySetup.CurrentBalance + ",'" +
-                                        objItemCategorySetup.DataUsed + "'";
+                                        objItemSetup.EntryUserName + "'," +
+                                        objItemSetup.BreakUpQuantity + ",'" +
+                                        objItemSetup.ReOrderLevel + "',"+
+                                        objItemSetup.BreakUpUnitD+","+
+                                        objItemSetup.MinimumQuantity;
                 StoredProcedureExecutor.StoredProcedureExecuteNonQuery(connectionString, storedProcedureComandTest);
-                //ItemCategorySetupController objItemCategorySetupController = new ItemCategorySetupController();
-                //objItemCategorySetupController.Save(connectionString, objItemCategorySetup);
-
             }
             catch (Exception msgException)
             {
@@ -53,5 +43,14 @@ namespace ERPWebApplication.AppClass.DataAccess
                 throw msgException;
             }
         }
+
+        public string SQLForAccountType(ItemCategorySetup objItemCategorySetup)
+        {
+            string sqlString = null;
+            sqlString = @"SELECT B.AccountNo,B.AccountName FROM accCOAAccountTypeSetup A INNER JOIN accCOAHeadSetup B ON A.AccountTypeID = B.AccountTypeID
+                                WHERE  A.KnownValueID = " + objItemCategorySetup.KnownValueID + " AND A.CompanyID = " + objItemCategorySetup.CompanyID + " AND A.BranchID = " + objItemCategorySetup.BranchID + "";
+            return sqlString;
+        }
+
     }
 }

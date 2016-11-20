@@ -64,6 +64,7 @@ D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApp
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\Antlr3.Runtime.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\AspNet.ScriptManager.jQuery.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\AspNet.ScriptManager.jQuery.UI.Combined.dll
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\ControlLibrary.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\CrystalDecisions.CrystalReports.Design.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\CrystalDecisions.CrystalReports.Engine.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\CrystalDecisions.Data.AdoDotNetInterop.dll
@@ -91,6 +92,7 @@ D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApp
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\System.Web.Optimization.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\System.Web.Providers.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\WebGrease.dll
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\ControlLibrary.pdb
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\EntityFramework.xml
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.Core.xml
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OAuth.xml
@@ -98,8 +100,6 @@ D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApp
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OpenId.xml
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.AspNet.xml
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\obj\Debug\ERPWebApplication.csprojResolveAssemblyReference.cache
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\obj\Debug\ERPWebApplication.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\obj\Debug\ERPWebApplication.pdb
-D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\ControlLibrary.dll
-D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\ControlLibrary.pdb
-D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\obj\Debug\ERPWebApplication.csprojResolveAssemblyReference.cache

@@ -26,7 +26,15 @@ namespace ERPWebApplication.AppClass.Model
         public int UnitID
         {
             get { return _unitID; }
-            set { _unitID = value; }
+            set
+            {
+                if (value == -1)
+                {
+                    throw new Exception("please select unit");
+
+                }
+                _unitID = value;
+            }
         }
         private string _hsCode;
 
@@ -68,28 +76,60 @@ namespace ERPWebApplication.AppClass.Model
         public int CoaSalesAccNo
         {
             get { return _coaSalesAccNo; }
-            set { _coaSalesAccNo = value; }
+            set
+            {
+                if (value == -1)
+                {
+                    throw new Exception("please select sales account no");
+
+                }
+                _coaSalesAccNo = value;
+            }
         }
         private int _coaStockAccNo;
 
         public int CoaStockAccNo
         {
             get { return _coaStockAccNo; }
-            set { _coaStockAccNo = value; }
+            set
+            {
+                if (value == -1)
+                {
+                    throw new Exception("please select stock account no");
+
+                }
+                _coaStockAccNo = value;
+            }
         }
         private int _coacgsAccNo;
 
         public int CoacgsAccNo
         {
             get { return _coacgsAccNo; }
-            set { _coacgsAccNo = value; }
+            set
+            {
+                if (value == -1)
+                {
+                    throw new Exception("please select COGS account no");
+
+                }
+                _coacgsAccNo = value;
+            }
         }
         private int _coaSalesRetAccNo;
 
         public int CoaSalesRetAccNo
         {
             get { return _coaSalesRetAccNo; }
-            set { _coaSalesRetAccNo = value; }
+            set
+            {
+                if (value == -1)
+                {
+                    throw new Exception("please select sales return account");
+
+                }
+                _coaSalesRetAccNo = value;
+            }
         }
         private string _entryUserName;
 
@@ -103,7 +143,13 @@ namespace ERPWebApplication.AppClass.Model
         public int ItemTypeID
         {
             get { return _itemTypeID; }
-            set { _itemTypeID = value; }
+            set {
+                if (value == -1)
+                {
+                    throw new Exception("please select item type ID");
+                    
+                }
+                _itemTypeID = value; }
         }
         private int _itemPropertySetID;
 
@@ -117,18 +163,25 @@ namespace ERPWebApplication.AppClass.Model
         public int ItemUsageID
         {
             get { return _itemUsageID; }
-            set { _itemUsageID = value; }
+            set {
+                if (value == -1)
+                {
+                    throw new Exception("please select item usage ID");
+                    
+                }
+                _itemUsageID = value; }
         }
         private string _modelNo;
 
         public string ModelNo
         {
             get { return _modelNo; }
-            set {
+            set
+            {
                 if (value == null)
                 {
                     throw new Exception(" Please type item name");
-                    
+
                 } _modelNo = value;
             }
         }
@@ -139,6 +192,33 @@ namespace ERPWebApplication.AppClass.Model
             get { return _itemCode; }
             set { _itemCode = value; }
         }
+        private string _reOrderLevel;
 
+        public string ReOrderLevel
+        {
+            get { return _reOrderLevel; }
+            set { _reOrderLevel = value; }
+        }
+        private int _breakUpQuantity;
+
+        public int BreakUpQuantity
+        {
+            get { return _breakUpQuantity; }
+            set { _breakUpQuantity = value; }
+        }
+        private int _breakUpUnitD;
+
+        public int BreakUpUnitD
+        {
+            get { return _breakUpUnitD; }
+            set { _breakUpUnitD = value; }
+        }
+        private int _minimumQuantity;
+
+        public int MinimumQuantity
+        {
+            get { return _minimumQuantity; }
+            set { _minimumQuantity = value; }
+        }
     }
 }
