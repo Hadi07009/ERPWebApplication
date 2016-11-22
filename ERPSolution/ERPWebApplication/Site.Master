@@ -66,7 +66,7 @@
                             <Items>
                                 <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Inventory">
                                     <asp:MenuItem NavigateUrl="~/Default.aspx" Text="MasterPage">
-                                        <asp:MenuItem NavigateUrl="~/ModuleName/Inventory/MasterPage/ItemSetupForm.aspx" Text="Item Setup" Value="21"></asp:MenuItem>
+                                        
                                         <asp:MenuItem NavigateUrl="~/ModuleName/Inventory/MasterPage/ItemCategorySetupForm.aspx" Text="Item Category Setup" Value="22"></asp:MenuItem>
                                     </asp:MenuItem>
                                     <asp:MenuItem NavigateUrl="~/Default.aspx" Text="TransactionPage">
@@ -81,37 +81,7 @@
                     </div>
                     <div style="float: right; padding-right: 10px">
                         <div class="content-wrapper">
-                            <%--<div class="float-left">
-                            <p class="site-title">
-                                <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/logo_120_100.png"  />
-                            </p>
-                        </div>--%>
-                            <div class="float-right">
-                                <section id="login">
-                                    <asp:LoginView runat="server" ViewStateMode="Disabled">
-                                        <AnonymousTemplate>
-                                            <ul>
-                                                <li><a id="loginLink" runat="server" href="~/Account/Login.aspx">Log in</a></li>
-                                            </ul>
-                                        </AnonymousTemplate>
-                                        <LoggedInTemplate>
-                                            <p>
-                                                Hello, <a runat="server" class="username" href="~/Account/Manage.aspx" title="Manage your account">
-                                                    <asp:LoginName runat="server" CssClass="username" />
-                                                </a>!
-                                <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" />
-                                            </p>
-                                        </LoggedInTemplate>
-                                    </asp:LoginView>
-                                </section>
-                                <nav>
-                                    <ul id="menu">
-                                        <li><a runat="server" href="~/">Home</a></li>
-                                        <li><a runat="server" href="~/About.aspx">About</a></li>
-                                        <li><a runat="server" href="~/Contact.aspx">Contact</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

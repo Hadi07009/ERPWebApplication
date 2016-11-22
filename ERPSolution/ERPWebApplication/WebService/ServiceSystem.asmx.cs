@@ -6,6 +6,7 @@ using System.Web.Services;
 using ERPWebApplication.CommonClass;
 using ERPWebApplication.Model;
 using System.Data;
+using System.Collections;
 
 namespace ERPWebApplication.WebService
 {
@@ -19,6 +20,7 @@ namespace ERPWebApplication.WebService
      [System.Web.Script.Services.ScriptService]
     public class ServiceSystem : System.Web.Services.WebService
     {
+        private SqlGenerationForItemDetail _objSqlGenerationForItemDetail;
         string connectionStringreq = System.Configuration.ConfigurationManager.ConnectionStrings["dbERPSolutionConnection"].ToString();
 
         [WebMethod]
@@ -70,6 +72,49 @@ namespace ERPWebApplication.WebService
 
             return str;
         }
+
+        [WebMethod]
+        public string[] GetItemName(string prefixText, int count)
+        {
+            DataTable detitem = new DataTable();
+            DataTable dt = new DataTable();
+            _objSqlGenerationForItemDetail = new SqlGenerationForItemDetail();
+            detitem = DataProcess.GetData(connectionStringreq, _objSqlGenerationForItemDetail.GetCategoryAndItem());
+
+            int maxsize = 1000;
+
+            if (prefixText == "*")
+            {
+                dt = detitem;
+            }
+            else
+            {
+                prefixText = "%" + prefixText + "%";
+                dt = DataProcess.GetData(connectionStringreq, _objSqlGenerationForItemDetail.GetCategoryAndItem(prefixText));
+            }
+
+
+            string[] str;
+
+            if (dt.Rows.Count > maxsize)
+                str = new string[maxsize];
+            else
+                str = new string[dt.Rows.Count];
+
+            int indx = 0;
+
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                str[indx] = dr["ModelNo"].ToString();
+                indx++;
+
+                if (indx == maxsize) break;
+            }
+
+            return str;
+        }
+
 
 
 

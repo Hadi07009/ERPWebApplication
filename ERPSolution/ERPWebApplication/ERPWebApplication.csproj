@@ -255,11 +255,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
-    <Content Include="Account\Login.aspx" />
-    <Content Include="Account\Manage.aspx" />
-    <Content Include="Account\OpenAuthProviders.ascx" />
-    <Content Include="Account\Register.aspx" />
-    <Content Include="Account\RegisterExternalLogin.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -979,11 +974,8 @@
     <Content Include="Images\header.png" />
     <Content Include="MicrosoftMenuHtmlPage.html" />
     <Content Include="ModuleName\Inventory\MasterPage\ItemCategorySetupForm.aspx" />
-    <Content Include="ModuleName\Inventory\MasterPage\ItemSetupForm.aspx" />
-    <Content Include="ModuleName\Inventory\MasterPage\ItemSetupForm1.aspx" />
     <Content Include="ModuleName\Inventory\Report\ReportForm\ReportViewer.aspx" />
     <Content Include="ModuleName\Inventory\TransactionPage\frmItemRequisition.aspx" />
-    <Content Include="NodeList.aspx" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\heroAccent.png" />
@@ -998,9 +990,6 @@
     <Content Include="Images\orderedList7.png" />
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
-    <Content Include="ModuleName\Inventory\TransactionPage\frm_item.aspx" />
-    <Content Include="ModuleName\Inventory\TransactionPage\frm_item_issue.aspx" />
-    <Content Include="ModuleName\Inventory\TransactionPage\WebFormFormat.aspx" />
     <Content Include="packages.config" />
     <Content Include="CSS\CSSstyleTheme\CommonCSS\default.skin" />
     <Content Include="CSS\CSSstyleTheme\Fonts\glyphicons-halflings-regular.eot" />
@@ -1061,6 +1050,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppClass\AccountType.cs" />
+    <Compile Include="AppClass\CommonClass\CGlobalMeaage.cs" />
     <Compile Include="AppClass\CommonClass\Class1.cs" />
     <Compile Include="AppClass\CommonClass\ClsDropDownListController.cs" />
     <Compile Include="AppClass\CommonClass\ClsGridViewLoad.cs" />
@@ -1098,41 +1088,6 @@
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Account\Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\Manage.aspx.cs">
-      <DependentUpon>Manage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Manage.aspx.designer.cs">
-      <DependentUpon>Manage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\OpenAuthProviders.ascx.cs">
-      <DependentUpon>OpenAuthProviders.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\OpenAuthProviders.ascx.designer.cs">
-      <DependentUpon>OpenAuthProviders.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\Register.aspx.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Register.aspx.designer.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\RegisterExternalLogin.aspx.cs">
-      <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
-      <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1146,20 +1101,6 @@
     </Compile>
     <Compile Include="ModuleName\Inventory\MasterPage\ItemCategorySetupForm.aspx.designer.cs">
       <DependentUpon>ItemCategorySetupForm.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ModuleName\Inventory\MasterPage\ItemSetupForm.aspx.cs">
-      <DependentUpon>ItemSetupForm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ModuleName\Inventory\MasterPage\ItemSetupForm.aspx.designer.cs">
-      <DependentUpon>ItemSetupForm.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ModuleName\Inventory\MasterPage\ItemSetupForm1.aspx.cs">
-      <DependentUpon>ItemSetupForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ModuleName\Inventory\MasterPage\ItemSetupForm1.aspx.designer.cs">
-      <DependentUpon>ItemSetupForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModuleName\Inventory\Report\ReportFile\ReportItemRequisition.cs">
       <AutoGen>True</AutoGen>
@@ -1181,13 +1122,6 @@
     <Compile Include="ModuleName\Inventory\TransactionPage\frmItemRequisition.aspx.designer.cs">
       <DependentUpon>frmItemRequisition.aspx</DependentUpon>
     </Compile>
-    <Compile Include="NodeList.aspx.cs">
-      <DependentUpon>NodeList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="NodeList.aspx.designer.cs">
-      <DependentUpon>NodeList.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1197,27 +1131,6 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="ModuleName\Inventory\TransactionPage\frm_item.aspx.cs">
-      <DependentUpon>frm_item.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ModuleName\Inventory\TransactionPage\frm_item.aspx.designer.cs">
-      <DependentUpon>frm_item.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ModuleName\Inventory\TransactionPage\frm_item_issue.aspx.cs">
-      <DependentUpon>frm_item_issue.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ModuleName\Inventory\TransactionPage\frm_item_issue.aspx.designer.cs">
-      <DependentUpon>frm_item_issue.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ModuleName\Inventory\TransactionPage\WebFormFormat.aspx.cs">
-      <DependentUpon>WebFormFormat.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ModuleName\Inventory\TransactionPage\WebFormFormat.aspx.designer.cs">
-      <DependentUpon>WebFormFormat.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
@@ -1238,7 +1151,6 @@
     <Folder Include="ModuleName\Organization\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Account\Web.config" />
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>

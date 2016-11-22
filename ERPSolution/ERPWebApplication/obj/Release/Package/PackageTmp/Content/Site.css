@@ -452,7 +452,7 @@ input, textarea {
     font-size: 1.2em;
     margin: 5px 0 6px 0;
     padding: 5px;
-    width: 300px;
+    width: 250px;
 }
 
 textarea {
@@ -500,7 +500,7 @@ select {
     font-size: 1.2em;
     /*margin: 5px 0 6px 0;
     padding: 5px;*/
-    width: 310px;
+    width: 262px;
     font-family: inherit;
     
 }
@@ -613,7 +613,8 @@ th {
         }
 
 td {
-    padding: 0.25em 2em 0.25em 0em;
+    /*padding: 0.25em 2em 0.25em 0em;*/ /*edited*/
+    padding: 0.25em .5em 0.25em 0em;
     border: 0 none;
 }
 
@@ -805,6 +806,48 @@ tr.pager td {
         }
 }
 /* END: Mobile Styles */
+
+/*FOR WEB SERVICES*/
+
+
+.autocomplete_completionListElement 
+{  
+	visibility : hidden;
+	margin : 0px!important;
+	color : windowtext;
+	border : buttonshadow;
+	border-width : 1px;
+	border-style : solid;
+	cursor :default;
+	overflow : auto;
+	height : 270px;
+    text-align : left; 
+    list-style-type : none;
+    background-color:#FFFFFF;
+    z-index:999999;
+    position:relative;
+}
+
+/* AutoComplete highlighted item */
+
+.autocomplete_highlightedListItem
+{
+	background-color: #ffff99;
+	color: black;
+	padding: 1px;
+	cursor:pointer;
+    z-index:999999;
+}
+
+/* AutoComplete item */
+
+.autocomplete_listItem 
+{
+	background-color : window;
+	color : windowtext;
+	padding : 1px;
+     z-index:999999;
+}
 
 
 

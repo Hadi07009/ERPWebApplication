@@ -1,2 +1,69 @@
-﻿body {
+﻿.treeNode {
+    background-color:#eeeeee;
+    border-color: #eeeeee;   
+    font: 12px Arial, Sans-Serif;
+    width: 100%;
+    height: 22px;
+    font-weight: bold;
+    /*border: Solid .5px gray;*/
+    color:#428BCA !important;
+      
+}
+
+.rootNode {
+    background-color:#eeeeee;
+    border-color: #eeeeee;
+    /*border: solid .5px #eeeeee;*/
+    font: 12px Arial #428BCA, Sans-Serif;
+    width: 100%;
+    height: 22px;
+    /*font-size: 18px;*/    
+    
+       
+}
+
+.leafNode {
+    border-color: #eeeeee;
+    /*border: solid .5px #eeeeee;*/
+    color:#00817F !important;
+    font: 12px Arial, Sans-Serif;
+    width: 100%;
+    height: 22px;
+    background-color: #eeeeee;
+    
+    
+}
+
+.selectedNode {
+    background-color:#428BCA;
+    border-color: #428BCA;
+    /*border: solid .5px #428BCA;*/
+    color:#eeeeee !important;
+    font: 12px Arial, Sans-Serif;
+    width: 100%;
+    height: 22px;
+     
+}
+
+.parentNode {
+    /*background-color:#eeeeee;
+    border-color: #eeeeee;
+    font: 12px Arial, Sans-Serif;
+    width: 100%;
+    height: 22px;
+    font-weight: bold;
+    border: Solid .5px gray;*/
+
+}
+
+.hoverNode {
+    background-color:red;
+    /*border-color: #C7D1D6;*/
+    color:#eeeeee !important;
+    font: 12px Arial, Sans-Serif;
+    width: 100%;
+    height: 22px;
+    font-weight: bold;
+    /*border: Solid .5px gray;*/
+
 }

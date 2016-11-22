@@ -41,3 +41,5 @@ D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApp
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\FlashControlV71.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\SAPBusinessObjects.WPF.Viewer.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\SAPBusinessObjects.WPF.ViewerShared.dll
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\ControlLibrary.dll
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\ControlLibrary.pdb

@@ -807,5 +807,47 @@ tr.pager td {
 }
 /* END: Mobile Styles */
 
+/*FOR WEB SERVICES*/
+
+
+.autocomplete_completionListElement 
+{  
+	visibility : hidden;
+	margin : 0px!important;
+	color : windowtext;
+	border : buttonshadow;
+	border-width : 1px;
+	border-style : solid;
+	cursor :default;
+	overflow : auto;
+	height : 270px;
+    text-align : left; 
+    list-style-type : none;
+    background-color:#FFFFFF;
+    z-index:999999;
+    position:relative;
+}
+
+/* AutoComplete highlighted item */
+
+.autocomplete_highlightedListItem
+{
+	background-color: #ffff99;
+	color: black;
+	padding: 1px;
+	cursor:pointer;
+    z-index:999999;
+}
+
+/* AutoComplete item */
+
+.autocomplete_listItem 
+{
+	background-color : window;
+	color : windowtext;
+	padding : 1px;
+     z-index:999999;
+}
+
 
 

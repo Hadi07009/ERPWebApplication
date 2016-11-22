@@ -43,7 +43,7 @@
                                                 <td>&nbsp;</td>
                                                 <td style="width: 109px">&nbsp;</td>
                                                 <td style="text-align:right; margin-left: 160px;">
-                                                    <asp:TextBox ID="txtSearch" runat="server" ></asp:TextBox>
+                                                    <asp:TextBox ID="txtSearch"  runat="server" ></asp:TextBox>
                                                     <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteForReq" runat="server" 
                                                         BehaviorID="AutoCompleteReq" CompletionInterval="1000"                                                         
                                                         CompletionListCssClass="autocomplete_completionListElement" 
@@ -442,11 +442,11 @@
                                                     <tr>
                                                         <td>
                                                             <asp:Panel ID="pnl" runat="server" Height="105px" ScrollBars="Vertical" Style="overflow: auto; width: 100%; text-align: center;">
-                                                                <asp:GridView ID="gdvItemDetail" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" CssClass="myGridClass" OnRowDataBound="gdvItemDetail_RowDataBound" OnSelectedIndexChanged="gdvItemDetail_SelectedIndexChanged" Style="text-align: left" Width="100%">
-                                                                    <FooterStyle BackColor="White" ForeColor="#000066" />
-                                                                    <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                                                                <asp:GridView ID="gdvItemDetail"  runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" CssClass="myGridClass" OnRowDataBound="gdvItemDetail_RowDataBound" OnSelectedIndexChanged="gdvItemDetail_SelectedIndexChanged" Style="text-align: left" Width="100%" ShowFooter="True">
+                                                                    <FooterStyle CssClass="gridFooterRow" />
+                                                                    <HeaderStyle CssClass="gridHeader" />
                                                                     <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
-                                                                    <RowStyle ForeColor="#000066" />
+                                                                    <RowStyle CssClass="gridRow"/>
                                                                     <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
                                                                     <SortedAscendingCellStyle BackColor="#F1F1F1" />
                                                                     <SortedAscendingHeaderStyle BackColor="#007DBB" />

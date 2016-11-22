@@ -48,9 +48,14 @@ namespace ERPWebApplication.AppClass.CommonClass
 
 
 
-        static public DialogResult Show(string message)
+        public static void Show(string message)
         {
-            return Show(message, string.Empty, MessageBoxButtons.OK);
+            //return Show(message, string.Empty, MessageBoxButtons.OK);
+            string script = "<script type= \"text/javascript\">alert('" + message + "'); </script> ";
+
+            System.Web.UI.Page page = System.Web.HttpContext.Current.CurrentHandler as System.Web.UI.Page;
+            System.Web.UI.ScriptManager.RegisterStartupScript(page, typeof(System.Web.UI.Page), "temp", script, false);
+            
         }
 
 

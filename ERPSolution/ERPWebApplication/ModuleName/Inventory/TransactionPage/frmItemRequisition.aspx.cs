@@ -15,6 +15,7 @@ using ERPWebApplication.CommonClass;
 using CrystalDecisions.Shared;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
+using ERPWebApplication.AppClass.CommonClass;
 
 
 
@@ -26,26 +27,28 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
         string _connectionString = ConfigurationManager.ConnectionStrings["dbERPSolutionConnection"].ToString();
         public static ArrayList Files = new ArrayList();
-      
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
            // ClsStatic.CheckUserAuthentication();
-
+          
             Session[ClsStatic.link3sessionUserId] = "MOS";
             string userid = Session[ClsStatic.link3sessionUserId].ToString();
-         
 
+            TopMostMessageBox.MsgConfirmBox(btnSubmit, "Are you sure to confirm submit?");
+            TopMostMessageBox.MsgConfirmBox(btnPost, "Are you sure to confirm post?");
+
+            
+        //  tblsearch.BgColor=
+         
             if (!IsPostBack)
             {
-
                 //table
 
                 tblattach.Visible = true;
-
                 tbladvsearch.Visible = false;
-
                 tbladvsearchresult.Visible = false;
-
                 tblitemdet.Visible = false;
 
 
@@ -58,20 +61,17 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 //button
                 btnPrintRequisition.Enabled = true;
 
-
                 //tr
                 trtest.Visible = false;
 
+              //  mesg.Visible = false;
+
 
                 //panel
-
                 pnl.Visible = false;
                 pnlBillAttachment.Visible = true;
 
-
-
                 //Collapsible
-
                 cpeheader.Collapsed = true;
                 cpeheader.ClientState = "true";
 
@@ -92,11 +92,8 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
                 }
 
-
-
                 txtFrmDate.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
                 txtToDate.Text = System.DateTime.Now.AddDays(15).ToString("dd/MM/yyyy");
-
 
 
                 txtrequestedDate.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
@@ -107,6 +104,19 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                
             }
         }
+
+        private void MessageBox(string mesg)
+        {
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('"+mesg +"');", true);
+        }
+
+        private void MessageBoxShow(Page page, string message)
+        {
+            Literal ltr = new Literal();
+            ltr.Text = @"<script type='text/javascript'> alert('" + message + "') </script>";
+            page.Controls.Add(ltr);
+        }
+
 
         private void GenerateRefNo(string connectionString, string companyID, string branchID, string tableName, string colName,DateTime requisitionDate, int refNoFor)
         {
@@ -121,11 +131,7 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             DataTable dtrequisitionNo = new DataTable();
             dtrequisitionNo = DataProcess.GetData(_connectionString, SqlGenerateForItemRequisition.GetDataMaxRequisitionIDByDate(Convert.ToDateTime(txtrequestedDate.Text)));
 
-
             int maxPart3;
-
-            if(dtrequisitionNo.Rows.Count==1)
-            {
 
                 if (dtrequisitionNo.Rows[0]["ItemRequisitionMaxNo"].ToString() == "0".ToString())
                 {
@@ -134,24 +140,23 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                     txtRefNo.Text = refno.ToString();
                 }
 
-                else
+            else
+            {
+
+                int reqIDPart2, reqIDPart3;
+
+                string reqID = dtrequisitionNo.Rows[0]["ItemRequisitionMaxNo"].ToString();
+                string month = reqID.Substring(0, 2);
+                string year = reqID.Substring(2, 2);
+
+                if (dt.Month.ToString() == month && dt.Year.ToString().Substring(2, 2) == year)
                 {
+                    reqIDPart2 = Convert.ToInt32(reqID.Substring(5, 2)) + 1;
+                    reqIDPart3 = Convert.ToInt32(DataProcess.GetMaximumValueFromtableColumn2(_connectionString, "ItemRequisitionHeader", "ItemRequisitionNo", "1", "1")); ;
+                    txtRefNo.Text = dt.Month + "" + string.Format("{0:00}", dt.Year.ToString().Substring(2, 2)) + "-" + string.Format("{0:00}", reqIDPart2) + string.Format("{0:0000}", reqIDPart3);
 
-                    int reqIDPart2, reqIDPart3;
-
-                    string reqID = dtrequisitionNo.Rows[0]["ItemRequisitionMaxNo"].ToString();
-                    string month = reqID.Substring(0, 2);
-                    string year = reqID.Substring(2, 2);
-
-                    if (dt.Month.ToString() == month && dt.Year.ToString().Substring(2, 2) == year)
-                    {
-                        reqIDPart2 = Convert.ToInt32(reqID.Substring(5, 2)) + 1;
-                        reqIDPart3 = Convert.ToInt32(DataProcess.GetMaximumValueFromtableColumn2(_connectionString, "ItemRequisitionHeader", "ItemRequisitionNo", "1", "1")); ;
-                        txtRefNo.Text = dt.Month + "" + string.Format("{0:00}", dt.Year.ToString().Substring(2, 2)) + "-" + string.Format("{0:00}", reqIDPart2) + string.Format("{0:0000}", reqIDPart3);
-
-                    }
                 }
-                
+
             }
         }
 
@@ -317,6 +322,9 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 tbladvsearchresult.Visible = false ;
                 advsearchbottom.Visible = false ;
                 headertop.Visible = false ;
+
+                MessageBox("No data found");
+
             }
 
             advsearchbottom.Visible = true;
@@ -348,10 +356,7 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
         protected void btnNewReq_Click(object sender, EventArgs e)
         {
 
-
-
             Response.Redirect(Request.Url.AbsoluteUri);
-
            
            // //Table
 
@@ -434,6 +439,9 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                     if (Convert.ToInt32(dtcount.Rows[0]["CompletionStatus"]) != 0)
                     {
                         return "Data Already Submitted.";
+
+
+                        
                     }
 
                 }
@@ -479,11 +487,13 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             if (CheckEntryDetail() != "")
             {
 
-                lblMesgDet.Text = CheckEntryDetail();
-                lblMesgDet.ForeColor = System.Drawing.Color.Red;             
-                //tblitemdet.Visible = false ;
+                string mesg = CheckEntryDetail();
+                //lblMesgDet.ForeColor = System.Drawing.Color.Red;             
+                tblitemdet.Visible = false ;
+
+                MessageBox(mesg);
               
-                lblMesgDet.Focus();
+                //lblMesgDet.Focus();
 
                 return;
 
@@ -492,9 +502,11 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
             if (CheckDuplicate() == false)
             {
-                lblMesgDet.Text = "Item Already Added";
-                lblMesgDet.ForeColor = System.Drawing.Color.Red;
-                lblMesgDet.Focus();
+                //lblMesgDet.Text = "Item Already Added";
+                //lblMesgDet.ForeColor = System.Drawing.Color.Red;
+                //lblMesgDet.Focus();
+
+                MessageBox("Item Already Added");
                 return;                     
             }
 
@@ -520,12 +532,8 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 dt.Columns.Add("Origin", typeof(string ));
                 dt.Columns.Add("Specification", typeof(string ));
                 dt.Columns.Add("Brand", typeof(string));
-               
 
             }
-
-
-
 
             dt.Rows.Add(dt.Rows.Count + 1, txtItem.Text.Split(':')[0].Trim(), txtItem.Text.Split(':')[1].Trim(), txtunit.Text.Split(':')[0].ToString(), txtunit.Text.Split(':')[1].ToString(), Convert.ToDecimal(txtQuantity.Text.ToString()), Convert.ToDecimal(txtRate.Text.ToString()), txtOrigin.Text.Replace("&nbsp;", ""), txtSpec.Text.Replace("&nbsp;", ""), txtBrand.Text.Replace("&nbsp;", ""));
 
@@ -599,10 +607,9 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                   double rate     = (dr["Rate"] == "") ? 0 : Convert.ToDouble(dr["Rate"]);
 
                   sum = quantity * rate;
-                  total += sum;
-        
+                  total += sum;        
             }
-           // txtTotal.Text = total.ToString();
+
         }
 
 
@@ -780,9 +787,13 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
             if (txtSearch.Text == "")
             {
-                lblMesSearch.Text = "Please enter Requisition No.";
-                lblMesSearch.ForeColor = System.Drawing.Color.Red;
-                lblMesSearch.Focus();
+                //lblMesSearch.Text = "Please enter Requisition No.";
+                //lblMesSearch.ForeColor = System.Drawing.Color.Red;
+                //lblMesSearch.Focus();
+
+                MessageBox("Please enter Requisition No.");
+
+
                 return;          
             }
 
@@ -876,9 +887,11 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
             else
             {
-                lblMesSearch.Text = "No data found ";
-                lblMesSearch.ForeColor = System.Drawing.Color.Red;
-                lblMesSearch.Focus();
+                //lblMesSearch.Text = "No data found ";
+                //lblMesSearch.ForeColor = System.Drawing.Color.Red;
+                //lblMesSearch.Focus();
+
+                MessageBox("No data found");
                 return;
 
             }
@@ -919,17 +932,12 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 if (dtcount.Rows.Count > 0)
                 {
 
-                  
-
                     if (Convert.ToInt32(dtcount.Rows[0]["CompletionStatus"]) == 1)
                     {
                       
                         foreach (GridViewRow gvrow in gdvItemDetail.Rows)
                         {
                             gvrow.Cells[0].Enabled = false;
-
-                         
-
                         }
                     }
 
@@ -949,10 +957,13 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             }
             else
             {
-                lblMesSearch.Text = "No detail data found";
-                tblitemdet.Visible = false;
-                lblMesSearch.ForeColor = System.Drawing.Color.Red;
-                lblMesSearch.Focus();
+                //lblMesSearch.Text = "No detail data found";
+                //tblitemdet.Visible = false;
+                //lblMesSearch.ForeColor = System.Drawing.Color.Red;
+                //lblMesSearch.Focus();
+
+
+                MessageBox("No detail data found");
                 return;
             }
         
@@ -966,7 +977,6 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             lblstatus.Text = "";
             lblMesgDet.Text = "";
 
-
             ShowReport(txtRefNo.Text);
         }
 
@@ -975,10 +985,13 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
         {
             if (requisitionNo == "")
             {
-                lblMesg.Text = "Please select Requisition";
+                //lblMesg.Text = "Please select Requisition";
 
-                lblMesg.ForeColor = System.Drawing.Color.Red;
-                lblMesg.Focus();
+                //lblMesg.ForeColor = System.Drawing.Color.Red;
+                //lblMesg.Focus();
+
+                MessageBox("Please select Requisition");
+
                 return;          
                
             }
@@ -1001,7 +1014,6 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
             RegisterStartupScript("click", "<script>window.open('../Report/ReportForm/ReportViewer.aspx');</script>");
 
-        
         }
 
 
@@ -1010,10 +1022,12 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
             if (checkEntry() != "")
             {
-                lblMesg.Text = checkEntry();
-                lblMesg.Visible = true;
-                lblMesg.ForeColor = System.Drawing.Color.Red;
-                lblMesg.Focus();
+                //lblMesg.Text = checkEntry();
+                //lblMesg.Visible = true;
+                //lblMesg.ForeColor = System.Drawing.Color.Red;
+                //lblMesg.Focus();
+
+                MessageBox(checkEntry());
                 return;           
             }
 
@@ -1039,7 +1053,10 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                else
                {
 
-                   lblMesg.Text = "Data Already Submitted";
+                   //lblMesg.Text = "Data Already Submitted";
+
+
+                   MessageBox("Data Already Submitted");
                
                }
                return;
@@ -1056,9 +1073,11 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             cmd.Connection = myConnection;
             cmd.Transaction = myTrans;
 
+             clsRequisitionHeader hdr = new clsRequisitionHeader();
+
             try
             {
-                clsRequisitionHeader hdr = new clsRequisitionHeader();
+                //clsRequisitionHeader hdr = new clsRequisitionHeader();
                 hdr.CompanyID = 1;
                 hdr.BranchID = 1;
                 hdr.ItemRequisitionNo = txtRefNo.Text;
@@ -1197,9 +1216,9 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                                 {
 
                                     ClearAllItemHeader();
-                                    lblMesg.Text = "Data Saved Successfully";
-                                    lblMesg.ForeColor = System.Drawing.Color.Purple;
-                                    lblMesg.Focus();
+                                    //lblMesg.Text = "Data Saved Successfully";
+                                    //lblMesg.ForeColor = System.Drawing.Color.Purple;
+                                    //lblMesg.Focus();
                                 }
 
                             }
@@ -1238,8 +1257,9 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 myConnection.Close();
             }
 
+            lblporef.Text = hdr.ItemRequisitionNo;
 
-            Response.Redirect(Request.Url.AbsoluteUri);
+            ModalPopupExtender5.Show();   
 
         }
 
@@ -1298,9 +1318,9 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 {
                     myTrans.Commit();
                     ClearAllItemHeader();
-                    lblMesg.Text = "Data Saved Successfully";
-                    lblMesg.ForeColor = System.Drawing.Color.Purple;
-                    lblMesg.Focus();
+                    //lblMesg.Text = "Data Saved Successfully";
+                    //lblMesg.ForeColor = System.Drawing.Color.Purple;
+                    //lblMesg.Focus();
                 }
 
                 else
@@ -1602,11 +1622,13 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                         if (FileList.Items.Contains(new ListItem(savename)))
                         {
 
-                            lblAttachMsg.Visible = true;
+                            //lblAttachMsg.Visible = true;
 
-                            lblAttachMsg.Text = "File already in the ListBox";
-                            lblAttachMsg.ForeColor = System.Drawing.Color.Red;
-                            lblAttachMsg.Focus();
+                            //lblAttachMsg.Text = "File already in the ListBox";
+                            //lblAttachMsg.ForeColor = System.Drawing.Color.Red;
+                            //lblAttachMsg.Focus();
+                            MessageBoxShow(this, "File already in the ListBox");
+
                             return;
                         }
                         else
@@ -1624,28 +1646,38 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
                             flAttachmentInBill.SaveAs(Server.MapPath("~/UploadFile/") + savename);
 
-                            lblAttachMsg.Visible = true;
-                            lblAttachMsg.Text = "Add another file and click attach to attach in the list";
-                            lblAttachMsg.ForeColor = System.Drawing.Color.YellowGreen;
-                            lblAttachMsg.Focus();
+                            //lblAttachMsg.Visible = true;
+                            //lblAttachMsg.Text = "Add another file and click attach to attach in the list";
+                            //lblAttachMsg.ForeColor = System.Drawing.Color.YellowGreen;
+                            //lblAttachMsg.Focus();
+
+
+                            MessageBoxShow(this, "Add another file and click attach to attach in the list");
+
+
                         }
 
                     }
                     else
                     {
-                        lblAttachMsg.Visible = true;
-                        lblAttachMsg.Text = "File size cannot be 0";
-                        lblAttachMsg.ForeColor = System.Drawing.Color.Red;
-                        lblAttachMsg.Focus();
+                        //lblAttachMsg.Visible = true;
+                        //lblAttachMsg.Text = "File size cannot be 0";
+                        //lblAttachMsg.ForeColor = System.Drawing.Color.Red;
+                        //lblAttachMsg.Focus();
+
+                        MessageBoxShow(this, "File size cannot be 0");
+
                         return;
                     }
                 }
                 else
                 {
-                    lblAttachMsg.Visible = true;
-                    lblAttachMsg.Text = "Please select a file to attach";
-                    lblAttachMsg.ForeColor=System.Drawing.Color.Red;
-                    lblAttachMsg.Focus();
+                    //lblAttachMsg.Visible = true;
+                    //lblAttachMsg.Text = "Please select a file to attach";
+                    //lblAttachMsg.ForeColor=System.Drawing.Color.Red;
+                    //lblAttachMsg.Focus();
+
+                    MessageBoxShow(this, "Please select a file to attach");
                     return;
                 }
 
@@ -1666,9 +1698,12 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
                     if (FileList.SelectedIndex < 0)
                     {
-                        lblAttachMsg.Visible = true;
-                        lblAttachMsg.Text = "Please select a file to remove";
-                        lblAttachMsg.ForeColor = System.Drawing.Color.Red;
+                        //lblAttachMsg.Visible = true;
+                        //lblAttachMsg.Text = "Please select a file to remove";
+                        //lblAttachMsg.ForeColor = System.Drawing.Color.Red;
+
+                        MessageBoxShow(this, "Please select a file to attach");
+
                         return;
 
                     }
@@ -1686,9 +1721,12 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
                         FileList.Items.Remove(FileList.SelectedItem.Text);
 
-                        lblAttachMsg.Visible = true;
-                        lblAttachMsg.Text = "File removed";
-                        lblAttachMsg.ForeColor = System.Drawing.Color.YellowGreen;
+                        //lblAttachMsg.Visible = true;
+                        //lblAttachMsg.Text = "File removed";
+                        //lblAttachMsg.ForeColor = System.Drawing.Color.YellowGreen;
+
+
+                        MessageBoxShow(this, "File removed");
 
                         if (FileList.Items.Count == 0)
                         {
@@ -1699,11 +1737,12 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             }
             catch
             {
-                lblAttachMsg.Visible = true;
-                lblAttachMsg.Text = "Please try again with valid information";
-                lblAttachMsg.ForeColor = System.Drawing.Color.YellowGreen;
-               
-                
+                //lblAttachMsg.Visible = true;
+                //lblAttachMsg.Text = "Please try again with valid information";
+                //lblAttachMsg.ForeColor = System.Drawing.Color.YellowGreen;
+
+                MessageBoxShow(this, "Please try again with valid information");
+                              
             }
         }
 
@@ -1716,8 +1755,6 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
         protected void chkproject_CheckedChanged1(object sender, EventArgs e)
         {
-
-
             if (chkproject.Checked == false)
             {
 
@@ -1743,16 +1780,15 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
         protected void txtUserName_TextChanged(object sender, EventArgs e)
         {
-
-
           //  dtaddreess = DataProcess.GetData(connectionStringreq, sqlGenerationClientInformation.GetClientAddress(txt));
 
             if (ddlItemUserType.Text == "-1")
             {
+                //lblMesg.Text = "Please select user type";
+                //lblMesg.ForeColor = System.Drawing.Color.Red;
+                //lblMesg.Focus();
 
-                lblMesg.Text = "Please select user type";
-                lblMesg.ForeColor = System.Drawing.Color.Red;
-                lblMesg.Focus();
+              MessageBoxShow(this,"Please select user type");
                 return;
             }
             
@@ -1846,8 +1882,8 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             bool flg = false;
             if (txtRefNo.Text == "")
             {
-
-                lblMesg.Text = "Enter Item Requisition No";
+             //   lblMesg.Text = "Enter Item Requisition No";
+                MessageBoxShow(this,"Enter Item Requisition No");
                 return;
             }
             
@@ -1858,8 +1894,6 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
                 Response.Redirect(Request.Url.AbsoluteUri);
 
-                //lblMesg.Text = "Requisition Posted";
-                //return;            
             }
 
         }
@@ -1885,6 +1919,39 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
         {
             GenerateRefNo(_connectionString, "1", "1", "ItemRequisitionHeader", "ItemRequisitionNo",Convert.ToDateTime(txtrequestedDate.Text),1);
         }
+
+        protected void btnok_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(Request.Url.AbsoluteUri);
+        }
+
+        protected void btnDownLoad_Click(object sender, EventArgs e)
+        {
+
+            string gg = lblDownloadSelectedFile.Text.Replace("amp;", "");
+            String F1Path, F1Name;
+            string abc = Server.MapPath("~/UtilityBillPaperTempAttachment/") + gg.ToString();
+            F1Path = abc.ToString();
+            F1Name = Path.GetFileName(F1Path);
+            GetFile(F1Path, F1Name);       
+
+        }
+        private void GetFile(String strPath, String strSuggestedName)
+        {
+            String strServerPath;
+            System.IO.FileInfo objSourceFileInfo;
+            strServerPath = this.Server.MapPath(strSuggestedName);
+            objSourceFileInfo = new System.IO.FileInfo(strPath);
+            Response.ContentType = "application/octet-stream";
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + strSuggestedName);
+            Response.AddHeader("Content-Length", objSourceFileInfo.Length.ToString());
+            Response.WriteFile(objSourceFileInfo.FullName);
+            Response.Flush();
+            Response.End();
+        }
+
+
+      
 
 
     }
