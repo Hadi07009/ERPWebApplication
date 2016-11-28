@@ -3,3 +3,4 @@ D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ControlLi
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ControlLibrary\bin\Release\AjaxControlToolkit.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ControlLibrary\obj\Release\ControlLibrary.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ControlLibrary\obj\Release\ControlLibrary.pdb
+D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ControlLibrary\obj\Release\ControlLibrary.csprojResolveAssemblyReference.cache

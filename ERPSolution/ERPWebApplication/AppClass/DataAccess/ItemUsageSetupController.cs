@@ -11,7 +11,7 @@ namespace ERPWebApplication.AppClass.DataAccess
         public string ItemUsageSql(CompanySetup objCompanySetup, BranchSetup objBranchSetup)
         {
             string sqlString = null;
-            sqlString = "SELECT ItemUsageID,ItemUsage FROM matMatUsagePurposeSetup WHERE CompanyID = '" + objCompanySetup.CompanyID + "' AND BranchID = '" + objBranchSetup.BranchID + "' ORDER BY ItemUsage";
+            sqlString = "SELECT ItemUsageID,ItemUsage FROM matMatUsagePurposeSetup WHERE DataUsed = 'A' AND CompanyID = '" + objCompanySetup.CompanyID + "' AND BranchID = '" + objBranchSetup.BranchID + "' ORDER BY ItemUsage";
             return sqlString;
         }
     }

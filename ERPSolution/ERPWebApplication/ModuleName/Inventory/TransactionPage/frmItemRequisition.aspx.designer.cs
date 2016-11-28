@@ -733,15 +733,6 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage {
         protected global::System.Web.UI.WebControls.Label Label42;
         
         /// <summary>
-        /// lblAttachMsg control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAttachMsg;
-        
-        /// <summary>
         /// pnlBillAttachment control.
         /// </summary>
         /// <remarks>
@@ -868,6 +859,15 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage {
         protected global::System.Web.UI.WebControls.Button btnPost;
         
         /// <summary>
+        /// btnReject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReject;
+        
+        /// <summary>
         /// tblitemdet control.
         /// </summary>
         /// <remarks>
@@ -940,15 +940,6 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage {
         protected global::System.Web.UI.WebControls.Panel header_ContentPanel;
         
         /// <summary>
-        /// lblMesgDet control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMesgDet;
-        
-        /// <summary>
         /// lblreqstatus6 control.
         /// </summary>
         /// <remarks>
@@ -976,13 +967,13 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage {
         protected global::AjaxControlToolkit.TextBoxWatermarkExtender TBWE2;
         
         /// <summary>
-        /// autoComplete1 control.
+        /// autoCompleteforItemDeat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.AutoCompleteExtender autoComplete1;
+        protected global::AjaxControlToolkit.AutoCompleteExtender autoCompleteforItemDeat;
         
         /// <summary>
         /// lblreqstatus9 control.

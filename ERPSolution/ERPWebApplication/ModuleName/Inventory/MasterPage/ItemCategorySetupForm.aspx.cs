@@ -44,6 +44,8 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
                     TopMostMessageBox.MsgConfirmBox(btnSave, CGlobalMeaage.GConfirmMessage);
                     txtSearch_AutoCompleteExtender.ContextKey = _connectionString;
                     PanelItemDetails.Visible = false;
+                    btnUpdate.Visible = false;
+                    TopMostMessageBox.MsgConfirmBox(btnUpdate, CGlobalMeaage.GConfirmMessage);
                 }
 
 
@@ -158,7 +160,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
             try
             {
                 var storedProcedureComandTest = "exec [spGetTierNumber] " + parentAccNo + "";
-                var dtTierNo = StoredProcedureExecutor.StoredProcedureExecuteReader(_connectionString, storedProcedureComandTest);
+                var dtTierNo = DataManipulation.GetData(_connectionString, storedProcedureComandTest);
                 int tierNumber = Convert.ToInt32(dtTierNo.Rows[0][0].ToString());
                 Session["tierNumber"] = tierNumber;
                 return tierNumber;
@@ -176,7 +178,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
             try
             {
                 var storedProcedureComandTest = "exec [spGetNodeSeqNo] " + parentAccount + " ";
-                var dtSeqNo = StoredProcedureExecutor.StoredProcedureExecuteReader(_connectionString, storedProcedureComandTest);
+                var dtSeqNo = DataManipulation.GetData(_connectionString, storedProcedureComandTest);
                 var sequenceNumberFixedDigit = dtSeqNo.Rows[0][0].ToString();
                 int sequenceNumber = Convert.ToInt32(sequenceNumberFixedDigit);
                 Session["sequenceNumber"] = sequenceNumber;
@@ -462,6 +464,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
                     txtCategoryName.Focus();
                     txtCategoryName.Enabled = true;
                     PanelItemDetails.Visible = false;
+                    btnUpdate.Visible = false;
                     if (countChildIDDigit == 8)
                     {
                         txtCategoryName.Enabled = false;
@@ -480,6 +483,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
                     _objItemSetup.ItemID = Convert.ToInt32(TreeViewCategory.SelectedNode.Value);
                     Session["itemID"] = _objItemSetup.ItemID;
                     ShowItemDetails(_objItemSetup);
+                    btnUpdate.Visible = true;
 
                 }
 
@@ -504,7 +508,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
                     txtItemNameUpdate.Text = rowNo["ModelNo"].ToString();
                     ddlItemTypeIDUpdate.SelectedValue = rowNo["ItemTypeID"].ToString() == null ? "-1" : rowNo["ItemTypeID"].ToString();
                     ddlItemUsageIDUpdate.SelectedValue = rowNo["ItemUsageID"].ToString() == null ? "-1" : rowNo["ItemUsageID"].ToString();
-                    //ddlRelatedSupplierUpdate.SelectedValue = rowNo["SupplierID"].ToString() == null ? "-1" : rowNo["SupplierID"].ToString();
+                    ddlRelatedSupplierUpdate.SelectedValue = rowNo["SupplierID"].ToString() == "" ? "-1" : rowNo["SupplierID"].ToString();
                     txtDescriptionUpdate.Text = rowNo["Specification"].ToString();
                     txtHSCodeUpdate.Text = rowNo["HSCode"].ToString();
                     txtOpeningBalanceUpdate.Text = rowNo["OpenningBalance"].ToString();
@@ -517,7 +521,8 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
                     ddlStockAccountNoUpdate.SelectedValue = rowNo["COAStockAccNo"].ToString() == null ? "-1" : rowNo["COAStockAccNo"].ToString();
                     ddlCOGSAccountNoUpdate.SelectedValue = rowNo["COACGSAccNo"].ToString() == null ? "-1" : rowNo["COACGSAccNo"].ToString();
                     ddlSalesReturnAccountUpdate.SelectedValue = rowNo["COASalesRetAccNo"].ToString() == null ? "-1" : rowNo["COASalesRetAccNo"].ToString();
-                    if (rowNo["IsVATableItem"].ToString() == "1")
+                    var vatValue = rowNo["IsVATableItem"].ToString();
+                    if (Convert.ToBoolean( vatValue) == true)
                     {
                         CheckBoxIsVATUpdate.Checked = true;
 
@@ -594,6 +599,8 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
                 AssignItemValuesForUpdate();
                 PanelItemDetails.Visible = false;
                 TopMostMessageBox.Show(CGlobalMeaage.GProcessSuccess);
+                btnUpdate.Visible = false;
+                TreeViewCategory.ExpandAll();
 
             }
             catch (Exception msgException)

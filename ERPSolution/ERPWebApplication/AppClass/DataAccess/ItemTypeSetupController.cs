@@ -11,7 +11,7 @@ namespace ERPWebApplication.AppClass.DataAccess
         public string ItemTypeSql(CompanySetup objCompanySetup, BranchSetup objBranchSetup)
         {
             string sqlString = null;
-            sqlString = "SELECT ItemTypeID,ItemType FROM matItemTypeSetup WHERE CompanyID = '" + objCompanySetup.CompanyID + "' AND BranchID = '" + objBranchSetup.BranchID + "' ORDER BY ItemType";
+            sqlString = "SELECT ItemTypeID,ItemType FROM matItemTypeSetup WHERE DataUsed = 'A' AND CompanyID = '" + objCompanySetup.CompanyID + "' AND BranchID = '" + objBranchSetup.BranchID + "' ORDER BY ItemType";
             return sqlString;
         }
     }

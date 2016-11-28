@@ -30,7 +30,7 @@ namespace ERPWebApplication.AppClass.DataAccess
                                         objItemCategorySetup.CurrentBalance + ",'" +
                                         objItemCategorySetup.DataUsed + "','" +
                                         objItemCategorySetup.EntryUserName + "'";
-                StoredProcedureExecutor.StoredProcedureExecuteNonQuery(connectionString, storedProcedureComandTest);
+                DataManipulation.StoredProcedureExecuteNonQuery(connectionString, storedProcedureComandTest);
 
             }
             catch (SqlException msgException)
@@ -49,7 +49,7 @@ namespace ERPWebApplication.AppClass.DataAccess
         {
             try
             {
-                string sql = "SELECT DISTINCT CategoryName,ItemCategoryID FROM [matCategoryList] ORDER BY ItemCategoryID";
+                string sql = "SELECT DISTINCT CategoryName,ItemCategoryID FROM [matCategoryList] WHERE DataUsed = 'A' ORDER BY ItemCategoryID";
                 ClsDropDownListController.LoadDropDownList(connectionString, sql, ddlCategory, "CategoryName", "ItemCategoryID");
             }
             catch (Exception msgException)
@@ -64,8 +64,8 @@ namespace ERPWebApplication.AppClass.DataAccess
             try
             {
                 DataTable dtItem = null;
-                string sqlString = "SELECT * FROM matMaterialSetup WHERE ItemCategoryID = " + objItemCategorySetup.ItemCategoryID + " OR ItemID = " + objItemCategorySetup.ItemCategoryID + "";
-                dtItem = StoredProcedureExecutor.StoredProcedureExecuteReader(connectionString, sqlString);
+                string sqlString = "SELECT * FROM matMaterialSetup WHERE DataUsed = 'A' AND ItemCategoryID = " + objItemCategorySetup.ItemCategoryID + " OR ItemID = " + objItemCategorySetup.ItemCategoryID + "";
+                dtItem = DataManipulation.GetData(connectionString, sqlString);
                 return dtItem;
 
             }

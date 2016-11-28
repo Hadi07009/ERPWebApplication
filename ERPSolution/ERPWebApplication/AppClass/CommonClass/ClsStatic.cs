@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace ERPWebApplication.CommonClass
 {
@@ -19,6 +20,13 @@ namespace ERPWebApplication.CommonClass
         public static String sessionReport = "*_%^&**scblsessionsessionReport*_%^&**";
 
 
+
+
+        public static string  sessionCompanyID = "*_%^&**scblsessionCompanyID*_%^&**";
+
+        public static string sessionBranchID = "*_%^&**scblsessionbranchID*_%^&**";
+
+
         public static void CheckUserAuthentication()
         {
             current.PermissionPrm = "";
@@ -31,10 +39,19 @@ namespace ERPWebApplication.CommonClass
                 HttpContext.Current.Response.Redirect("~/frmLogin.aspx");
 
         }
+
+
+        public static void MsgConfirmBox(Button btn, string strMessage)
+        {
+            btn.Attributes.Add("onclick", "return confirm('" + strMessage + "');");
+
+        }
+        public static void MsgConfirmBox(LinkButton btn, string strMessage)
+        {
+            btn.Attributes.Add("onclick", "return confirm('" + strMessage + "');");
+
+        }
     }
-
-
-
 
 
     public static class current

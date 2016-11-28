@@ -11,7 +11,7 @@ namespace ERPWebApplication.AppClass.DataAccess
         public string UnitSql(CompanySetup objCompanySetup, BranchSetup objBranchSetup)
         {
             string sqlString = null;
-            sqlString = "SELECT UnitID,Unit FROM matUnitSetup WHERE CompanyID = '" + objCompanySetup.CompanyID + "' AND BranchID = '" + objBranchSetup.BranchID + "' ORDER BY Unit";
+            sqlString = "SELECT UnitID,Unit FROM matUnitSetup WHERE DataUsed = 'A' AND CompanyID = '" + objCompanySetup.CompanyID + "' AND BranchID = '" + objBranchSetup.BranchID + "' ORDER BY Unit";
             return sqlString;
         }
     }

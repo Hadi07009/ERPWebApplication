@@ -14,7 +14,7 @@ namespace ERPWebApplication.CommonClass
         public ClsGridViewLoad()
         { }
 
-        public static void GetData(DataTable dt, GridView GridViewName)
+        public static void ShowDataInGridView(DataTable dt, GridView GridViewName)
         {
             if (dt.Rows.Count > 0)
             {
@@ -27,7 +27,7 @@ namespace ERPWebApplication.CommonClass
             }
         }
 
-        public static DataSet GetData(String queryString, GridView GridViewName)
+        public static DataSet ShowDataInGridView(String queryString, GridView GridViewName)
         {
             String connectionString = System.Configuration.ConfigurationManager.AppSettings["UbasysConnectionString"].ToString();
             DataSet ds = new DataSet();

@@ -287,6 +287,50 @@ namespace ERPWebApplication.CommonClass
             }
             return retValue;
         }
+
+        public static int GetMaximumValueUsingSQL(string connectionString, string selectQuery)
+        {
+            SqlConnection sqlConn = null;
+            DataTable dataTableObj = null;
+            int retValue = 0;
+            try
+            {
+                //SELECT RIGHT('HELLO WORLD', 3);
+
+                //string selectQuery = selectQuery;
+
+                //string selectQuery = "select count(" + colName + ")+1  as " + colName + " from " + tableName + " " + "WHERE CompanyID = " + companyID + " AND BranchID = " + branchID + " and RequisitionDate=convert(datetime,'" + whereClause + "',103)";
+
+                // string selectQuery = "select isnull( max(" + colName + "),0)+1  as " + colName + " from " + tableName + " " + "WHERE CompanyID = " + companyID + " AND BranchID = " + branchID + " ";
+
+                sqlConn = new SqlConnection(connectionString);
+                sqlConn.Open();
+                SqlDataAdapter sqlDataAdapterObj = new SqlDataAdapter(selectQuery, sqlConn);
+                dataTableObj = new DataTable();
+                sqlDataAdapterObj.Fill(dataTableObj);
+
+                if (dataTableObj.Rows.Count > 0)
+                    retValue = Convert.ToInt32(dataTableObj.Rows[0][0].ToString());
+
+            }
+            catch (SqlException sqlExceptionObject)
+            {
+                throw sqlExceptionObject;
+            }
+            catch (Exception exceptionObject)
+            {
+                throw exceptionObject;
+            }
+            finally
+            {
+                if (sqlConn.State == System.Data.ConnectionState.Open)
+                {
+                    sqlConn.Close();
+                }
+            }
+            return retValue;
+        }
+
        
 
         
