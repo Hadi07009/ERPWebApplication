@@ -28,6 +28,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -1001,6 +1003,7 @@
     <Content Include="CSS\HomePage\bootstrap.css.map" />
     <Content Include="WebService\ServiceSystem.asmx" />
     <None Include="Properties\PublishProfiles\ERPApplicationPublish.pubxml" />
+    <Content Include="README.docx" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
     <Content Include="Scripts\jquery-3.1.0.min.js" />
@@ -1053,10 +1056,16 @@
     <Compile Include="AppClass\CommonClass\CGlobalMeaage.cs" />
     <Compile Include="AppClass\CommonClass\ClsDropDownListController.cs" />
     <Compile Include="AppClass\CommonClass\ClsGridViewLoad.cs" />
+    <Compile Include="AppClass\CommonClass\clsImageHandler.cs" />
     <Compile Include="AppClass\CommonClass\ClsReport.cs" />
     <Compile Include="AppClass\CommonClass\ClsStatic.cs" />
     <Compile Include="AppClass\CommonClass\DataProcess.cs" />
     <Compile Include="AppClass\CommonClass\DataManipulation.cs" />
+    <Compile Include="AppClass\CommonClass\DateProcess.cs" />
+    <Compile Include="AppClass\CommonClass\DocumentUpload.cs" />
+    <Compile Include="AppClass\CommonClass\DocumentUploadController.cs" />
+    <Compile Include="AppClass\CommonClass\EnumCollections.cs" />
+    <Compile Include="AppClass\CommonClass\StringManipulation.cs" />
     <Compile Include="AppClass\CommonClass\TopMostMessageBox.cs" />
     <Compile Include="AppClass\DataAccess\ActivitySetupController.cs" />
     <Compile Include="AppClass\DataAccess\ClientInformationController.cs" />
