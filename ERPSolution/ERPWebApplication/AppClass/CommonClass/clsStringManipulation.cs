@@ -5,13 +5,12 @@ using System.Configuration;
 using System.Collections.Generic;
 using System.Text;
 using System.Web.UI.WebControls;
-using System.Data.SqlClient;
 using System.Linq;
 
 
-public class StringManipulation
+public class clsStringManipulation
 {
-    public StringManipulation() { }
+    public clsStringManipulation() { }
 
     public string CreatingCommaSeparatedlist(string inputString1, string inputString2, string inputString3,
                                              string inputString4, string inputString5, string inputString6)
@@ -246,7 +245,7 @@ public class StringManipulation
         string FilterName = string.Empty;
         string ExtractTitle = string.Empty;
         string ExtractTitleFilterName = string.Empty;
-        FilterName = StringManipulation.RemoveSpace(name);
+        FilterName = clsStringManipulation.RemoveSpace(name);
         string[] ar1 = (FilterName.ToString().Replace(".", ". ")).Split(' ');
         
         string[] titles = { "Mr.", "Mrs.", "Mr", "Mrs", "Miss.", "Miss", "Ms", "Ms.", "Dr.", "Dr", "Eng.", "Eng", "Engr.", "Engr" };
@@ -255,7 +254,7 @@ public class StringManipulation
         {
             for (int j = 0; j < ar1.Length; j++)
             {
-                if (StringManipulation.ConvertProperCase(ar1[j].ToString()) == StringManipulation.ConvertProperCase(titles[i].ToString()))
+                if (clsStringManipulation.ConvertProperCase(ar1[j].ToString()) == clsStringManipulation.ConvertProperCase(titles[i].ToString()))
                 {
                     ExtractTitle = ar1[j].ToString();
 
@@ -268,7 +267,7 @@ public class StringManipulation
 
         if (ReturnName != string.Empty)
         {
-            ExtractTitleFilterName = StringManipulation.RemoveSpace(FilterName.Replace(ReturnName, string.Empty));
+            ExtractTitleFilterName = clsStringManipulation.RemoveSpace(FilterName.Replace(ReturnName, string.Empty));
         }
         else
         {
@@ -276,7 +275,7 @@ public class StringManipulation
         }
 
 
-        ExtractTitleFilterName = StringManipulation.RemoveSpace(ExtractTitleFilterName);
+        ExtractTitleFilterName = clsStringManipulation.RemoveSpace(ExtractTitleFilterName);
         string[] ar = ExtractTitleFilterName.ToString().Split(' ');
         stringlength = ar.Length;
 
@@ -318,7 +317,7 @@ public class StringManipulation
     {
         string ReturnName = string.Empty;
 
-        ReturnName = StringManipulation.RemoveSpace(title + " " + firstname + " " + middlename + " " + lastname);
+        ReturnName = clsStringManipulation.RemoveSpace(title + " " + firstname + " " + middlename + " " + lastname);
 
         return ReturnName;
     }

@@ -36,7 +36,7 @@ namespace ERPWebApplication.AppClass.DataAccess
                                         objItemSetup.ReOrderLevel + "',"+
                                         objItemSetup.BreakUpUnitD+","+
                                         objItemSetup.MinimumQuantity;
-                DataManipulation.StoredProcedureExecuteNonQuery(connectionString, storedProcedureComandTest);
+                clsDataManipulation.StoredProcedureExecuteNonQuery(connectionString, storedProcedureComandTest);
             }
             catch (Exception msgException)
             {
@@ -72,7 +72,7 @@ namespace ERPWebApplication.AppClass.DataAccess
                                         objItemSetup.ReOrderLevel + "'," +
                                         objItemSetup.BreakUpUnitD + "," +
                                         objItemSetup.MinimumQuantity;
-                DataManipulation.StoredProcedureExecuteNonQuery(connectionString, storedProcedureComandTest);
+                clsDataManipulation.StoredProcedureExecuteNonQuery(connectionString, storedProcedureComandTest);
             }
             catch (Exception msgException)
             {
@@ -96,7 +96,7 @@ namespace ERPWebApplication.AppClass.DataAccess
             {
                 DataTable dtItemDetails = null;
                 var storedProcedureComandTest = "exec [spGetDetailsmatMaterialSetup] "+_objItemSetup.ItemID+"";
-                dtItemDetails = DataManipulation.GetData(connectionString, storedProcedureComandTest);
+                dtItemDetails = clsDataManipulation.GetData(connectionString, storedProcedureComandTest);
                 return dtItemDetails;
 
             }

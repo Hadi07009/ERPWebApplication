@@ -6,9 +6,9 @@ using System.Linq;
 using System.Web;
 
 
-public class DataManipulation
+public class clsDataManipulation
 {
-    public DataManipulation()
+    public clsDataManipulation()
     {
         //
         // TODO: Add constructor logic here
@@ -212,14 +212,51 @@ public class DataManipulation
         }
     }
 
-    public static int GetMaximumValueFromtableColumn(string connectionString, string tableName, string whereClause, string colName, string companyID, string branchID)
+    public static int GetMaximumValueFromtableColumnAll(string connectionString, string tableName, string colName, string companyID, string branchID)
     {
         SqlConnection sqlConn = null;
         DataTable dataTableObj = null;
         int retValue = 0;
         try
         {
-            string selectQuery = "select count(" + colName + ")+1  as " + colName + " from " + tableName + " " + "WHERE CompanyID = " + companyID + " AND BranchID = " + branchID + " and RequisitionDate=convert(datetime,'" + whereClause + "',103)";
+            string selectQuery = "select count(" + colName + ")+1  as " + colName + " from " + tableName + " " + "WHERE CompanyID = " + companyID + " AND BranchID = " + branchID + "";
+
+            sqlConn = new SqlConnection(connectionString);
+            sqlConn.Open();
+            SqlDataAdapter sqlDataAdapterObj = new SqlDataAdapter(selectQuery, sqlConn);
+            dataTableObj = new DataTable();
+            sqlDataAdapterObj.Fill(dataTableObj);
+
+            if (dataTableObj.Rows.Count > 0)
+                retValue = Convert.ToInt32(dataTableObj.Rows[0][colName].ToString());
+
+        }
+        catch (SqlException sqlExceptionObject)
+        {
+            throw sqlExceptionObject;
+        }
+        catch (Exception exceptionObject)
+        {
+            throw exceptionObject;
+        }
+        finally
+        {
+            if (sqlConn.State == System.Data.ConnectionState.Open)
+            {
+                sqlConn.Close();
+            }
+        }
+        return retValue;
+    }
+
+    public static int GetMaximumValueFromtableColumn(string connectionString, string tableName, string colName, string companyID, string branchID, string dataUsed)
+    {
+        SqlConnection sqlConn = null;
+        DataTable dataTableObj = null;
+        int retValue = 0;
+        try
+        {
+            string selectQuery = "select count(" + colName + ")+1  as " + colName + " from " + tableName + " " + "WHERE DataUsed = '" + dataUsed + "' AND CompanyID = " + companyID + " AND BranchID = " + branchID + "";
 
             sqlConn = new SqlConnection(connectionString);
             sqlConn.Open();

@@ -5,10 +5,10 @@ using System.Text;
 using System.Data;
 
 
- public class DateProcess
+ public class clsDateProcess
     {
       
-       public DateProcess() { }
+       public clsDateProcess() { }
 
        public static int NoOfDaysOfMonth(DateTime inputDate)
        {
@@ -168,7 +168,7 @@ using System.Data;
            DateTime dd = System.DateTime.Now;
            try
            {
-               DataTable dt = DataManipulation.GetData(ConnectionString, "select Getdate() as rd");
+               DataTable dt = clsDataManipulation.GetData(ConnectionString, "select Getdate() as rd");
                if (dt.Rows.Count > 0)
                {
                    dd = Convert.ToDateTime(dt.Rows[0]["rd"].ToString());
@@ -272,6 +272,11 @@ using System.Data;
                return false;
            }
 
+       }
+       public string DateToNumber(DateTime dtDate)
+       {
+
+           return string.Format("{0:00}", dtDate.Month) + "" + string.Format("{0:00}", dtDate.Year.ToString().Substring(2, 2)) + "-";
        }
 
 

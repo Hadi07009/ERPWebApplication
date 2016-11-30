@@ -19,14 +19,14 @@ public class DocumentUploadController
     public void DocumentUpload(string connectionString, DocumentUpload objDocumentUpload)
     {
         string storedProcedureText = "exec [DocumentUploadInto_HRMS_Document] '" + objDocumentUpload.DocumentFor + "','" + objDocumentUpload.DocumentTypeCode + "','" + objDocumentUpload.Description + "','" + objDocumentUpload.DocumentContent + "','" + objDocumentUpload.EntryUser + "','" + objDocumentUpload.documentCode + "','" + objDocumentUpload.documentName + "'";
-        DataManipulation.StoredProcedureExecuteNonQuery(connectionString, storedProcedureText);
+        clsDataManipulation.StoredProcedureExecuteNonQuery(connectionString, storedProcedureText);
     }
 
     public string GetReferenceNo(string connectionString)
     {
         string referenceNo = null;
         const string storedProcedureCommand = "exec [DocumentUploadGetReferenceNoFrom_HRMS_Document] ";
-        var dtReference = DataManipulation.GetData(connectionString, storedProcedureCommand);
+        var dtReference = clsDataManipulation.GetData(connectionString, storedProcedureCommand);
         if (dtReference.Rows.Count > 0)
         {
             referenceNo = dtReference.Rows[0][0].ToString();
@@ -37,7 +37,7 @@ public class DocumentUploadController
     public DataTable GetActiveDocument(string connectionString,int doctype)
     {
         string storedProcedureCommand = "exec [DocumentUploadGetActiveDocumentFrom_HRMS_Document] " + doctype.ToString();
-        var dtActiveDocument = DataManipulation.GetData(connectionString,
+        var dtActiveDocument = clsDataManipulation.GetData(connectionString,
             storedProcedureCommand);
         return dtActiveDocument;
     }
@@ -46,14 +46,14 @@ public class DocumentUploadController
     {
         string storedProcedureCommand = "exec [DocumentUploadGetInActiveDocumentFrom_HRMS_Document] " + doctype.ToString();
 
-        var dtInactiveDocument = DataManipulation.GetData(connectionString,
+        var dtInactiveDocument = clsDataManipulation.GetData(connectionString,
             storedProcedureCommand);
         return dtInactiveDocument;
     }
     public void UpdateDocumentSrtatus(string connectionString, DocumentUpload objDocumentUpload)
     {
         string storedProcedureCommand = "exec [spUpdateDocumentSrtatus] " + objDocumentUpload.referenceNo + "," + objDocumentUpload.dstatus + "";
-        DataManipulation.StoredProcedureExecuteNonQuery(connectionString,storedProcedureCommand);
+        clsDataManipulation.StoredProcedureExecuteNonQuery(connectionString,storedProcedureCommand);
     }
    
 }

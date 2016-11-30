@@ -11,7 +11,7 @@ namespace ERPWebApplication.AppClass.CommonClass
     /// <summary>
     /// Displays MessageBox messages as a top most window
     /// </summary>
-    static public class TopMostMessageBox
+    static public class clsTopMostMessageBox
     {
         /// <summary>
         /// Displays a <see cref="MessageBox"/> but as a TopMost window.

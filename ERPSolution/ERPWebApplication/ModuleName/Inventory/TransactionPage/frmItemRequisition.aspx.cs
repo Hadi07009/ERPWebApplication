@@ -16,22 +16,17 @@ using ERPWebApplication.AppClass.DataAccess;
 using CrystalDecisions.Shared;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
-
-
-
+using ERPWebApplication.AppClass.CommonClass;
 
 namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 {
     public partial class frmItemRequisition : System.Web.UI.Page
     {
-
         string _connectionString = ConfigurationManager.ConnectionStrings["dbERPSolutionConnection"].ToString();
         public static ArrayList Files = new ArrayList();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-           // ClsStatic.CheckUserAuthentication();
-          
             Session[ClsStatic.link3sessionUserId] = "MOS";
             string userid = Session[ClsStatic.link3sessionUserId].ToString();
 
@@ -39,39 +34,27 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             Session[ClsStatic.sessionCompanyID]=1;
             Session[ClsStatic.sessionBranchID]=0;
 
-            ClsStatic.MsgConfirmBox(btnSubmit,"Are you sure to confirm submit?");
-            ClsStatic.MsgConfirmBox(btnPost, "Are you sure to confirm post?");
-            ClsStatic.MsgConfirmBox(btnReject , "Are you sure to confirm reject?");
+            ClsStatic.MsgConfirmBox(btnSubmit, clsMessages.GConfirmMessage);
+            ClsStatic.MsgConfirmBox(btnPost, clsMessages.GConfirmMessage);
+            ClsStatic.MsgConfirmBox(btnReject , clsMessages.GConfirmMessage);
             tblsearch.BgColor = "#F0F8FF";
            
 
             if (!IsPostBack)
             {
-
-
                 AutoCompleteForReq.ContextKey = Session[ClsStatic.sessionCompanyID].ToString() + ":" + Session[ClsStatic.sessionBranchID].ToString();
                 AutoCompleteforEmployee.ContextKey = Session[ClsStatic.sessionCompanyID].ToString() + ":" + Session[ClsStatic.sessionBranchID].ToString();
                 autoCompleteforItemDeat.ContextKey = Session[ClsStatic.sessionCompanyID].ToString() + ":" + Session[ClsStatic.sessionBranchID].ToString();
-               
-
-                //table
-
+                
                 tblattach.Visible = true;
                 tbladvsearch.Visible = false;
                 tbladvsearchresult.Visible = false;
                 tblitemdet.Visible = false;
-
-
-                //hr 
-              //  searchbottom.Visible = true;
+                
                 advsearchbottom.Visible = false;
                 headertop.Visible = false;
-
-
-                //button
+                
                 btnPrintRequisition.Enabled = true;
-
-                //tr
                 trtest.Visible = false;
 
               //  mesg.Visible = false;
@@ -111,7 +94,7 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
                 Loaddata();
 
-                GenerateRefNo(_connectionString, Session[ClsStatic.sessionCompanyID].ToString(), Session[ClsStatic.sessionBranchID].ToString(), Convert.ToDateTime(txtrequestedDate.Text), 1);
+                //GenerateRefNo(_connectionString, Session[ClsStatic.sessionCompanyID].ToString(), Session[ClsStatic.sessionBranchID].ToString(), Convert.ToDateTime(txtrequestedDate.Text), 1);
 
             }
         }
@@ -130,7 +113,7 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
 
 
-        private void GenerateRefNo(string connectionString, string companyID, string branchID, DateTime requisitionDate, int refNoFor)
+        private string GenerateRefNo(string connectionString, string companyID, string branchID, DateTime requisitionDate)
         {
             DateTime dt = Convert.ToDateTime(requisitionDate);
             int maxnofromDate;
@@ -138,71 +121,26 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             string SQLStatement;
 
             maxnofromDate = 0;
-            refno = DateToNumber(requisitionDate);
+            clsDateProcess objDateProcess = new clsDateProcess(); 
+            refno = objDateProcess.DateToNumber(requisitionDate);
 
             // By Date
             SQLStatement = "select count(ItemRequisitionNo)+1  as ItemRequisitionMaxNo from ItemRequisitionHeader WHERE  RequisitionDate =convert(datetime,'" + requisitionDate + "',103) and CompanyID = " + companyID + " AND BranchID = " + branchID + "";
-
-
-            maxnofromDate = DataProcess.GetMaximumValueUsingSQL(_connectionString, SQLStatement);
+            maxnofromDate = clsDataManipulation.GetMaximumValueUsingSQL(connectionString, SQLStatement);
             refno = refno + string.Format("{0:00}", maxnofromDate);
 
             // By Month
 
             SQLStatement = "select count(ItemRequisitionNo)+1  as ItemRequisitionMaxNo from ItemRequisitionHeader WHERE  month(RequisitionDate) =" + requisitionDate.Month + " and year(RequisitionDate) =" + requisitionDate.Year + " and CompanyID = " + companyID + " AND BranchID = " + branchID + "";
-
-
-            maxnofromDate = DataProcess.GetMaximumValueUsingSQL(_connectionString, SQLStatement);
+            maxnofromDate = clsDataManipulation.GetMaximumValueUsingSQL(connectionString, SQLStatement);
             refno = refno + string.Format("{0:0000}", maxnofromDate);
-
-            txtRefNo.Text = refno;
+            //txtRefNo.Text = refno;
+            return refno;
 
         }
 
 
-        //private void GenerateRefNo(string connectionString, string companyID, string branchID, string tableName, string colName,DateTime requisitionDate, int refNoFor)
-        //{
-        //    DateTime dt = Convert.ToDateTime(requisitionDate);
-        //    string refno;
-        //    refno = string.Format("{0:00}", dt.Month) + "" + string.Format("{0:00}", dt.Year.ToString().Substring(2, 2)) + "-";
-
-
-
-        //    //maxcount by date
-        //    int maxnofromDate = DataProcess.GetMaximumValueFromtableColumn(_connectionString, "ItemRequisitionHeader", requisitionDate.ToString("dd/MM/yyyy"), "ItemRequisitionNo", companyID.ToString(), branchID.ToString());
-        //    refno = refno + string.Format("{0:00}", maxnofromDate);
-
-
-        //    DataTable dtrequisitionNo = new DataTable();
-        //    dtrequisitionNo = DataProcess.GetData(_connectionString, SqlGenerateForItemRequisition.GetDataMaxRequisitionIDByDate(Convert.ToDateTime(txtrequestedDate.Text)));
-
-        //    int maxPart3;
-        //    maxPart3 = Convert.ToInt32(DataProcess.GetMaximumValueFromtableColumn2(_connectionString, "ItemRequisitionHeader", "ItemRequisitionNo", "1", "1"));
-
-        //        if (dtrequisitionNo.Rows[0]["ItemRequisitionMaxNo"].ToString() == "0".ToString())
-        //        {                  
-        //            refno += string.Format("{0:0000}", maxPart3);
-        //            txtRefNo.Text = refno.ToString();
-        //        }
-
-        //    else
-        //    {
-
-        //        int reqIDPart2;
-
-        //        string reqID = dtrequisitionNo.Rows[0]["ItemRequisitionMaxNo"].ToString();
-        //        string month = reqID.Substring(0, 2);
-        //        string year = reqID.Substring(2, 2);
-
-        //        if (dt.Month.ToString() == month && dt.Year.ToString().Substring(2, 2) == year)
-        //        {
-        //            reqIDPart2 = Convert.ToInt32(reqID.Substring(5, 2)) + 1;                 
-        //            txtRefNo.Text = dt.Month + "" + string.Format("{0:00}", dt.Year.ToString().Substring(2, 2)) + "-" + string.Format("{0:00}", reqIDPart2) + string.Format("{0:0000}", maxPart3);
-
-        //        }
-
-        //    }
-        //}
+       
 
         private void Loaddata()
         {
@@ -1063,9 +1001,9 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
                 hdr.CompanyID = Convert.ToInt32(Session[ClsStatic.sessionCompanyID]);
                 hdr.BranchID = Convert.ToInt32(Session[ClsStatic.sessionBranchID]); 
-                hdr.ItemRequisitionNo = txtRefNo.Text;
                 hdr.RequisitionBy = txtRequestedBy.Text.Split(':')[0].ToString();
                 hdr.RequisitionDate = Convert.ToDateTime(txtrequestedDate.Text);
+                hdr.ItemRequisitionNo = GenerateRefNo(_connectionString, hdr.CompanyID.ToString(), hdr.BranchID.ToString(), hdr.RequisitionDate);
                 hdr.RequiredDate = Convert.ToDateTime(txtDateNeed.Text);
                 hdr.RequestedDepartment = ddlRequestedDept.SelectedItem.Value;
                 hdr.UserType = Convert.ToInt32(ddlItemUserType.SelectedItem.Value);
@@ -1851,18 +1789,14 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
         }
 
 
-        private string DateToNumber(DateTime dtDate)
-        {
-
-            return string.Format("{0:00}", dtDate.Month) + "" + string.Format("{0:00}", dtDate.Year.ToString().Substring(2, 2)) + "-";
-        }
+        
 
 
 
         protected void txtrequestedDate_TextChanged(object sender, EventArgs e)
         {
 
-             GenerateRefNo(_connectionString, Session[ClsStatic.sessionCompanyID].ToString(), Session[ClsStatic.sessionBranchID].ToString(), Convert.ToDateTime(txtrequestedDate.Text), 1);
+             //GenerateRefNo(_connectionString, Session[ClsStatic.sessionCompanyID].ToString(), Session[ClsStatic.sessionBranchID].ToString(), Convert.ToDateTime(txtrequestedDate.Text), 1);
         }
 
         protected void btnok_Click(object sender, EventArgs e)
@@ -1896,6 +1830,11 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
         }
 
         protected void btnReject_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void txtFrmDate_TextChanged(object sender, EventArgs e)
         {
 
         }

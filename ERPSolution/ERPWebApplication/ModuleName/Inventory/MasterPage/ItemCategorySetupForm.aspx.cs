@@ -41,11 +41,11 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
                     LoadCategory(ddlCategory);
                     LoadCategory(ddlParentCategory);
                     CheckBoxAddItem.Enabled = false;
-                    TopMostMessageBox.MsgConfirmBox(btnSave, CGlobalMeaage.GConfirmMessage);
+                    clsTopMostMessageBox.MsgConfirmBox(btnSave, clsMessages.GConfirmMessage);
                     txtSearch_AutoCompleteExtender.ContextKey = _connectionString;
                     PanelItemDetails.Visible = false;
                     btnUpdate.Visible = false;
-                    TopMostMessageBox.MsgConfirmBox(btnUpdate, CGlobalMeaage.GConfirmMessage);
+                    clsTopMostMessageBox.MsgConfirmBox(btnUpdate, clsMessages.GConfirmMessage);
                 }
 
 
@@ -53,7 +53,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
             catch (Exception msgException)
             {
 
-                TopMostMessageBox.Show(msgException.Message);
+                clsTopMostMessageBox.Show(msgException.Message);
             }
         }
 
@@ -85,7 +85,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
                 var myConnection = new SqlConnection(_connectionString);
                 var command = new SqlCommand("SELECT ItemCategoryID,CategoryName," +
                 "childnodecount = (SELECT Count(*) FROM matCategoryList WHERE ParentCategoryID = D.ItemCategoryID) " +
-                "FROM matCategoryList D WHERE ParentCategoryID = 1", myConnection);
+                "FROM matCategoryList D WHERE ParentCategoryID = 111", myConnection);
                 var da = new SqlDataAdapter(command);
                 var dt = new DataTable();
                 da.Fill(dt);
@@ -160,7 +160,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
             try
             {
                 var storedProcedureComandTest = "exec [spGetTierNumber] " + parentAccNo + "";
-                var dtTierNo = DataManipulation.GetData(_connectionString, storedProcedureComandTest);
+                var dtTierNo = clsDataManipulation.GetData(_connectionString, storedProcedureComandTest);
                 int tierNumber = Convert.ToInt32(dtTierNo.Rows[0][0].ToString());
                 Session["tierNumber"] = tierNumber;
                 return tierNumber;
@@ -178,7 +178,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
             try
             {
                 var storedProcedureComandTest = "exec [spGetNodeSeqNo] " + parentAccount + " ";
-                var dtSeqNo = DataManipulation.GetData(_connectionString, storedProcedureComandTest);
+                var dtSeqNo = clsDataManipulation.GetData(_connectionString, storedProcedureComandTest);
                 var sequenceNumberFixedDigit = dtSeqNo.Rows[0][0].ToString();
                 int sequenceNumber = Convert.ToInt32(sequenceNumberFixedDigit);
                 Session["sequenceNumber"] = sequenceNumber;
@@ -209,7 +209,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
                 catch (Exception msgException)
                 {
 
-                    TopMostMessageBox.Show(msgException.Message);
+                    clsTopMostMessageBox.Show(msgException.Message);
                 }
 
             }
@@ -246,13 +246,14 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
                 _objItemCategorySetup = new ItemCategorySetup();
                 _objItemCategorySetup.CompanyID = _objCompanySetup.CompanyID;
                 _objItemCategorySetup.BranchID = _objBranchSetup.BranchID;
-                _objItemCategorySetup.KnownValueID = Convert.ToInt32(AccountType.AccountTypeID.Sale);
+
+                _objItemCategorySetup.KnownValueID = Convert.ToInt32(EnumCollections.eTransactionType.eSalesTrans);
                 ClsDropDownListController.LoadDropDownList(_connectionString, _objItemSetupController.SQLForAccountType(_objItemCategorySetup), targetDDSalesAccountNo, "AccountName", "AccountNo");
-                _objItemCategorySetup.KnownValueID = Convert.ToInt32(AccountType.AccountTypeID.Stock);
+                _objItemCategorySetup.KnownValueID = Convert.ToInt32(EnumCollections.eTransactionType.eStock);
                 ClsDropDownListController.LoadDropDownList(_connectionString, _objItemSetupController.SQLForAccountType(_objItemCategorySetup), targetDDStockAccountNo, "AccountName", "AccountNo");
-                _objItemCategorySetup.KnownValueID = Convert.ToInt32(AccountType.AccountTypeID.COGS);
+                _objItemCategorySetup.KnownValueID = Convert.ToInt32(EnumCollections.eTransactionType.eCOGS);
                 ClsDropDownListController.LoadDropDownList(_connectionString, _objItemSetupController.SQLForAccountType(_objItemCategorySetup), targetDDCOGSAccountNo, "AccountName", "AccountNo");
-                _objItemCategorySetup.KnownValueID = Convert.ToInt32(AccountType.AccountTypeID.SalesReturn);
+                _objItemCategorySetup.KnownValueID = Convert.ToInt32(EnumCollections.eTransactionType.eSalesReturn);
                 ClsDropDownListController.LoadDropDownList(_connectionString, _objItemSetupController.SQLForAccountType(_objItemCategorySetup), targetDDSalesReturnAccount, "AccountName", "AccountNo");
 
             }
@@ -270,20 +271,20 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
                 if (CheckBoxAddItem.Checked == true)
                 {
                     SaveItem();
-                    TopMostMessageBox.Show(CGlobalMeaage.GProcessSuccess);
+                    clsTopMostMessageBox.Show(clsMessages.GProcessSuccess);
 
                 }
                 else
                 {
                     AddValuesToCategory();
-                    TopMostMessageBox.Show(CGlobalMeaage.GProcessSuccess);
+                    clsTopMostMessageBox.Show(clsMessages.GProcessSuccess);
 
                 }
 
             }
             catch (Exception msgException)
             {
-                TopMostMessageBox.Show(msgException.Message);
+                clsTopMostMessageBox.Show(msgException.Message);
 
 
 
@@ -397,7 +398,9 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
                 _objItemCategorySetup.CategoryTypeID = Convert.ToInt32(ddlProductType.SelectedValue);
                 _objItemCategorySetup.ItemCategoryID = CreateCategoryID();
                 _objItemCategorySetup.CategoryName = txtCategoryName.Text == string.Empty ? null : txtCategoryName.Text;
-                _objItemCategorySetup.ParentCategoryID = ddlParentCategory.SelectedValue == "-1" ? 1 : Convert.ToInt32(ddlParentCategory.SelectedValue);
+
+                _objItemCategorySetup.ParentCategoryID = ddlParentCategory.SelectedValue == "-1" ? Convert.ToInt32("1" + _objItemCategorySetup.CompanyID.ToString() + _objItemCategorySetup.BranchID.ToString()) :
+                    Convert.ToInt32(ddlParentCategory.SelectedValue);
                 _objItemCategorySetup.StartingItemCode = 0;
                 _objItemCategorySetup.EndingItemCode = 0;
                 _objItemCategorySetup.SeqNo = Convert.ToInt32(Session["sequenceNumber"].ToString());
@@ -491,7 +494,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
             catch (Exception msgException)
             {
 
-                TopMostMessageBox.Show(msgException.Message);
+                clsTopMostMessageBox.Show(msgException.Message);
             }
         }
 
@@ -522,7 +525,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
                     ddlCOGSAccountNoUpdate.SelectedValue = rowNo["COACGSAccNo"].ToString() == null ? "-1" : rowNo["COACGSAccNo"].ToString();
                     ddlSalesReturnAccountUpdate.SelectedValue = rowNo["COASalesRetAccNo"].ToString() == null ? "-1" : rowNo["COASalesRetAccNo"].ToString();
                     var vatValue = rowNo["IsVATableItem"].ToString();
-                    if (Convert.ToBoolean( vatValue) == true)
+                    if (Convert.ToBoolean(vatValue) == true)
                     {
                         CheckBoxIsVATUpdate.Checked = true;
 
@@ -532,7 +535,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
                         CheckBoxIsVATUpdate.Checked = false;
                     }
 
-                    
+
                 }
 
             }
@@ -588,7 +591,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
             catch (Exception msgException)
             {
 
-                TopMostMessageBox.Show(msgException.Message);
+                clsTopMostMessageBox.Show(msgException.Message);
             }
         }
 
@@ -598,7 +601,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
             {
                 AssignItemValuesForUpdate();
                 PanelItemDetails.Visible = false;
-                TopMostMessageBox.Show(CGlobalMeaage.GProcessSuccess);
+                clsTopMostMessageBox.Show(clsMessages.GProcessSuccess);
                 btnUpdate.Visible = false;
                 TreeViewCategory.ExpandAll();
 
@@ -606,7 +609,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
             catch (Exception msgException)
             {
 
-                TopMostMessageBox.Show(msgException.Message);
+                clsTopMostMessageBox.Show(msgException.Message);
             }
         }
 
@@ -626,7 +629,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
                 _objItemSetup.CoacgsAccNo = Convert.ToInt32(ddlCOGSAccountNoUpdate.SelectedValue);
                 _objItemSetup.CoaSalesRetAccNo = Convert.ToInt32(ddlSalesReturnAccountUpdate.SelectedValue);
                 _objItemSetup.EntryUserName = Session["entryUserCode"].ToString();
-                _objItemSetup.ItemID = Convert.ToInt32( Session["itemID"].ToString());//
+                _objItemSetup.ItemID = Convert.ToInt32(Session["itemID"].ToString());//
                 _objItemSetup.ModelNo = txtItemNameUpdate.Text == string.Empty ? null : txtItemNameUpdate.Text;
                 _objItemSetup.UnitID = Convert.ToInt32(ddlUnitUpdate.SelectedValue);
                 _objItemSetup.ItemCode = txtItemCodeUpdate.Text == string.Empty ? null : txtItemCodeUpdate.Text;
@@ -646,7 +649,7 @@ namespace ERPWebApplication.ModuleName.Inventory.MasterPage
             }
             catch (Exception msgException)
             {
-                
+
                 throw msgException;
             }
         }

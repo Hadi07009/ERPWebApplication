@@ -1052,7 +1052,6 @@
     <Content Include="Bundle.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppClass\AccountType.cs" />
     <Compile Include="AppClass\CommonClass\CGlobalMeaage.cs" />
     <Compile Include="AppClass\CommonClass\ClsDropDownListController.cs" />
     <Compile Include="AppClass\CommonClass\ClsGridViewLoad.cs" />
@@ -1060,13 +1059,13 @@
     <Compile Include="AppClass\CommonClass\ClsReport.cs" />
     <Compile Include="AppClass\CommonClass\ClsStatic.cs" />
     <Compile Include="AppClass\CommonClass\DataProcess.cs" />
-    <Compile Include="AppClass\CommonClass\DataManipulation.cs" />
-    <Compile Include="AppClass\CommonClass\DateProcess.cs" />
+    <Compile Include="AppClass\CommonClass\clsDataManipulation.cs" />
+    <Compile Include="AppClass\CommonClass\clsDateProcess.cs" />
     <Compile Include="AppClass\CommonClass\DocumentUpload.cs" />
     <Compile Include="AppClass\CommonClass\DocumentUploadController.cs" />
     <Compile Include="AppClass\CommonClass\EnumCollections.cs" />
-    <Compile Include="AppClass\CommonClass\StringManipulation.cs" />
-    <Compile Include="AppClass\CommonClass\TopMostMessageBox.cs" />
+    <Compile Include="AppClass\CommonClass\clsStringManipulation.cs" />
+    <Compile Include="AppClass\CommonClass\clsTopMostMessageBox.cs" />
     <Compile Include="AppClass\DataAccess\ActivitySetupController.cs" />
     <Compile Include="AppClass\DataAccess\ClientInformationController.cs" />
     <Compile Include="AppClass\DataAccess\DepartmentSetupController.cs" />

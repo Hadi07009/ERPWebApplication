@@ -30,7 +30,7 @@ namespace ERPWebApplication.AppClass.DataAccess
                                         objItemCategorySetup.CurrentBalance + ",'" +
                                         objItemCategorySetup.DataUsed + "','" +
                                         objItemCategorySetup.EntryUserName + "'";
-                DataManipulation.StoredProcedureExecuteNonQuery(connectionString, storedProcedureComandTest);
+                clsDataManipulation.StoredProcedureExecuteNonQuery(connectionString, storedProcedureComandTest);
 
             }
             catch (SqlException msgException)
@@ -65,7 +65,7 @@ namespace ERPWebApplication.AppClass.DataAccess
             {
                 DataTable dtItem = null;
                 string sqlString = "SELECT * FROM matMaterialSetup WHERE DataUsed = 'A' AND ItemCategoryID = " + objItemCategorySetup.ItemCategoryID + " OR ItemID = " + objItemCategorySetup.ItemCategoryID + "";
-                dtItem = DataManipulation.GetData(connectionString, sqlString);
+                dtItem = clsDataManipulation.GetData(connectionString, sqlString);
                 return dtItem;
 
             }
