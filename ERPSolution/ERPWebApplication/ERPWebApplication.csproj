@@ -955,7 +955,6 @@
     <Content Include="CSS\CSSstyleTheme\Images\youtube.png" />
     <Content Include="CSS\CSSstyleTheme\MasterPageCSS\CssAddon.css" />
     <Content Include="CSS\CSSstyleTheme\MasterPageCSS\Site.css" />
-    <Content Include="CSS\default.css" />
     <Content Include="CSS\GridViewCSS.css" />
     <Content Include="CSS\HomePage\bootstrap-theme.css" />
     <Content Include="CSS\HomePage\bootstrap-theme.min.css" />
@@ -975,6 +974,7 @@
     <Content Include="Images\btnYes.jpg" />
     <Content Include="Images\header.png" />
     <Content Include="MicrosoftMenuHtmlPage.html" />
+    <Content Include="ModuleName\Accounts\CoaHeadSetup.aspx" />
     <Content Include="ModuleName\Inventory\MasterPage\ItemCategorySetupForm.aspx" />
     <Content Include="ModuleName\Inventory\Report\ReportForm\ReportViewer.aspx" />
     <Content Include="ModuleName\Inventory\TransactionPage\frmItemRequisition.aspx" />
@@ -1110,6 +1110,13 @@
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleName\Accounts\CoaHeadSetup.aspx.cs">
+      <DependentUpon>CoaHeadSetup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuleName\Accounts\CoaHeadSetup.aspx.designer.cs">
+      <DependentUpon>CoaHeadSetup.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModuleName\Inventory\MasterPage\ItemCategorySetupForm.aspx.cs">
       <DependentUpon>ItemCategorySetupForm.aspx</DependentUpon>

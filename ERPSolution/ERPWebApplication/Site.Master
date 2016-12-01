@@ -1,6 +1,7 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ERPWebApplication.SiteMaster" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +16,7 @@
     <meta name="viewport" content="width=device-width" />
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
 
+    <link href="CSS/CSSstyleTheme/Control/CommandButton.css" rel="stylesheet" />
     <link href="CSS/CSSstyleTheme/CommonCSS/Tree.css" rel="stylesheet" />
     <link href="CSS/GridViewCSS.css" rel="stylesheet" />
     <link href="CSS/StyleSheetGridView.css" rel="stylesheet" />
