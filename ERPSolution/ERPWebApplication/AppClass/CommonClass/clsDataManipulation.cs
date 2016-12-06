@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -319,6 +320,63 @@ public class clsDataManipulation
             }
         }
         return retValue;
+    }
+
+    public static string GetSingleValueFromtable(string ConnectionString, string TableName, string ColName, string WhereClause)
+    {
+        SqlConnection sqlConn = null;
+        DataTable dataTableObj = null;
+        string retValue = "";
+        try
+        {
+            string selectQuery = "select top 1 " + ColName + " from " + TableName + " " + WhereClause;
+            sqlConn = new SqlConnection(ConnectionString);
+            sqlConn.Open();
+            SqlDataAdapter sqlDataAdapterObj = new SqlDataAdapter(selectQuery, sqlConn);
+            dataTableObj = new DataTable();
+            sqlDataAdapterObj.Fill(dataTableObj);
+
+            if (dataTableObj.Rows.Count > 0)
+                retValue = dataTableObj.Rows[0][ColName].ToString();
+
+        }
+        catch (SqlException msgException)
+        {
+            throw msgException;
+        }
+        catch (Exception msgException)
+        {
+            throw msgException;
+        }
+        finally
+        {
+            if (sqlConn.State == System.Data.ConnectionState.Open)
+            {
+                sqlConn.Close();
+            }
+        }
+        return retValue;
+    }
+
+    public static string DeleteQueryWithMessage(string connectionString, string queryStr)
+    {
+        try
+        {
+            var sqlConn = new SqlConnection(connectionString);
+            sqlConn.Open();
+            var sqlCom = new SqlCommand(queryStr, sqlConn);
+            var noOfRowsAffected = sqlCom.ExecuteNonQuery();
+            sqlConn.Close();
+            return noOfRowsAffected.ToString(CultureInfo.InvariantCulture) + "  row(s) affected";
+        }
+        catch (SqlException msgException)
+        {
+            throw msgException;
+        }
+        catch (Exception msgException)
+        {
+            throw msgException;
+        }
     }
 
 }

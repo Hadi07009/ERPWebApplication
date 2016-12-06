@@ -107,7 +107,7 @@
                                                         <asp:Label ID="Label5" runat="server" Text="From Date:"></asp:Label>
                                                     </td>
                                                     <td style=" margin-top:0px">
-                                                        <asp:TextBox ID="txtFrmDate" runat="server" ></asp:TextBox>
+                                                        <asp:TextBox ID="txtFrmDate" runat="server" OnTextChanged="txtFrmDate_TextChanged" ></asp:TextBox>
                                                         <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server"  BehaviorID="txtFrmDate"  CssClass="Calendar" Format="dd/MM/yyyy" TargetControlID="txtFrmDate" />
                                                        
                                                         <asp:ImageButton ID="imgbtnadsearch" runat="server" Height="17px" ImageAlign="Top" ImageUrl="~/Images/collapse.jpg" OnClick="imgbtnadsearch_Click" Width="15px" />

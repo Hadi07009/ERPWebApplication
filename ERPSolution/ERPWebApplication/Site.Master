@@ -68,14 +68,21 @@
                             <Items>
                                 <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Inventory">
                                     <asp:MenuItem NavigateUrl="~/Default.aspx" Text="MasterPage">
-                                        
                                         <asp:MenuItem NavigateUrl="~/ModuleName/Inventory/MasterPage/ItemCategorySetupForm.aspx" Text="Item Category Setup" Value="22"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="~/ModuleName/Inventory/MasterPage/TemplateForm.aspx" Text="Template Form" Value="23"></asp:MenuItem>
                                     </asp:MenuItem>
                                     <asp:MenuItem NavigateUrl="~/Default.aspx" Text="TransactionPage">
                                         <asp:MenuItem NavigateUrl="~/ModuleName/Inventory/TransactionPage/frmItemRequisition.aspx" Text="Item Requisition" Value="aaaaa"></asp:MenuItem>
 
                                     </asp:MenuItem>
                                 </asp:MenuItem>
+                                <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Accounts">
+                                    <asp:MenuItem NavigateUrl="~/Default.aspx" Text="MasterPage">
+                                        <asp:MenuItem NavigateUrl="~/ModuleName/Accounts/CoaHeadSetup.aspx" Text="Account Head Setup" Value="51"></asp:MenuItem>
+                                    </asp:MenuItem>
+
+                                </asp:MenuItem>
+
 
                             </Items>
                         </asp:Menu>
@@ -83,7 +90,6 @@
                     </div>
                     <div style="float: right; padding-right: 10px">
                         <div class="content-wrapper">
-                            
                         </div>
                     </div>
                 </div>

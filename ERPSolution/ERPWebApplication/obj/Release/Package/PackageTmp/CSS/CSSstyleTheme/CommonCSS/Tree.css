@@ -1,7 +1,7 @@
 ﻿.treeNode {
     background-color:#eeeeee;
     border-color: #eeeeee;   
-    font: 12px Arial, Sans-Serif;
+    font: 12px Tahoma, Sans-Serif;
     width: 100%;
     height: 22px;
     font-weight: bold;
@@ -14,7 +14,7 @@
     background-color:#eeeeee;
     border-color: #eeeeee;
     /*border: solid .5px #eeeeee;*/
-    font: 12px Arial #428BCA, Sans-Serif;
+    font: 12px Tahoma #428BCA, Sans-Serif;
     width: 100%;
     height: 22px;
     /*font-size: 18px;*/    
@@ -26,7 +26,7 @@
     border-color: #eeeeee;
     /*border: solid .5px #eeeeee;*/
     color:#00817F !important;
-    font: 12px Arial, Sans-Serif;
+    font: 12px Tahoma, Sans-Serif;
     width: 100%;
     height: 22px;
     background-color: #eeeeee;
@@ -39,7 +39,7 @@
     border-color: #428BCA;
     /*border: solid .5px #428BCA;*/
     color:#eeeeee !important;
-    font: 12px Arial, Sans-Serif;
+    font: 12px Tahoma, Sans-Serif;
     width: 100%;
     height: 22px;
      
@@ -48,7 +48,7 @@
 .parentNode {
     /*background-color:#eeeeee;
     border-color: #eeeeee;
-    font: 12px Arial, Sans-Serif;
+    font: 12px Tahoma, Sans-Serif;
     width: 100%;
     height: 22px;
     font-weight: bold;
@@ -57,10 +57,10 @@
 }
 
 .hoverNode {
-    background-color:red;
+    background-color:#C7D1D6;
     /*border-color: #C7D1D6;*/
-    color:#eeeeee !important;
-    font: 12px Arial, Sans-Serif;
+    color:#ff006e !important;
+    font: 12px Tahoma, Sans-Serif;
     width: 100%;
     height: 22px;
     font-weight: bold;

@@ -976,6 +976,7 @@
     <Content Include="MicrosoftMenuHtmlPage.html" />
     <Content Include="ModuleName\Accounts\CoaHeadSetup.aspx" />
     <Content Include="ModuleName\Inventory\MasterPage\ItemCategorySetupForm.aspx" />
+    <Content Include="ModuleName\Inventory\MasterPage\TemplateForm.aspx" />
     <Content Include="ModuleName\Inventory\Report\ReportForm\ReportViewer.aspx" />
     <Content Include="ModuleName\Inventory\TransactionPage\frmItemRequisition.aspx" />
     <Content Include="Images\accent.png" />
@@ -1068,6 +1069,7 @@
     <Compile Include="AppClass\CommonClass\clsTopMostMessageBox.cs" />
     <Compile Include="AppClass\DataAccess\ActivitySetupController.cs" />
     <Compile Include="AppClass\DataAccess\ClientInformationController.cs" />
+    <Compile Include="AppClass\DataAccess\CoaHeadController.cs" />
     <Compile Include="AppClass\DataAccess\DepartmentSetupController.cs" />
     <Compile Include="AppClass\DataAccess\EmployeeInformationController.cs" />
     <Compile Include="AppClass\DataAccess\ItemCategorySetupController.cs" />
@@ -1088,6 +1090,7 @@
     <Compile Include="AppClass\Model\clsMaterialSetup.cs" />
     <Compile Include="AppClass\Model\ClsRequisitionDetail.cs" />
     <Compile Include="AppClass\Model\clsRequisitionHeader.cs" />
+    <Compile Include="AppClass\Model\CoaHead.cs" />
     <Compile Include="AppClass\Model\CompanySetup.cs" />
     <Compile Include="AppClass\Model\FileUploadDetail.cs" />
     <Compile Include="AppClass\Model\FileUploadHeader.cs" />
@@ -1124,6 +1127,13 @@
     </Compile>
     <Compile Include="ModuleName\Inventory\MasterPage\ItemCategorySetupForm.aspx.designer.cs">
       <DependentUpon>ItemCategorySetupForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleName\Inventory\MasterPage\TemplateForm.aspx.cs">
+      <DependentUpon>TemplateForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuleName\Inventory\MasterPage\TemplateForm.aspx.designer.cs">
+      <DependentUpon>TemplateForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModuleName\Inventory\Report\ReportFile\ReportItemRequisition.cs">
       <AutoGen>True</AutoGen>

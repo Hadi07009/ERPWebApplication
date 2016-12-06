@@ -25,9 +25,9 @@
                             <table style="width: 100%; text-align: left">
                                 <tr>
                                     <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
                                     <td>
-                                        <asp:TextBox ID="txtSearch" Width="300px" placeholder="Search..." runat="server" AutoPostBack="True"></asp:TextBox></td>
+                                        <asp:TextBox ID="txtSearch" runat="server" AutoPostBack="True" placeholder="Search..." Width="337px"></asp:TextBox>
+                                    </td>
                                     <ajaxToolkit:AutoCompleteExtender ID="txtSearch_AutoCompleteExtender" runat="server"
                                         CompletionListCssClass="autocomplete_completionListElement"
                                         CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem"
@@ -52,7 +52,7 @@
                                         <asp:Label ID="Label3" runat="server" AssociatedControlID="CheckBoxAddItem" CssClass="checkbox" ForeColor="White">Add Item?</asp:Label>
                                     </td>
                                     <td style="text-align: right">
-                                        <asp:Button ID="btnSave" runat="server" Text="Save" Width="75px" OnClick="btnSave_Click" />
+                                        <asp:Button ID="btnSave" CssClass="CssBtnSave" runat="server" Text="Save" Width="75px" OnClick="btnSave_Click" />
                                     </td>
                                     <td style="text-align: center">
                                         <asp:Button ID="btnUpdate" runat="server" Text="Update" Width="115px" OnClick="btnUpdate_Click" />
@@ -66,6 +66,11 @@
                                 </tr>
                             </table>
                         </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <hr id="searchbottom" runat="server" style="border:0; height: 1px; background: #333;  background-image: linear-gradient(to right, #ccc, #333, #ccc); width: 1010px;" />
                     </td>
                 </tr>
 
@@ -92,7 +97,7 @@
                                                                     HoverNodeStyle-CssClass="hoverNode"
                                                                     runat="server" OnTreeNodePopulate="TreeViewCategory_TreeNodePopulate"
                                                                     OnSelectedNodeChanged="TreeViewCategory_SelectedNodeChanged"
-                                                                    ImageSet="Msdn" ForeColor="#428BCA" Width="90%">
+                                                                    ImageSet="Msdn" ForeColor="#428BCA" Width="80%">
                                                                     <HoverNodeStyle CssClass="hoverNode" />
                                                                     <LeafNodeStyle CssClass="leafNode" />
                                                                     <NodeStyle CssClass="treeNode" />
@@ -111,6 +116,36 @@
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
                                                         </tr>
                                                     </table>
                                                 </asp:Panel>

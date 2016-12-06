@@ -268,5 +268,28 @@ namespace ERPWebApplication.WebService
             return str;
         }
 
+        [WebMethod]
+        public List<string> GetSubledgerHeadName(string prefixText, int count, String contextKey)
+        {
+            List<string> SubledgerHeadList = new List<string>();
+            DataTable dt = new DataTable();
+            string str = "";
+            string constr = contextKey;
+            if (prefixText == "*")
+            {
+                str = "SELECT DISTINCT [SubledgerHeadName]  FROM [AccCOASubHeadSetup] ORDER BY [SubledgerHeadName]";
+            }
+            else
+            {
+                str = "SELECT DISTINCT [SubledgerHeadName] FROM [AccCOASubHeadSetup] WHERE ([SubledgerHeadName] like '%" + prefixText + "%' ) ORDER BY [SubledgerHeadName]";
+            }
+            dt = DataProcess.GetData(constr, str);
+            foreach (DataRow dr in dt.Rows)
+            {
+                SubledgerHeadList.Add(dr["SubledgerHeadName"].ToString());
+            }
+            return SubledgerHeadList;
+        }
+
     }
 }
