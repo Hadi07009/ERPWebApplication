@@ -975,6 +975,7 @@
     <Content Include="Images\header.png" />
     <Content Include="MicrosoftMenuHtmlPage.html" />
     <Content Include="ModuleName\Accounts\CoaHeadSetup.aspx" />
+    <Content Include="ModuleName\HRMS\MasterPage\CompanySetupForm.aspx" />
     <Content Include="ModuleName\Inventory\MasterPage\ItemCategorySetupForm.aspx" />
     <Content Include="ModuleName\Inventory\MasterPage\TemplateForm.aspx" />
     <Content Include="ModuleName\Inventory\Report\ReportForm\ReportViewer.aspx" />
@@ -993,6 +994,10 @@
     <Content Include="Images\orderedList7.png" />
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
+    <Content Include="ModuleName\Organization\MasterPage\NodeListForm.aspx" />
+    <Content Include="ModuleName\Organization\MasterPage\TwoColumnsTableDataAutoForm.aspx" />
+    <Content Include="ModuleName\Organization\MasterPage\TwoColumnsTableDataForm.aspx" />
+    <Content Include="ModuleName\Organization\MasterPage\TwoColumnTablesForm.aspx" />
     <Content Include="packages.config" />
     <Content Include="CSS\CSSstyleTheme\CommonCSS\default.skin" />
     <Content Include="CSS\CSSstyleTheme\Fonts\glyphicons-halflings-regular.eot" />
@@ -1053,6 +1058,7 @@
     <Content Include="Bundle.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppClass\CommonClass\AutoTableData.cs" />
     <Compile Include="AppClass\CommonClass\CGlobalMeaage.cs" />
     <Compile Include="AppClass\CommonClass\ClsDropDownListController.cs" />
     <Compile Include="AppClass\CommonClass\ClsGridViewLoad.cs" />
@@ -1083,8 +1089,12 @@
     <Compile Include="AppClass\DataAccess\ProritySetupController.cs" />
     <Compile Include="AppClass\DataAccess\PurposeSetupController.cs" />
     <Compile Include="AppClass\DataAccess\SuppliersController.cs" />
+    <Compile Include="AppClass\DataAccess\TwoColumnsTableDataAutoController.cs" />
+    <Compile Include="AppClass\DataAccess\TwoColumnsTableDataController.cs" />
+    <Compile Include="AppClass\DataAccess\TwoColumnTablesController.cs" />
     <Compile Include="AppClass\DataAccess\UnitSetupController.cs" />
     <Compile Include="AppClass\Model\BranchSetup.cs" />
+    <Compile Include="AppClass\Model\ClsCompanySetup.cs" />
     <Compile Include="AppClass\Model\ClsFileUploadDetail.cs" />
     <Compile Include="AppClass\Model\ClsFileUploadHeader.cs" />
     <Compile Include="AppClass\Model\clsMaterialSetup.cs" />
@@ -1098,6 +1108,9 @@
     <Compile Include="AppClass\Model\ItemSetup.cs" />
     <Compile Include="AppClass\Model\RequisitionDetail.cs" />
     <Compile Include="AppClass\Model\RequisitionHeader.cs" />
+    <Compile Include="AppClass\Model\TwoColumnsTableData.cs" />
+    <Compile Include="AppClass\Model\TwoColumnsTableDataAuto.cs" />
+    <Compile Include="AppClass\Model\TwoColumnTables.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="About.aspx.cs">
@@ -1120,6 +1133,13 @@
     </Compile>
     <Compile Include="ModuleName\Accounts\CoaHeadSetup.aspx.designer.cs">
       <DependentUpon>CoaHeadSetup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleName\HRMS\MasterPage\CompanySetupForm.aspx.cs">
+      <DependentUpon>CompanySetupForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuleName\HRMS\MasterPage\CompanySetupForm.aspx.designer.cs">
+      <DependentUpon>CompanySetupForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModuleName\Inventory\MasterPage\ItemCategorySetupForm.aspx.cs">
       <DependentUpon>ItemCategorySetupForm.aspx</DependentUpon>
@@ -1165,6 +1185,34 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ModuleName\Organization\MasterPage\NodeListForm.aspx.cs">
+      <DependentUpon>NodeListForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuleName\Organization\MasterPage\NodeListForm.aspx.designer.cs">
+      <DependentUpon>NodeListForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleName\Organization\MasterPage\TwoColumnsTableDataAutoForm.aspx.cs">
+      <DependentUpon>TwoColumnsTableDataAutoForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuleName\Organization\MasterPage\TwoColumnsTableDataAutoForm.aspx.designer.cs">
+      <DependentUpon>TwoColumnsTableDataAutoForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleName\Organization\MasterPage\TwoColumnsTableDataForm.aspx.cs">
+      <DependentUpon>TwoColumnsTableDataForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuleName\Organization\MasterPage\TwoColumnsTableDataForm.aspx.designer.cs">
+      <DependentUpon>TwoColumnsTableDataForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleName\Organization\MasterPage\TwoColumnTablesForm.aspx.cs">
+      <DependentUpon>TwoColumnTablesForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuleName\Organization\MasterPage\TwoColumnTablesForm.aspx.designer.cs">
+      <DependentUpon>TwoColumnTablesForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -1180,8 +1228,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ModuleName\HRMS\MasterPage\" />
-    <Folder Include="ModuleName\Organization\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Site.Master" />

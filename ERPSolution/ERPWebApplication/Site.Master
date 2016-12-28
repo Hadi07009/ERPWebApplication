@@ -3,6 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
@@ -66,6 +67,12 @@
 
                         <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                             <Items>
+                                <asp:MenuItem NavigateUrl="~/Default.aspx" Text="HRMS">
+                                    <asp:MenuItem NavigateUrl="~/Default.aspx" Text="MasterPage">
+                                        <asp:MenuItem NavigateUrl="~/ModuleName/HRMS/MasterPage/CompanySetupForm.aspx" Text="Company Setup" Value="11"></asp:MenuItem>
+                                    </asp:MenuItem>
+                                </asp:MenuItem>
+
                                 <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Inventory">
                                     <asp:MenuItem NavigateUrl="~/Default.aspx" Text="MasterPage">
                                         <asp:MenuItem NavigateUrl="~/ModuleName/Inventory/MasterPage/ItemCategorySetupForm.aspx" Text="Item Category Setup" Value="22"></asp:MenuItem>
@@ -82,8 +89,15 @@
                                     </asp:MenuItem>
 
                                 </asp:MenuItem>
+                                <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Organization">
+                                    <asp:MenuItem NavigateUrl="~/Default.aspx" Text="MasterPage">
+                                        <asp:MenuItem NavigateUrl="~/ModuleName/Organization/MasterPage/TwoColumnTablesForm.aspx" Text="Two Column Tables" Value="61"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="~/ModuleName/Organization/MasterPage/TwoColumnsTableDataForm.aspx" Text="Two Columns Table Data" Value="62"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="~/ModuleName/Organization/MasterPage/TwoColumnsTableDataAutoForm.aspx" Text="Two Columns Table Data(Auto)" Value="63"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="~/ModuleName/Organization/MasterPage/NodeListForm.aspx" Text="Default Node List" Value="64"></asp:MenuItem>
+                                    </asp:MenuItem>
 
-
+                                </asp:MenuItem>
                             </Items>
                         </asp:Menu>
 

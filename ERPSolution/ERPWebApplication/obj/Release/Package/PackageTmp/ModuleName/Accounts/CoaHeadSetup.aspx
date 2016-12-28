@@ -18,7 +18,27 @@
         <ContentTemplate>
             <table style="width: 99%">
                 <tr>
-                    <td colspan="2"></td>
+                    <td>
+                        <table style="width: 50%; text-align: left">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        <asp:TextBox ID="txtSearch" runat="server" AutoPostBack="True" placeholder="Search..." Width="337px"></asp:TextBox>
+                                    </td>
+                                    <ajaxToolkit:AutoCompleteExtender ID="txtSearch_AutoCompleteExtender" runat="server"
+                                        CompletionListCssClass="autocomplete_completionListElement"
+                                        CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem"
+                                        CompletionListItemCssClass="autocomplete_listItem2"
+                                        DelimiterCharacters=""
+                                        Enabled="True"
+                                        MinimumPrefixLength="1" ServiceMethod="GetItemName" ServicePath="~/WebService/ServiceSystem.asmx" TargetControlID="txtSearch">
+                                    </ajaxToolkit:AutoCompleteExtender>
+                                    <td>
+                                        <asp:Button ID="btnSearch" runat="server" Text="Search" Height="30px" Width="100px" OnClick="btnSearch_Click" /></td>
+                                </tr>
+
+                            </table>
+                    </td>
                     <td>
                         <div style="position: fixed; width: 350px; background-color: #00817F; height: 100px">
                             <table style="width: 100%; text-align: left;margin-left:5px">
@@ -48,7 +68,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td>
+                        <hr id="searchbottom" runat="server" style="border:0; height: 1px; background: #333;  background-image: linear-gradient(to right, #ccc, #333, #ccc); width: 665px;" />
+                        </td>
+                    <td>
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
                         <div style="text-align: left; padding-top: 1px; height: 900px; width: 665px">
                             <div style="height: 415px; width: 600px">
                                 <asp:Panel ID="Panel5" runat="server" Height="100%" ScrollBars="Auto"
@@ -87,14 +114,8 @@
                                     <tr>
                                         <td colspan="4"></td>
                                     </tr>
-                                     <tr>
-                                        <td colspan="4">&nbsp;</td>
-                                    </tr>
                                     <tr>
                                         <td colspan="4">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="4"></td>
                                     </tr>
                                     <tr>
                                         <td colspan="4">

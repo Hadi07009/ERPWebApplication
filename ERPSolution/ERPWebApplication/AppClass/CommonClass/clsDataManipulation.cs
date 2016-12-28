@@ -358,6 +358,78 @@ public class clsDataManipulation
         return retValue;
     }
 
+    public static string GetSingleValueFromtable(SqlCommand myCommand, string TableName, string ColName, string WhereClause)
+    {
+        string retValue = "";
+        DataTable dataTableObj = new DataTable();
+        string selectQuery = "select top 1 " + ColName + " from " + TableName + " " + WhereClause;
+        try
+        {
+            myCommand.CommandText = selectQuery;
+            SqlDataAdapter sqlDataAdapterObj = new SqlDataAdapter();
+            sqlDataAdapterObj.SelectCommand = myCommand;
+            sqlDataAdapterObj.Fill(dataTableObj);
+            if (dataTableObj.Rows.Count > 0)
+                retValue = dataTableObj.Rows[0][ColName].ToString();
+        }
+        catch (Exception msgException)
+        {
+            throw msgException;
+            
+        }
+
+        return retValue;
+    }
+
+    public static DataTable GetData(SqlCommand myCommand, string QueryStr)
+    {
+        DataTable dataTableObj = new DataTable();
+        try
+        {
+            myCommand.CommandText = QueryStr;
+            SqlDataAdapter sqlDataAdapterObj = new SqlDataAdapter();
+            sqlDataAdapterObj.SelectCommand = myCommand;
+            sqlDataAdapterObj.Fill(dataTableObj);
+        }
+        catch (SqlException sqlExceptionObject)
+        {
+            throw sqlExceptionObject;
+        }
+        catch (Exception exceptionObject)
+        {
+            throw exceptionObject;
+        }
+        return dataTableObj;
+    }
+
+    public static bool ExecuteCommand(SqlCommand myCommand, string QueryStr)
+    {
+        int noOfRowsAffected = 0;
+        try
+        {
+            myCommand.CommandText = QueryStr;
+            noOfRowsAffected = myCommand.ExecuteNonQuery();
+        }
+        catch (SqlException sqlExceptionObj)
+        {
+            throw sqlExceptionObj;
+        }
+        catch (Exception exceptionObj)
+        {
+            throw exceptionObj;
+        }
+        if (noOfRowsAffected > 0)
+        {
+            return true;
+
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
     public static string DeleteQueryWithMessage(string connectionString, string queryStr)
     {
         try

@@ -341,6 +341,7 @@ namespace ERPWebApplication.ModuleName.Accounts
         protected void treeCOAHead_TreeNodePopulate(object sender, TreeNodeEventArgs e)
         {
             PopulateSubLevel(Int32.Parse(e.Node.Value), e.Node);
+            treeCOAHead.ExpandAll();
         }
         protected void treeCOAHead_SelectedNodeChanged(object sender, EventArgs e)
         {
@@ -415,6 +416,7 @@ namespace ERPWebApplication.ModuleName.Accounts
                         PopulateRootLevel();
                         LoadParentAccountDdl();
                         ClearAllControl();
+                        treeCOAHead.ExpandAll();
 
                     }
                     catch (Exception msgException)
