@@ -53,6 +53,19 @@
                                         </asp:DropDownList>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="auto-style1">
+                                        <asp:Label ID="Label5" runat="server" Text="Entry System"></asp:Label>
+                                    </td>
+                                    <td>:</td>
+                                    <td>
+                                        <asp:DropDownList ID="ddlEntrySystem" runat="server">
+                                            <asp:ListItem Selected="True" Value="-1">--- Please Select ---</asp:ListItem>
+                                            <asp:ListItem Value="A">Auto</asp:ListItem>
+                                            <asp:ListItem Value="M">Manual</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </td>
@@ -120,6 +133,11 @@
                                 <asp:TemplateField HeaderText="Related User Role ID">
                                     <ItemTemplate>
                                         <asp:Label ID="lblRelatedUserRoleID" runat="server" Text='<%# Bind("RelatedUserRoleID") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Entry System">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblEntrySystem" runat="server" Text='<%# Bind("EntrySystem") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:CommandField ShowSelectButton="True" />

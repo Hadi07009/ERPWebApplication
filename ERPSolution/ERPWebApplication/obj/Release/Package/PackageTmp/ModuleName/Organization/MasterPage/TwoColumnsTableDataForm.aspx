@@ -26,6 +26,7 @@
                                     <ItemTemplate>
                                         <asp:Label ID="lblTableName" runat="server" Text='<%# Bind("TableName") %>'></asp:Label>
                                     </ItemTemplate>
+                                    <ItemStyle Font-Size="11pt" />
                                 </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
@@ -35,7 +36,7 @@
                             <tr>
                                 <td colspan="3" style="margin-top: -5px">
                                     <div style="position: fixed; width: 425px; background-color: #00817F; height: 50px">
-                                        <table style="width: 55%;">
+                                        <table style="width: 55%;margin-left:5px">
                                             <tr>
                                                 <td>
                                                     <asp:Button ID="btnSave" runat="server" Text="Save" Width="100px" OnClick="btnSave_Click" /></td>
@@ -58,24 +59,20 @@
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td>
-                                    <asp:Label ID="Label1" runat="server" Text="Table Name"></asp:Label>
-                                </td>
-                                <td>:</td>
-                                <td>
+                                <td colspan="3">
                                     <asp:Label ID="lblSelectedTableName" runat="server" Text=""></asp:Label>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:Label ID="Label3" runat="server" Text="Field Of Name"></asp:Label></td>
+                                    <asp:Label ID="Label3" runat="server" Text="Name"></asp:Label></td>
                                 <td>:</td>
                                 <td>
                                     <asp:TextBox ID="txtFieldOfName" runat="server"></asp:TextBox></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:Label ID="Label4" runat="server" Text="Field Description"></asp:Label></td>
+                                    <asp:Label ID="Label4" runat="server" Text="Description"></asp:Label></td>
                                 <td>:</td>
                                 <td>
                                     <asp:TextBox ID="txtFieldDescription" runat="server"></asp:TextBox></td>
@@ -86,7 +83,7 @@
                 </tr>
                 <tr>
                     <td colspan="4" style="float:right;text-align:right">
-                        <asp:GridView ID="grdTableData" runat="server" AutoGenerateColumns="False" OnRowCommand="grdTableData_RowCommand" OnRowDataBound="grdTableData_RowDataBound" OnRowDeleting="grdTableData_RowDeleting" Width="100%">
+                        <asp:GridView ID="grdTableData" runat="server" AutoGenerateColumns="False" OnRowCommand="grdTableData_RowCommand" OnRowDataBound="grdTableData_RowDataBound" OnRowDeleting="grdTableData_RowDeleting" Width="421px">
                             <Columns>
                                 <asp:TemplateField HeaderText="SL">
                                     <ItemTemplate>
@@ -95,20 +92,24 @@
                                     <HeaderStyle HorizontalAlign="Center" Width="30px" />
                                     <ItemStyle HorizontalAlign="Center" Width="30px" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Field Of ID">
+                                <asp:TemplateField HeaderText="ID">
                                     <ItemTemplate>
                                         <asp:Label ID="lblFieldOfID" runat="server" Text='<%# Bind("FieldOfID") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Field Of Name">
+                                <asp:TemplateField HeaderText="Name">
                                     <ItemTemplate>
                                         <asp:Label ID="lblFieldOfName" runat="server" Text='<%# Bind("FieldOfName") %>'></asp:Label>
                                     </ItemTemplate>
+                                    <HeaderStyle HorizontalAlign="Left" />
+                                    <ItemStyle HorizontalAlign="Left" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Field Description">
+                                <asp:TemplateField HeaderText="Description">
                                     <ItemTemplate>
                                         <asp:Label ID="lblFieldDescription" runat="server" Text='<%# Bind("FieldDescription") %>'></asp:Label>
                                     </ItemTemplate>
+                                    <HeaderStyle HorizontalAlign="Left" />
+                                    <ItemStyle HorizontalAlign="Left" />
                                 </asp:TemplateField>
                                 <asp:CommandField ShowSelectButton="True" />
                                 <asp:CommandField ShowDeleteButton="True" />

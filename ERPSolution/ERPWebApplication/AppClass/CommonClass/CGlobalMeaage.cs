@@ -9,5 +9,6 @@ namespace ERPWebApplication.AppClass.CommonClass
     {
         public static string GProcessSuccess = "Data processed successfully";
         public static string GConfirmMessage = "Are you sure ?";
+        
     }
 }
