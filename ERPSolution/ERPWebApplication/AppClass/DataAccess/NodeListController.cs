@@ -169,6 +169,51 @@ namespace ERPWebApplication.AppClass.DataAccess
             }
         }
 
+        public DataTable GetNodeDetails(string connectionString, NodeList objNodeList)
+        {
+            try
+            {
+                DataTable dtNodeValue = null;
+                var storedProcedureComandText = @"SELECT [ActivityID]
+                                                  ,[ActivityName]            
+                                                  ,[FormDescription]
+                                                  ,[FormName]
+                                              FROM [suDefaultNodeList] WHERE [NodeTypeID] = " + objNodeList.NodeTypeID + " ";
+                dtNodeValue = clsDataManipulation.GetData(connectionString, storedProcedureComandText);
+                return dtNodeValue;
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+        public void Update(string connectionString, NodeList objNodeList)
+        {
+            try
+            {
+                var storedProcedureComandText = "UPDATE [suDefaultNodeList] " +
+                                               " SET " +
+                                                 " [ActivityID] = ISNULL(" + objNodeList.ActivityID + ",ActivityID) " +
+                                                 " ,[ActivityName] = ISNULL('" + objNodeList.ActivityName + "',ActivityName) " +
+                                                 " ,[FormDescription] = ISNULL('" + objNodeList.FormDescription + "',FormDescription) " +
+                                                 " ,[FormName] = ISNULL('" + objNodeList.FormName + "',FormName) " +
+                                                 " ,[LastUpdateDate] = CAST(GETDATE() AS DateTime) " +
+                                                 " ,[LastUpdateUserID] = '160ea939-7633-46a8-ae49-f661d12abfd5' " +
+                                                 " WHERE [NodeTypeID] = " + objNodeList.NodeTypeID + "";
+                clsDataManipulation.StoredProcedureExecuteNonQuery(connectionString, storedProcedureComandText);
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+
+        }
+
 
     }
 }

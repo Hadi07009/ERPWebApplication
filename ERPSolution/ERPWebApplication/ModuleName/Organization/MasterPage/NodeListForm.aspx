@@ -17,14 +17,34 @@
                         <table style="width: 100%;">
                             <tr>
                                 <td colspan="3" style="margin-top: -5px">
-                                    <div style="position: fixed; width: 425px; background-color: #00817F; height: 50px">
-                                        <table style="width: 55%; margin-left: 5px">
+                                    <div style="position: fixed; width: 425px; background-color: #00817F; height: 100px">
+                                        <table style="width: 100%; margin-left: 5px">
+                                            <tr>
+                                                <td colspan="2">
+                                                    <asp:Button ID="btnAddNew" runat="server" Text="AddNew" Width="150px" OnClick="btnAddNew_Click" />
+                                                </td>
+                                                <td colspan="2">
+                                                    <asp:Button ID="btnEdit" runat="server" Text="Edit" Width="150px" OnClick="btnEdit_Click" />
+                                                </td>
+                                                <td>
+                                                    <asp:Button ID="btnPrint" runat="server" Text="Print" Width="95px" />
+                                                </td>
+                                            </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:Button ID="btnSave" runat="server" Text="Save" Width="100px" OnClick="btnSave_Click" /></td>
+                                                    <asp:Button ID="btnSave" runat="server" Text="Save" Width="70px" OnClick="btnSave_Click" />
+                                                </td>
                                                 <td>
-                                                    <asp:Button ID="btnClear" runat="server" Text="Clear" Width="100px" OnClick="btnClear_Click" /></td>
-                                                <td>&nbsp;</td>
+                                                    <asp:Button ID="btnCancelAddNew" runat="server" Text="Cancel" Width="70px" OnClick="btnCancelAddNew_Click" />
+                                                </td>
+                                                <td>
+                                                    <asp:Button ID="btnUpdate" runat="server" Text="Update" Width="70px" OnClick="btnUpdate_Click" />
+                                                </td>
+                                                <td>
+                                                    <asp:Button ID="btnCancelEdit" runat="server" Text="Cancel" Width="70px" OnClick="btnCancelEdit_Click" />
+                                                </td>
+                                                <td>
+                                                    &nbsp;</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -39,6 +59,14 @@
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    &nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    &nbsp;</td>
                             </tr>
                             <tr>
                                 <td colspan="3">
@@ -117,6 +145,7 @@
             </table>
         </ContentTemplate>
         <Triggers>
+            
         </Triggers>
     </asp:UpdatePanel>
 </asp:Content>
