@@ -100,7 +100,9 @@
                                 <td>
                                     <asp:DropDownList ID="ddlType" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlType_SelectedIndexChanged" Width="310px">
                                         <asp:ListItem Selected="True" Value="-1">--- Please Select ---</asp:ListItem>
-                                        <asp:ListItem Value="1">Folder</asp:ListItem>
+                                        <asp:ListItem Value="1">Module Name</asp:ListItem>
+                                        <asp:ListItem Value="2">Setup Page</asp:ListItem>
+                                        <asp:ListItem Value="3">TransactionPage</asp:ListItem>
                                         <asp:ListItem Value="4">Form</asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
@@ -116,6 +118,19 @@
                                                 <td>:</td>
                                                 <td>
                                                     <asp:DropDownList ID="ddlFormURL" runat="server" Width="320px">
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label ID="Label7" runat="server" Text="Position"></asp:Label>
+                                                </td>
+                                                <td>:</td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlShowPosition" runat="server" Width="320px">
+                                                        <asp:ListItem Selected="True" Value="-1">--- Please Select ---</asp:ListItem>
+                                                        <asp:ListItem Value="1">Menu</asp:ListItem>
+                                                        <asp:ListItem Value="2">Dashboard</asp:ListItem>
                                                     </asp:DropDownList>
                                                 </td>
                                             </tr>

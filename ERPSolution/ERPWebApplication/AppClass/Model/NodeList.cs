@@ -26,11 +26,12 @@ namespace ERPWebApplication.AppClass.Model
         public int ActivityID
         {
             get { return _activityID; }
-            set {
+            set
+            {
                 if (value == -1)
                 {
                     throw new Exception(" type is required ");
-                    
+
                 } _activityID = value;
             }
         }
@@ -39,11 +40,12 @@ namespace ERPWebApplication.AppClass.Model
         public string ActivityName
         {
             get { return _activityName; }
-            set {
+            set
+            {
                 if (value == null)
                 {
                     throw new Exception(" title is required ");
-                    
+
                 } _activityName = value;
             }
         }
@@ -66,11 +68,12 @@ namespace ERPWebApplication.AppClass.Model
         public int ParentNodeTypeID
         {
             get { return _parentNodeTypeID; }
-            set {
+            set
+            {
                 if (value == 0)
                 {
                     throw new Exception(" please select from tree view");
-                    
+
                 } _parentNodeTypeID = value;
             }
         }
@@ -86,11 +89,12 @@ namespace ERPWebApplication.AppClass.Model
         public string FormName
         {
             get { return _formName; }
-            set {
+            set
+            {
                 if (value == null && ActivityID == 4)
                 {
                     throw new Exception(" form URL is required ");
-                    
+
                 } _formName = value;
             }
         }
@@ -100,6 +104,23 @@ namespace ERPWebApplication.AppClass.Model
         {
             get { return _entryUserName; }
             set { _entryUserName = value; }
+        }
+        private Nullable<int> _showPosition;
+
+        public Nullable<int> ShowPosition
+        {
+            get
+            {
+                return _showPosition;
+            }
+            set
+            {
+                if (value == -1 && ActivityID == 4)
+                {
+                    throw new Exception(" form position is required ");
+
+                } _showPosition = value;
+            }
         }
     }
 }

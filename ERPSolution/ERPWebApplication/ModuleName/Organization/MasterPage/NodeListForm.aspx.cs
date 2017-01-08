@@ -100,12 +100,11 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
                 txtDescription.Text = string.Empty;
                 ddlType.SelectedValue = "-1";
                 ddlFormURL.SelectedValue = "-1";
+                ddlShowPosition.SelectedValue = "-1";
                 PanelFormDetails.Visible = false;
                 lblParentText.Text = string.Empty;
                 lblParentText.Visible = false;
                 lblParentValue.Text = string.Empty;
-                txtTitle.Enabled = true;
-
             }
             catch (Exception msgException)
             {
@@ -126,6 +125,7 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
                 _objNodeList.CompanyID = Convert.ToInt32(Session["companyID"].ToString());
                 _objNodeList.FormDescription = txtDescription.Text == string.Empty ? null : txtDescription.Text;
                 _objNodeList.FormName = ddlFormURL.SelectedValue == "-1" ? null : ddlFormURL.SelectedValue;
+                _objNodeList.ShowPosition = Convert.ToInt32( ddlShowPosition.SelectedValue);
                 _objNodeList.ParentNodeTypeID = lblParentValue.Text == string.Empty ? 0 : Convert.ToInt32(lblParentValue.Text);
                 _objNodeList.SeqNo = _objNodeListController.GetSeqNo(_connectionString);
                 _objNodeListController.Save(_connectionString, _objNodeList);
@@ -163,18 +163,7 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
                 lblParentText.Visible = true;
                 var nodeValue = treeNodeList.SelectedNode.Value;
                 lblParentValue.Text = nodeValue;
-                if (nodeValue.Length == 6)
-                {
-                    txtTitle.Enabled = false;
-
-                }
-                else
-                {
-                    txtTitle.Enabled = true;
-                    txtTitle.Focus();
-                }
-
-
+                txtTitle.Focus();
                 if (Convert.ToInt32(nodeValue) == 111)
                 {
                     btnEdit.Enabled = false;
@@ -212,6 +201,7 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
                     txtDescription.Text = row["FormDescription"].ToString() == null ? string.Empty : row["FormDescription"].ToString();
                     ddlType.SelectedValue = row["ActivityID"].ToString() == null ? "-1" : row["ActivityID"].ToString();
                     string formURL = row["FormName"].ToString() == "" ? null : row["FormName"].ToString();
+                    int formPosition = row["ShowPosition"].ToString() == "0" ? -1 : Convert.ToInt32( row["ShowPosition"].ToString());
                     if (formURL == null || formURL == string.Empty)
                     {
                         PanelFormDetails.Visible = false;
@@ -220,6 +210,7 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
                     {
                         PanelFormDetails.Visible = true;
                         ddlFormURL.SelectedValue = formURL;
+                        ddlShowPosition.SelectedValue = formPosition.ToString();
                     }
 
 
@@ -303,6 +294,9 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
                 btnSave.Visible = false;
                 btnCancelAddNew.Visible = false;
                 ClearControl();
+                _objNodeListController = new NodeListController();
+                _objNodeListController.PopulateRootLevel(_connectionString, treeNodeList);
+                treeNodeList.ExpandAll();
 
             }
             catch (Exception msgException)
@@ -319,6 +313,9 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
                 btnUpdate.Visible = false;
                 btnCancelEdit.Visible = false;
                 ClearControl();
+                _objNodeListController = new NodeListController();
+                _objNodeListController.PopulateRootLevel(_connectionString, treeNodeList);
+                treeNodeList.ExpandAll();
 
             }
             catch (Exception msgException)
@@ -359,6 +356,7 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
                 _objNodeList.ActivityName = txtTitle.Text == string.Empty ? null : txtTitle.Text;
                 _objNodeList.FormDescription = txtDescription.Text == string.Empty ? null : txtDescription.Text;
                 _objNodeList.FormName = ddlFormURL.SelectedValue == "-1" ? null : ddlFormURL.SelectedValue;
+                _objNodeList.ShowPosition = Convert.ToInt32( ddlShowPosition.SelectedValue);
                 _objNodeList.NodeTypeID = lblParentValue.Text == string.Empty ? 0 : Convert.ToInt32(lblParentValue.Text);
                 _objNodeListController.Update(_connectionString, _objNodeList);
 

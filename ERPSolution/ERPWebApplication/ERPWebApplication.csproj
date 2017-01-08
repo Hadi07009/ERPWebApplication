@@ -1000,6 +1000,7 @@
     <Content Include="Images\orderedList7.png" />
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
+    <Content Include="ModuleName\Organization\MasterPage\NewCompany.aspx" />
     <Content Include="ModuleName\Organization\MasterPage\NodeListForm.aspx" />
     <Content Include="ModuleName\Organization\MasterPage\TwoColumnsTableDataAutoForm.aspx" />
     <Content Include="ModuleName\Organization\MasterPage\TwoColumnsTableDataForm.aspx" />
@@ -1192,6 +1193,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleName\Organization\MasterPage\NewCompany.aspx.cs">
+      <DependentUpon>NewCompany.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuleName\Organization\MasterPage\NewCompany.aspx.designer.cs">
+      <DependentUpon>NewCompany.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModuleName\Organization\MasterPage\NodeListForm.aspx.cs">
       <DependentUpon>NodeListForm.aspx</DependentUpon>

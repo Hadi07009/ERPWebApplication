@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI.WebControls;
 
+
 namespace ERPWebApplication.AppClass.DataAccess
 {
     public class NodeListController
@@ -15,6 +16,13 @@ namespace ERPWebApplication.AppClass.DataAccess
         {
             try
             {
+                if (objNodeList.ParentNodeTypeID.ToString().Length == 6)
+                {
+                    throw new Exception(" please select correctly from tree view.");
+                    
+                }
+
+
                 objNodeList.NodeTypeID = Convert.ToInt32(objNodeList.CompanyID.ToString() + objNodeList.BranchID.ToString());
                 if (objNodeList.ActivityID == 4)
                 {
@@ -23,11 +31,12 @@ namespace ERPWebApplication.AppClass.DataAccess
                 else
                 {
                     objNodeList.NodeTypeID = Convert.ToInt32(objNodeList.NodeTypeID.ToString() + GetSeqNoForModule(connectionString).ToString());
+                    objNodeList.ShowPosition = 0;
 
                 }
 
                 var storedProcedureComandText = "INSERT INTO [suDefaultNodeList] ([CompanyID],[BranchID],[ActivityID],[ActivityName],[SeqNo],[NodeTypeID],[PNodeTypeID]" +
-                                            " ,[FormDescription],[FormName],[DataUsed],[EntryUserID],[EntryDate]) VALUES ( " +
+                                            " ,[FormDescription],[FormName],[ShowPosition],[DataUsed],[EntryUserID],[EntryDate]) VALUES ( " +
                                                  objNodeList.CompanyID + "," +
                                                  objNodeList.BranchID + ", " +
                                                  objNodeList.ActivityID + ", '" +
@@ -36,7 +45,8 @@ namespace ERPWebApplication.AppClass.DataAccess
                                                  objNodeList.NodeTypeID + ", " +
                                                  objNodeList.ParentNodeTypeID + ", '" +
                                                  objNodeList.FormDescription + "', '" +
-                                                 objNodeList.FormName + "', '" +
+                                                 objNodeList.FormName + "', " +
+                                                 objNodeList.ShowPosition + ",'" +
                                                  "A" + "', '" +
                                                  "160ea939-7633-46a8-ae49-f661d12abfd5" + "'," +
                                                  "CAST(GETDATE() AS DateTime));";
@@ -178,6 +188,7 @@ namespace ERPWebApplication.AppClass.DataAccess
                                                   ,[ActivityName]            
                                                   ,[FormDescription]
                                                   ,[FormName]
+                                                  ,[ShowPosition]  
                                               FROM [suDefaultNodeList] WHERE [NodeTypeID] = " + objNodeList.NodeTypeID + " ";
                 dtNodeValue = clsDataManipulation.GetData(connectionString, storedProcedureComandText);
                 return dtNodeValue;
@@ -194,12 +205,20 @@ namespace ERPWebApplication.AppClass.DataAccess
         {
             try
             {
+                if (objNodeList.ShowPosition == -1)
+                {
+                    objNodeList.ShowPosition = 0;
+
+                }
+
+
                 var storedProcedureComandText = "UPDATE [suDefaultNodeList] " +
                                                " SET " +
                                                  " [ActivityID] = ISNULL(" + objNodeList.ActivityID + ",ActivityID) " +
                                                  " ,[ActivityName] = ISNULL('" + objNodeList.ActivityName + "',ActivityName) " +
                                                  " ,[FormDescription] = ISNULL('" + objNodeList.FormDescription + "',FormDescription) " +
                                                  " ,[FormName] = ISNULL('" + objNodeList.FormName + "',FormName) " +
+                                                 " ,[ShowPosition] = ISNULL(" + objNodeList.ShowPosition + ",ShowPosition) " +
                                                  " ,[LastUpdateDate] = CAST(GETDATE() AS DateTime) " +
                                                  " ,[LastUpdateUserID] = '160ea939-7633-46a8-ae49-f661d12abfd5' " +
                                                  " WHERE [NodeTypeID] = " + objNodeList.NodeTypeID + "";
