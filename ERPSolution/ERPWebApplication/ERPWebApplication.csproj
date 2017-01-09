@@ -1083,6 +1083,9 @@
     <Compile Include="AppClass\DataAccess\ActivitySetupController.cs" />
     <Compile Include="AppClass\DataAccess\ClientInformationController.cs" />
     <Compile Include="AppClass\DataAccess\CoaHeadController.cs" />
+    <Compile Include="AppClass\DataAccess\CompanySetupController.cs" />
+    <Compile Include="AppClass\DataAccess\CountrySetupController.cs" />
+    <Compile Include="AppClass\DataAccess\DataAccessBase.cs" />
     <Compile Include="AppClass\DataAccess\DepartmentSetupController.cs" />
     <Compile Include="AppClass\DataAccess\EmployeeInformationController.cs" />
     <Compile Include="AppClass\DataAccess\ItemCategorySetupController.cs" />
@@ -1109,7 +1112,10 @@
     <Compile Include="AppClass\Model\ClsRequisitionDetail.cs" />
     <Compile Include="AppClass\Model\clsRequisitionHeader.cs" />
     <Compile Include="AppClass\Model\CoaHead.cs" />
+    <Compile Include="AppClass\Model\CompanyDetailsSetup.cs" />
     <Compile Include="AppClass\Model\CompanySetup.cs" />
+    <Compile Include="AppClass\Model\CountryDetailsSetup.cs" />
+    <Compile Include="AppClass\Model\CountrySetup.cs" />
     <Compile Include="AppClass\Model\FileUploadDetail.cs" />
     <Compile Include="AppClass\Model\FileUploadHeader.cs" />
     <Compile Include="AppClass\Model\ItemCategorySetup.cs" />

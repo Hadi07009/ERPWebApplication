@@ -32,6 +32,31 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class="auto-style1">
+                            <asp:Label ID="Label3" runat="server" Text="Email"></asp:Label>
+                        </td>
+                        <td>:</td>
+                        <td>
+                            <asp:TextBox ID="txtEmail" runat="server" TextMode="Email"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style1">
+                            <asp:Label ID="Label4" runat="server" Text="Mobile"></asp:Label>
+                        </td>
+                        <td>:</td>
+                        <td>
+                            <asp:TextBox ID="txtMobile" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style1">
+                            &nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            &nbsp;</td>
+                    </tr>
+                    <tr>
                         <td class="auto-style1">&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
@@ -46,7 +71,7 @@
                                 <table style="width: 70%;margin-left:5px">
                                     <tr>
                                         <td>
-                                            <asp:Button ID="btnSave" runat="server" Text="Save" Width="100px" /></td>
+                                            <asp:Button ID="btnSave" runat="server" Text="Save" Width="100px" OnClick="btnSave_Click" /></td>
                                         <td>
                                             <asp:Button ID="btnClear" runat="server" Text="Clear" Width="100px" /></td>
                                         <td>

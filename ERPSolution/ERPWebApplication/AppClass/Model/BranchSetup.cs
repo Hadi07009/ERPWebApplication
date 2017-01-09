@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ERPWebApplication.AppClass.Model
 {
-    public class BranchSetup
+    public class BranchSetup : CompanySetup
     {
         private int _branchID;
 
