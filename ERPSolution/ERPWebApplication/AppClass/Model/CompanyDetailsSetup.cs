@@ -7,25 +7,17 @@ namespace ERPWebApplication.AppClass.Model
 {
     public class CompanyDetailsSetup : CompanySetup
     {
-        public CompanyDetailsSetup()
-        {
-            if (this.CountryID == -1)
-            {
-                throw new Exception(" country name is required ");
-                
-            }
-        }
-
         private string _companyName;
 
         public string CompanyName
         {
             get { return _companyName; }
-            set {
+            set
+            {
                 if (value == null)
                 {
                     throw new Exception(" Company name is required ");
-                    
+
                 } _companyName = value;
             }
         }
@@ -42,6 +34,13 @@ namespace ERPWebApplication.AppClass.Model
         {
             get { return _companyMobile; }
             set { _companyMobile = value; }
+        }
+        private string _companyLogo;
+
+        public string CompanyLogo
+        {
+            get { return _companyLogo; }
+            set { _companyLogo = value; }
         }
 
 
