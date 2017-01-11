@@ -91,6 +91,7 @@
                                 </asp:MenuItem>
                                 <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Organization">
                                     <asp:MenuItem NavigateUrl="~/Default.aspx" Text="MasterPage">
+                                        <asp:MenuItem NavigateUrl="~/ModuleName/Organization/MasterPage/NewCompany.aspx" Text="New Company..." Value="60"></asp:MenuItem>
                                         <asp:MenuItem NavigateUrl="~/ModuleName/Organization/MasterPage/TwoColumnTablesForm.aspx" Text="Two Column Tables" Value="61"></asp:MenuItem>
                                         <asp:MenuItem NavigateUrl="~/ModuleName/Organization/MasterPage/TwoColumnsTableDataForm.aspx" Text="Two Columns Table Data" Value="62"></asp:MenuItem>
                                         <asp:MenuItem NavigateUrl="~/ModuleName/Organization/MasterPage/TwoColumnsTableDataAutoForm.aspx" Text="Two Columns Table Data(Auto)" Value="63"></asp:MenuItem>

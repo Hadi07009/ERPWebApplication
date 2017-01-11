@@ -979,6 +979,7 @@
     <Content Include="Images\btnOK.jpg" />
     <Content Include="Images\btnYes.jpg" />
     <Content Include="Images\header.png" />
+    <Content Include="Images\imageup.jpg" />
     <Content Include="MicrosoftMenuHtmlPage.html" />
     <Content Include="ModuleName\Accounts\CoaHeadSetup.aspx" />
     <Content Include="ModuleName\HRMS\MasterPage\CompanySetupForm.aspx" />

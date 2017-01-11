@@ -35,13 +35,15 @@ namespace ERPWebApplication.AppClass.Model
             get { return _companyMobile; }
             set { _companyMobile = value; }
         }
-        private string _companyLogo;
+        private byte[] _companyLogo;
 
-        public string CompanyLogo
+        public byte[] CompanyLogo
         {
             get { return _companyLogo; }
             set { _companyLogo = value; }
         }
+
+        
 
 
 

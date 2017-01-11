@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
@@ -37,19 +38,22 @@ namespace ERPWebApplication.AppClass.DataAccess
 
 
                 objCompanyDetailsSetup.CompanyID = this.GetMaxCompanyID();
-                var storedProcedureComandText = "INSERT INTO [comCompanySetup] ([CompanyID],[CountryID],[CompanyName],[CompanyMobile],[CompanyEmail],[CompanyLogo] " +
+                var storedProcedureComandText = "INSERT INTO [comCompanySetup] ([CompanyID],[CountryID],[CompanyName],[CompanyMobile],[CompanyEmail] " +
                                                 " ,[DataUsed],[EntryUserID],[EntryDate]) VALUES ( " +
                                                  objCompanyDetailsSetup.CompanyID + "," +
                                                  objCompanyDetailsSetup.CountryID + ", '" +
                                                  objCompanyDetailsSetup.CompanyName + "', '" +
                                                  objCompanyDetailsSetup.CompanyMobile + "', '" +
                                                  objCompanyDetailsSetup.CompanyEmail + "', '" +
-                                                 objCompanyDetailsSetup.CompanyLogo + "', '" +
                                                  "A" + "', '" +
                                                  "160ea939-7633-46a8-ae49-f661d12abfd5" + "'," +
                                                  "CAST(GETDATE() AS DateTime));";
                 clsDataManipulation.StoredProcedureExecuteNonQuery(this.ConnectionString, storedProcedureComandText);
+                if (objCompanyDetailsSetup.CompanyLogo != null)
+                {
+                    this.UpdateLogo(objCompanyDetailsSetup);
 
+                }
             }
             catch (Exception msgException)
             {
@@ -126,21 +130,64 @@ namespace ERPWebApplication.AppClass.DataAccess
 
 
                 var storedProcedureComandText = "UPDATE [comCompanySetup] " +
-                                           " SET [CountryID] = ISNULL(" + objCompanyDetailsSetup.CompanyID + ",[CountryID]) " +
+                                           " SET [CountryID] = ISNULL(" + objCompanyDetailsSetup.CountryID + ",[CountryID]) " +
                                               " ,[CompanyName] = ISNULL('" + objCompanyDetailsSetup.CompanyName + "',[CompanyName]) " +
                                               " ,[CompanyMobile] = ISNULL('" + objCompanyDetailsSetup.CompanyMobile + "',[CompanyMobile]) " +
                                               " ,[CompanyEmail] = ISNULL('" + objCompanyDetailsSetup.CompanyEmail + "',[CompanyEmail]) " +
-                                              " ,[CompanyLogo] = ISNULL('" + objCompanyDetailsSetup.CompanyLogo + "',[CompanyLogo]) " +
                                               " ,[LastUpdateDate] = CAST(GETDATE() AS DateTime) " +
                                               " ,[LastUpdateUserID] = '160ea939-7633-46a8-ae49-f661d12abfd5' " +
                                           " WHERE [CompanyID] = " + objCompanyDetailsSetup.CompanyID + "";
                 clsDataManipulation.StoredProcedureExecuteNonQuery(this.ConnectionString, storedProcedureComandText);
+                if (objCompanyDetailsSetup.CompanyLogo != null)
+                {
+                    this.UpdateLogo(objCompanyDetailsSetup);
+
+                }
 
             }
             catch (Exception msgException)
             {
 
                 throw msgException;
+            }
+
+        }
+        internal void UpdateLogo(CompanyDetailsSetup objCompanyDetailsSetup)
+        {
+            try
+            {
+                SqlConnection con = null;
+                con = new SqlConnection(this.ConnectionString);
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "UPDATE [comCompanySetup] SET CompanyLogo = @CompanyLogo WHERE CompanyID = @CompanyID";
+                cmd.Connection = con;
+                cmd.Parameters.AddWithValue("@CompanyLogo", objCompanyDetailsSetup.CompanyLogo);
+                cmd.Parameters.AddWithValue("@CompanyID", objCompanyDetailsSetup.CompanyID);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+
+        }
+        internal DataTable GetLogo(CompanyDetailsSetup objCompanyDetailsSetup)
+        {
+            try
+            {
+                DataTable dtLogo = null;
+                var storedProcedureComandText = @"select CompanyLogo from [comCompanySetup] WHERE CompanyID = '" + objCompanyDetailsSetup.CompanyID + "'";
+                dtLogo = clsDataManipulation.GetData(this.ConnectionString, storedProcedureComandText);
+                return dtLogo;
+
+            }
+            catch (Exception msgException)
+            {
+                
+                throw msgException; 
             }
 
         }

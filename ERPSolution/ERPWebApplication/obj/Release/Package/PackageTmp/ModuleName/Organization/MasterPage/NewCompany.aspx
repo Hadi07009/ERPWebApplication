@@ -12,46 +12,9 @@
         <ContentTemplate>
             <table style="width: 100%;">
                 <tr>
-                    <td colspan="2" style="width: 635px; float: left">
+                    <td colspan="2" style="width: 600px; float: left">
                         <table style="width: 100%;">
                             <tr>
-                                <td class="auto-style1" rowspan="8">
-                                    <asp:Panel ID="Panel11" runat="server" Height="250px" Width="235px">
-                                        <table style="width: 100%; text-align: left">
-                                            <tr>
-                                                <td>
-                                                    <asp:Label ID="lblImage" runat="server" BorderColor="Black" BorderWidth="0px" Font-Bold="True" Font-Italic="True" Font-Size="Medium" ForeColor="Red" Height="155px" Style="text-align: center; vertical-align: middle" Width="155px"> <br /> Logo
-                                             <br />  Not <br />  Available  
-                                             
-                                                    </asp:Label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <asp:FileUpload ID="ProfileImageUpload" runat="server" Width="100%" Height="25px" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td align="left">
-                                                    <asp:ImageButton ID="btnCompanyLogo" runat="server" Width="27px" ImageUrl="~/Images/imageup.jpg" Height="16px" OnClick="btnCompanyLogo_Click" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <asp:RegularExpressionValidator ID="RevImg" runat="server" ControlToValidate="ProfileImageUpload" ErrorMessage="Invalid File!(only  .gif, .jpg, .jpeg, .bmp, .png  Files are supported)" ForeColor="Red" ValidationExpression="^.+(.jpg|.JPG|.gif|.GIF|.jpeg|JPEG| .bmp|BMP| .png|PNG)$" Width="100%"></asp:RegularExpressionValidator>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <asp:Label ID="Label98" runat="server" Text="[150X150,  Files are supported]"></asp:Label>
-                                                    <div id="dvMsg" style="background-color: Red; color: White; width: 190px; padding: 3px; display: none;">
-                                                        Maximum size allowed is 500 kb
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </asp:Panel>
-                                </td>
                                 <td class="auto-style1">
                                     <asp:Label ID="Label1" runat="server" Text="Country Name"></asp:Label>
                                 </td>
@@ -88,36 +51,6 @@
                                     <asp:TextBox ID="txtMobile" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="auto-style1">&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="auto-style1">&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="auto-style1">&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="auto-style1">&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="auto-style1">&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="auto-style1">&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
                         </table>
                     </td>
                     <td colspan="2" style="text-align: left; float: left">
@@ -150,11 +83,6 @@
                             </tr>
                         </table>
                     </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td colspan="2">&nbsp;</td>
-                    <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
@@ -215,8 +143,6 @@
                 </tr>
             </table>
         </ContentTemplate>
-        <Triggers>
-            <asp:PostBackTrigger ControlID="btnCompanyLogo" />
-        </Triggers>
+        <Triggers></Triggers>
     </asp:UpdatePanel>
 </asp:Content>
