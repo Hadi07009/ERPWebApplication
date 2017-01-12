@@ -1017,6 +1017,7 @@
     <Content Include="CSS\HomePage\bootstrap.css.map" />
     <Content Include="WebService\ServiceSystem.asmx" />
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="ClassDiagram2.cd" />
     <None Include="Properties\PublishProfiles\ERPApplicationPublish.pubxml" />
     <Content Include="README.docx" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
