@@ -4,10 +4,12 @@ using System.Linq;
 using System.Web;
 using ERPWebApplication.AppClass.Model;
 using System.Data;
+using ERPWebApplication.CommonClass;
+using System.Web.UI.WebControls;
 
 namespace ERPWebApplication.AppClass.DataAccess
 {
-    public class TwoColumnsTableDataController
+    public class TwoColumnsTableDataController : DataAccessBase
     {
         public void Save(string connectionString, TwoColumnsTableData objTwoColumnsTableData)
         {
@@ -89,7 +91,41 @@ namespace ERPWebApplication.AppClass.DataAccess
 
                 throw msgException;
             }
- 
+
+        }
+
+        private void LoadRecordDDL(DropDownList givenDDLID, TwoColumnsTableData objTwoColumnsTableData)
+        {
+            try
+            {
+                string sqlString = @"SELECT [FieldOfID]
+                 ,[FieldOfName]
+                 FROM [TwoColumnsTable] 
+                 WHERE DataUsed = 'A' AND [TableID] = " + objTwoColumnsTableData.TableID + " AND [CompanyID] = " + objTwoColumnsTableData.CompanyID + " AND [BranchID] = " + objTwoColumnsTableData.BranchID + " ORDER BY [FieldOfName]";
+                ClsDropDownListController.LoadDropDownList(this.ConnectionString, sqlString, givenDDLID, "FieldOfName", "FieldOfID");
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+
+        }
+
+        internal void LoadDesignationDDL(DropDownList givenDDL, TwoColumnsTableData objTwoColumnsTableData)
+        {
+            try
+            {
+                objTwoColumnsTableData.TableID = 22;
+                this.LoadRecordDDL(givenDDL, objTwoColumnsTableData);
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
         }
     }
 }

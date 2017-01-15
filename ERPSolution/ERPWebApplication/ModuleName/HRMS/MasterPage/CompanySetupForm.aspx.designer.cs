@@ -202,7 +202,7 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage {
         protected global::System.Web.UI.WebControls.Label Label101;
         
         /// <summary>
-        /// ddlOwnershipType control.
+        /// givenDDLID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -355,7 +355,7 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage {
         protected global::System.Web.UI.WebControls.Label Label110;
         
         /// <summary>
-        /// ddlContactPersonDesignation control.
+        /// givenDDLID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.

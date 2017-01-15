@@ -5,10 +5,12 @@ using System.Web;
 using ERPWebApplication.AppClass.Model;
 using System.Data;
 using ERPWebApplication.AppClass.CommonClass;
+using ERPWebApplication.CommonClass;
+using System.Web.UI.WebControls;
 
 namespace ERPWebApplication.AppClass.DataAccess
 {
-    public class TwoColumnsTableDataAutoController
+    public class TwoColumnsTableDataAutoController : DataAccessBase
     {
         public void Save(string connectionString, TwoColumnsTableDataAuto objTwoColumnsTableDataAuto)
         {
@@ -114,6 +116,69 @@ namespace ERPWebApplication.AppClass.DataAccess
                 string sqlForDelete = null;
                 sqlForDelete = @"  DELETE FROM [TwoColumnsTableAuto] WHERE [TableID] = " + objTwoColumnsTableDataAuto.TableID + "; ";
                 return sqlForDelete;
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+        internal void GetBusinessNature(DropDownList ddlBusinessType)
+        {
+            try
+            {
+                string sqlString = "BusinessNatureSetup";
+                this.GetTwoColumnsTableDataAuto(ddlBusinessType, sqlString);
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+
+        internal void GetOwnershipType(DropDownList ddlOwnershipType)
+        {
+            try
+            {
+                string sqlString = "OwnershipSetup";
+                this.GetTwoColumnsTableDataAuto(ddlOwnershipType, sqlString);
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+
+        }
+
+        private void GetTwoColumnsTableDataAuto(DropDownList givenDDL, string sqlString)
+        {
+            try
+            {
+                string sqlStringFinal = "SELECT FieldOfID,FieldOfName FROM " + sqlString + " WHERE DataUsed = 'A' ORDER BY FieldOfName";
+                ClsDropDownListController.LoadDropDownList(this.ConnectionString, sqlStringFinal, givenDDL, "FieldOfName", "FieldOfID");
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+
+        internal void GetDistrict(DropDownList ddlDistrict)
+        {
+            try
+            {
+                string sqlString = "DistrictSetup";
+                this.GetTwoColumnsTableDataAuto(ddlDistrict, sqlString);
 
             }
             catch (Exception msgException)

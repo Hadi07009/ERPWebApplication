@@ -88,8 +88,29 @@ namespace ERPWebApplication.AppClass.CommonClass
                 {
                     dtTargetData = OwnershipSetup();
                 }
+                else if (TableID == 23)
+                {
+                    dtTargetData = DistrictSetup();
+                }
 
                 return dtTargetData;
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+        private DataTable DistrictSetup()
+        {
+            try
+            {
+                DataRow dr;
+                dr = dtAutoData.NewRow(); dr[0] = "100231"; dr[1] = "DHAKA"; dtAutoData.Rows.Add(dr);
+                dr = dtAutoData.NewRow(); dr[0] = "100232"; dr[1] = "FARIDPUR"; dtAutoData.Rows.Add(dr);
+                return dtAutoData;
 
             }
             catch (Exception msgException)

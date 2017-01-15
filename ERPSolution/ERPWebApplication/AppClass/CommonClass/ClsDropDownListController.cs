@@ -46,6 +46,7 @@ namespace ERPWebApplication.CommonClass
                 throw msgException;
             }
         }
+
         public static void LoadDropDownListWithConcatenation(string connectionString, string sqlQueryString, DropDownList dropDownListName, string displayMember, string valueMember)
         {
             DataSet ds = new DataSet();

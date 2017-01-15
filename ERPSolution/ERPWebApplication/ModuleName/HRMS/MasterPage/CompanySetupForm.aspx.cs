@@ -15,12 +15,18 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
     {
         private CompanyDetailsSetup _objCompanyDetailsSetup;
         private CompanySetupController _objCompanySetupController;
+        private TwoColumnsTableDataAutoController _objTwoColumnsTableDataAutoController;
+        private TwoColumnsTableDataController _objTwoColumnsTableDataController;
+        private TwoColumnsTableData _objTwoColumnsTableData;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
                 if (!Page.IsPostBack)
                 {
+                    Session["companyID"] = 1;
+                    Session["branchID"] = 1;
+
                     PanelDetails.Visible = false;
                     LoadCountryDropDown(ddlCountry);
                     LoadCompanyDetails();
@@ -33,6 +39,21 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
                 clsTopMostMessageBox.Show(msgException.Message);
             }
 
+        }
+
+        private void LoadBusinessNature(DropDownList ddlBusinessType)
+        {
+            try
+            {
+                _objTwoColumnsTableDataAutoController = new TwoColumnsTableDataAutoController();
+                _objTwoColumnsTableDataAutoController.GetBusinessNature(ddlBusinessType);
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
         }
         private void LoadCompanyDetails()
         {
@@ -97,6 +118,11 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
                     btnSave.Text = "Update";
                     ShowLogo();
                     PanelDetails.Visible = true;
+                    LoadBusinessNature(ddlBusinessType);
+                    LoadOwnershipType(ddlOwnershipType);
+                    LoadDesignation(ddlContactPersonDesignation);
+                    LoadDesignation(ddlAltContDesignation);
+                    LoadDistrict(ddlDistrict);
                 }
             }
             catch (Exception msgException)
@@ -104,6 +130,55 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
 
                 clsTopMostMessageBox.Show(msgException.Message);
             }
+        }
+
+        private void LoadDistrict(DropDownList ddlDistrict)
+        {
+            try
+            {
+                _objTwoColumnsTableDataAutoController = new TwoColumnsTableDataAutoController();
+                _objTwoColumnsTableDataAutoController.GetDistrict(ddlDistrict);
+
+            }
+            catch (Exception msgException)
+            {
+                
+                throw msgException;
+            }
+        }
+
+        private void LoadDesignation(DropDownList givenDDL)
+        {
+            try
+            {
+                _objTwoColumnsTableDataController = new TwoColumnsTableDataController();
+                _objTwoColumnsTableData = new TwoColumnsTableData();
+                _objTwoColumnsTableData.CompanyID = Convert.ToInt32( Session["companyID"].ToString());
+                _objTwoColumnsTableData.BranchID = Convert.ToInt32( Session["branchID"].ToString());
+                _objTwoColumnsTableDataController.LoadDesignationDDL(givenDDL, _objTwoColumnsTableData);
+
+            }
+            catch (Exception msgException)
+            {
+                
+                throw msgException;
+            }
+        }
+
+        private void LoadOwnershipType(DropDownList ddlOwnershipType)
+        {
+            try
+            {
+                _objTwoColumnsTableDataAutoController = new TwoColumnsTableDataAutoController();
+                _objTwoColumnsTableDataAutoController.GetOwnershipType(ddlOwnershipType);
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+
         }
         protected void grdCompany_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
