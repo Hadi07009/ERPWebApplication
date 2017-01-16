@@ -24,10 +24,10 @@ public class clsDataManipulation
             new SqlCommand(storedProcedureCommandTest, myConnection).ExecuteNonQuery();
 
         }
-        catch (SqlException msgException)
-        {
-            throw msgException;
-        }
+        //catch (SqlException msgException)
+        //{
+        //    throw msgException;
+        //}
         catch (Exception msgException)
         {
             throw msgException;

@@ -186,10 +186,99 @@ namespace ERPWebApplication.AppClass.DataAccess
             }
             catch (Exception msgException)
             {
-                
-                throw msgException; 
+
+                throw msgException;
             }
 
+        }
+
+        internal void UpdateByUser(CompanyDetailsSetup objCompanyDetailsSetup, BusinessType objBusinessType, OwnershipType objOwnershipType, DistrictSetup objDistrictSetup)
+        {
+            try
+            {
+                //if (objCompanyDetailsSetup.LicenceID == 0)
+                //{
+                //    objCompanyDetailsSetup.LicenceID = null;
+
+                //}
+
+                var storedProcedureComandText = "UPDATE [comCompanySetup] " +
+                                           " SET [CompanyShortName] = ISNULL('" + objCompanyDetailsSetup.CompanyShortName + "',[CompanyShortName]) " +
+                                              " ,[CompanySlogun] = ISNULL('" + objCompanyDetailsSetup.CompanySlogun + "',[CompanySlogun]) " +
+                                              " ,[House] = ISNULL('" + objCompanyDetailsSetup.House + "',[House]) " +
+                                              " ,[Road] = ISNULL('" + objCompanyDetailsSetup.Road + "',[Road]) " +
+                                              " ,[Sector] = ISNULL('" + objCompanyDetailsSetup.Sector + "',[Sector]) " +
+                                              " ,[Landmark] = ISNULL('" + objCompanyDetailsSetup.Landmark + "',[Landmark]) " +
+                                              " ,[ContactPersonName] = ISNULL('" + objCompanyDetailsSetup.ContactPersonName + "',[ContactPersonName]) " +
+                                              " ,[ContactPersonDesignation] = ISNULL('" + objCompanyDetailsSetup.ContactPersonDesignation + "',[ContactPersonDesignation]) " +
+                                              " ,[ContactPersonContactNumber] = ISNULL('" + objCompanyDetailsSetup.ContactPersonContactNumber + "',[ContactPersonContactNumber]) " +
+                                              " ,[AlternateContactPersonName] = ISNULL('" + objCompanyDetailsSetup.AlternateContactPersonName + "',[AlternateContactPersonName]) " +
+                                              " ,[AlternateContactPersonDesignation] = ISNULL('" + objCompanyDetailsSetup.AlternateContactPersonDesignation + "',[AlternateContactPersonDesignation]) " +
+                                              " ,[AlternateContactPersonContactNumber] = ISNULL('" + objCompanyDetailsSetup.AlternateContactPersonContactNumber + "',[AlternateContactPersonContactNumber]) " +
+                                              " ,[CompanyPhones] = ISNULL('" + objCompanyDetailsSetup.CompanyPhones + "',[CompanyPhones]) " +
+                                              " ,[CompanyFax] = ISNULL('" + objCompanyDetailsSetup.CompanyFax + "',[CompanyFax]) " +
+                                              " ,[CompanyURL] = ISNULL('" + objCompanyDetailsSetup.CompanyURL + "',[CompanyURL]) " +
+                                              " ,[LicenceID] = ISNULL(" + objCompanyDetailsSetup.LicenceID + ",[LicenceID]) " +
+                                              " ,[FaceBookID] = ISNULL('" + objCompanyDetailsSetup.FaceBookID + "',[FaceBookID]) " +
+                                              " ,[LinkedInID] = ISNULL('" + objCompanyDetailsSetup.LinkedInID + "',[LinkedInID]) " +
+                                              " ,[TwitterID] = ISNULL('" + objCompanyDetailsSetup.TwitterID + "',[TwitterID]) " +
+                                              " ,[YouTubeID] = ISNULL('" + objCompanyDetailsSetup.YouTubeID + "',[YouTubeID]) " +
+                                              " ,[BusinessTypeID] = ISNULL(" + objBusinessType.BusinessTypeID + ",[BusinessTypeID]) " +
+                                              " ,[OwnershipTypeID] = ISNULL(" + objOwnershipType.OwnershipTypeID + ",[OwnershipTypeID]) " +
+                                              " ,[DistrictID] = ISNULL(" + objDistrictSetup.DistrictID + ",[DistrictID]) " +
+                                              " ,[LastUpdateDate] = CAST(GETDATE() AS DateTime) " +
+                                              " ,[LastUpdateUserID] = '160ea939-7633-46a8-ae49-f661d12abfd5' " +
+                                          " WHERE [CompanyID] = " + objCompanyDetailsSetup.CompanyID + "";
+                clsDataManipulation.StoredProcedureExecuteNonQuery(this.ConnectionString, storedProcedureComandText);
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+        internal DataTable GetDataOfUser(CompanyDetailsSetup objCompanyDetailsSetup)
+        {
+            try
+            {
+                DataTable dtRecord = null;
+                var storedProcedureComandText = @"SELECT
+	                [CompanyShortName]
+                      ,[BusinessTypeID]
+                      ,[OwnershipTypeID]
+                      ,[CompanySlogun]
+                      ,[House]
+                      ,[Road]
+                      ,[Sector]
+                      ,[Landmark]
+                      ,[DistrictID]
+                      ,[ContactPersonName]
+                      ,[ContactPersonDesignation]
+                      ,[ContactPersonContactNumber]
+                      ,[AlternateContactPersonName]
+                      ,[AlternateContactPersonDesignation]
+                      ,[AlternateContactPersonContactNumber]
+                      ,[CompanyPhones]
+                      ,[CompanyFax]
+                      ,[CompanyURL]
+                      ,[LicenceID]
+                      ,[FaceBookID]
+                      ,[LinkedInID]
+                      ,[TwitterID]
+                      ,[YouTubeID]
+                  FROM [comCompanySetup]
+                  WHERE CompanyID = " + objCompanyDetailsSetup.CompanyID + "";
+                dtRecord = clsDataManipulation.GetData(this.ConnectionString, storedProcedureComandText);
+                return dtRecord;
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
         }
     }
 }

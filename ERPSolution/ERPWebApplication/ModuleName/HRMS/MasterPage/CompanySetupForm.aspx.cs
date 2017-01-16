@@ -18,6 +18,10 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
         private TwoColumnsTableDataAutoController _objTwoColumnsTableDataAutoController;
         private TwoColumnsTableDataController _objTwoColumnsTableDataController;
         private TwoColumnsTableData _objTwoColumnsTableData;
+        private BusinessType _objBusinessType;
+        private OwnershipType _objOwnershipType;
+        private DistrictSetup _objDistrictSetup;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -123,12 +127,120 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
                     LoadDesignation(ddlContactPersonDesignation);
                     LoadDesignation(ddlAltContDesignation);
                     LoadDistrict(ddlDistrict);
+                    ShowDataOfUser();
                 }
             }
             catch (Exception msgException)
             {
 
                 clsTopMostMessageBox.Show(msgException.Message);
+            }
+        }
+
+        private void ShowDataOfUser()
+        {
+            try
+            {
+                _objCompanyDetailsSetup = new CompanyDetailsSetup();
+                _objCompanyDetailsSetup.CompanyID = Convert.ToInt32(Session["selectedCompanyID"].ToString());
+                _objCompanySetupController = new CompanySetupController();
+                DataTable dtUserData = _objCompanySetupController.GetDataOfUser(_objCompanyDetailsSetup);
+                this.ClearControlByUser();
+                foreach (DataRow rowNo in dtUserData.Rows)
+                {
+                    txtShortName.Text = rowNo["CompanyShortName"].ToString() == null ? string.Empty : rowNo["CompanyShortName"].ToString();
+                    txtSlogun.Text = rowNo["CompanySlogun"].ToString() == null ? string.Empty : rowNo["CompanySlogun"].ToString();
+                    txtHouse.Text = rowNo["House"].ToString() == null ? string.Empty : rowNo["House"].ToString();
+                    txtRoad.Text = rowNo["Road"].ToString() == null ? string.Empty : rowNo["Road"].ToString();
+                    txtSector.Text = rowNo["Sector"].ToString() == null ? string.Empty : rowNo["Sector"].ToString();
+                    txtLandmark.Text = rowNo["Landmark"].ToString() == null ? string.Empty : rowNo["Landmark"].ToString();
+                    txtContactPersonName.Text = rowNo["ContactPersonName"].ToString() == null ? string.Empty : rowNo["ContactPersonName"].ToString();
+
+                    var contactPersonDesignation = rowNo["ContactPersonDesignation"].ToString();
+                    if (contactPersonDesignation == null || contactPersonDesignation == "0" || contactPersonDesignation == "")
+                    {
+                        ddlContactPersonDesignation.SelectedValue = "-1";
+                    }
+                    else
+                    {
+                        ddlContactPersonDesignation.SelectedValue = contactPersonDesignation;
+
+                    }
+
+
+                    txtContactNumber.Text = rowNo["ContactPersonContactNumber"].ToString() == null ? string.Empty : rowNo["ContactPersonContactNumber"].ToString();
+                    txtAltContName.Text = rowNo["AlternateContactPersonName"].ToString() == null ? string.Empty : rowNo["AlternateContactPersonName"].ToString();
+
+                    var AltContDesignation = rowNo["AlternateContactPersonDesignation"].ToString();
+                    if (AltContDesignation == null || AltContDesignation == "0" || AltContDesignation == "")
+                    {
+                        ddlAltContDesignation.SelectedValue = "-1";
+                    }
+                    else
+                    {
+                        ddlAltContDesignation.SelectedValue = AltContDesignation;
+                    }
+                    
+                    
+                    txtAltContactNumber.Text = rowNo["AlternateContactPersonContactNumber"].ToString() == null ? string.Empty : rowNo["AlternateContactPersonContactNumber"].ToString();
+                    txtPhone.Text = rowNo["CompanyPhones"].ToString() == null ? string.Empty : rowNo["CompanyPhones"].ToString();
+                    txtFax.Text = rowNo["CompanyFax"].ToString() == null ? string.Empty : rowNo["CompanyFax"].ToString();
+                    txtURL.Text = rowNo["CompanyURL"].ToString() == null ? string.Empty : rowNo["CompanyURL"].ToString();
+                    var licenceNo = rowNo["LicenceID"].ToString();
+                    if (licenceNo == null || licenceNo == "0" || licenceNo == "")
+                    {
+                        txtLicence.Text = string.Empty;
+                    }
+                    else
+                    {
+                        txtLicence.Text = licenceNo;
+                    }
+                    
+                    
+                    txtFaceBook.Text = rowNo["FaceBookID"].ToString() == null ? string.Empty : rowNo["FaceBookID"].ToString();
+                    txtLinkedInID.Text = rowNo["LinkedInID"].ToString() == null ? string.Empty : rowNo["LinkedInID"].ToString();
+                    txtTwitterID.Text = rowNo["TwitterID"].ToString() == null ? string.Empty : rowNo["TwitterID"].ToString();
+                    txtYouTubeID.Text = rowNo["YouTubeID"].ToString() == null ? string.Empty : rowNo["YouTubeID"].ToString();
+                    var businessType = rowNo["BusinessTypeID"].ToString();
+                    if (businessType == null || businessType == "0" || businessType == "")
+                    {
+                        ddlBusinessType.SelectedValue = "-1";
+                        
+                    }
+                    else
+                    {
+                        ddlBusinessType.SelectedValue = businessType;
+                    }
+
+                    var ownershipType = rowNo["OwnershipTypeID"].ToString();
+                    if (ownershipType == null || ownershipType == "-1" || ownershipType == "")
+                    {
+                        ddlOwnershipType.SelectedValue = "-1";
+                        
+                    }
+                    else
+                    {
+                        ddlOwnershipType.SelectedValue = ownershipType;
+                    }
+
+                    var districtID = rowNo["DistrictID"].ToString();
+                    if (districtID == null || districtID == "-1" || districtID == "")
+                    {
+                        ddlDistrict.SelectedValue = "-1";
+                        
+                    }
+                    else
+                    {
+                        ddlDistrict.SelectedValue = districtID;
+                    }
+                }
+
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
             }
         }
 
@@ -142,7 +254,7 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
             }
             catch (Exception msgException)
             {
-                
+
                 throw msgException;
             }
         }
@@ -153,14 +265,14 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
             {
                 _objTwoColumnsTableDataController = new TwoColumnsTableDataController();
                 _objTwoColumnsTableData = new TwoColumnsTableData();
-                _objTwoColumnsTableData.CompanyID = Convert.ToInt32( Session["companyID"].ToString());
-                _objTwoColumnsTableData.BranchID = Convert.ToInt32( Session["branchID"].ToString());
+                _objTwoColumnsTableData.CompanyID = Convert.ToInt32(Session["companyID"].ToString());
+                _objTwoColumnsTableData.BranchID = Convert.ToInt32(Session["branchID"].ToString());
                 _objTwoColumnsTableDataController.LoadDesignationDDL(givenDDL, _objTwoColumnsTableData);
 
             }
             catch (Exception msgException)
             {
-                
+
                 throw msgException;
             }
         }
@@ -190,6 +302,7 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
             {
                 AddCompanyValues();
                 ClearControl();
+                this.ClearControlByUser();
                 this.LoadCompanyDetails();
                 clsTopMostMessageBox.Show(clsMessages.GProcessSuccess);
 
@@ -198,6 +311,41 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
             {
 
                 clsTopMostMessageBox.Show(msgException.Message);
+            }
+        }
+
+        private void ClearControlByUser()
+        {
+            try
+            {
+                txtShortName.Text = string.Empty;
+                txtSlogun.Text = string.Empty;
+                txtHouse.Text = string.Empty;
+                txtRoad.Text = string.Empty;
+                txtSector.Text = string.Empty;
+                txtLandmark.Text = string.Empty;
+                txtContactPersonName.Text = string.Empty;
+                ddlContactPersonDesignation.SelectedValue = "-1";
+                txtContactNumber.Text = string.Empty;
+                txtAltContName.Text = string.Empty;
+                ddlAltContDesignation.SelectedValue = "-1";
+                txtAltContactNumber.Text = string.Empty;
+                txtPhone.Text = string.Empty;
+                txtFax.Text = string.Empty;
+                txtURL.Text = string.Empty;
+                txtLicence.Text = string.Empty;
+                txtFaceBook.Text = string.Empty;
+                txtLinkedInID.Text = string.Empty;
+                txtTwitterID.Text = string.Empty;
+                txtYouTubeID.Text = string.Empty;
+                ddlBusinessType.SelectedValue = "-1";
+                ddlOwnershipType.SelectedValue = "-1";
+                ddlDistrict.SelectedValue = "-1";
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
             }
         }
 
@@ -232,11 +380,41 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
                 _objCompanyDetailsSetup.CompanyEmail = txtEmail.Text == string.Empty ? null : txtEmail.Text;
                 _objCompanyDetailsSetup.CompanyMobile = txtMobile.Text == string.Empty ? null : txtMobile.Text;
                 _objCompanyDetailsSetup.CompanyLogo = (byte[])ViewState["profileImage"];
+
+                _objCompanyDetailsSetup.CompanyShortName = txtShortName.Text == string.Empty ? null : txtShortName.Text;
+                _objCompanyDetailsSetup.CompanySlogun = txtSlogun.Text == string.Empty ? null : txtSlogun.Text;
+                _objCompanyDetailsSetup.House = txtHouse.Text == string.Empty ? null : txtHouse.Text;
+                _objCompanyDetailsSetup.Road = txtRoad.Text == string.Empty ? null : txtRoad.Text;
+                _objCompanyDetailsSetup.Sector = txtSector.Text == string.Empty ? null : txtSector.Text;
+                _objCompanyDetailsSetup.Landmark = txtLandmark.Text == string.Empty ? null : txtLandmark.Text;
+                _objCompanyDetailsSetup.ContactPersonName = txtContactPersonName.Text == string.Empty ? null : txtContactPersonName.Text;
+                _objCompanyDetailsSetup.ContactPersonDesignation = ddlContactPersonDesignation.SelectedValue == "-1" ? null : ddlContactPersonDesignation.SelectedValue;
+                _objCompanyDetailsSetup.ContactPersonContactNumber = txtContactNumber.Text == string.Empty ? null : txtContactNumber.Text;
+                _objCompanyDetailsSetup.AlternateContactPersonName = txtAltContName.Text == string.Empty ? null : txtAltContName.Text;
+                _objCompanyDetailsSetup.AlternateContactPersonDesignation = ddlAltContDesignation.SelectedValue == "-1" ? null : ddlAltContDesignation.SelectedValue;
+                _objCompanyDetailsSetup.AlternateContactPersonContactNumber = txtAltContactNumber.Text == string.Empty ? null : txtAltContactNumber.Text;
+                _objCompanyDetailsSetup.CompanyPhones = txtPhone.Text == string.Empty ? null : txtPhone.Text;
+                _objCompanyDetailsSetup.CompanyFax = txtFax.Text == string.Empty ? null : txtFax.Text;
+                _objCompanyDetailsSetup.CompanyURL = txtURL.Text == string.Empty ? null : txtURL.Text;
+
+                _objCompanyDetailsSetup.LicenceID = Convert.ToInt32(txtLicence.Text == string.Empty ? null : txtLicence.Text);
+                _objCompanyDetailsSetup.FaceBookID = txtFaceBook.Text == string.Empty ? null : txtFaceBook.Text;
+                _objCompanyDetailsSetup.LinkedInID = txtLinkedInID.Text == string.Empty ? null : txtLinkedInID.Text;
+                _objCompanyDetailsSetup.TwitterID = txtTwitterID.Text == string.Empty ? null : txtTwitterID.Text;
+                _objCompanyDetailsSetup.YouTubeID = txtYouTubeID.Text == string.Empty ? null : txtYouTubeID.Text;
+                _objBusinessType = new BusinessType();
+                _objBusinessType.BusinessTypeID = ddlBusinessType.SelectedValue == "-1" ? Convert.ToInt32(null) : Convert.ToInt32(ddlBusinessType.SelectedValue);
+                _objOwnershipType = new OwnershipType();
+                _objOwnershipType.OwnershipTypeID = ddlOwnershipType.SelectedValue == "-1" ? Convert.ToInt32(null) : Convert.ToInt32(ddlOwnershipType.SelectedValue);
+                _objDistrictSetup = new DistrictSetup();
+                _objDistrictSetup.DistrictID = ddlDistrict.SelectedValue == "-1" ? Convert.ToInt32(null) : Convert.ToInt32(ddlDistrict.SelectedValue);
+
                 _objCompanySetupController = new CompanySetupController();
                 if (btnSave.Text == "Update")
                 {
                     _objCompanyDetailsSetup.CompanyID = Convert.ToInt32(Session["selectedCompanyID"].ToString());
                     _objCompanySetupController.Update(_objCompanyDetailsSetup);
+                    _objCompanySetupController.UpdateByUser(_objCompanyDetailsSetup, _objBusinessType, _objOwnershipType, _objDistrictSetup);
 
                 }
             }
@@ -252,6 +430,7 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
             try
             {
                 this.ClearControl();
+                this.ClearControlByUser();
 
             }
             catch (Exception msgException)
