@@ -260,22 +260,12 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
                         }
                         else
                         {
-                            ScriptManager.RegisterStartupScript(
-                            this,
-                            GetType(),
-                            "MessageBox",
-                            "alert(' Image size should not be greater than 150X150 !');",
-                            true);
+                            clsTopMostMessageBox.Show(clsMessages.GImageSize);
                         }
                     }
                     else
                     {
-                        ScriptManager.RegisterStartupScript(
-                            this,
-                            GetType(),
-                            "MessageBox",
-                            "alert(' Image size not more than 500 kb!');",
-                            true);
+                        clsTopMostMessageBox.Show(clsMessages.GImageSizeBytes);
                     }
 
                 }

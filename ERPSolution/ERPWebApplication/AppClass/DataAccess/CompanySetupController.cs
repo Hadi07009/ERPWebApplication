@@ -196,12 +196,6 @@ namespace ERPWebApplication.AppClass.DataAccess
         {
             try
             {
-                //if (objCompanyDetailsSetup.LicenceID == 0)
-                //{
-                //    objCompanyDetailsSetup.LicenceID = null;
-
-                //}
-
                 var storedProcedureComandText = "UPDATE [comCompanySetup] " +
                                            " SET [CompanyShortName] = ISNULL('" + objCompanyDetailsSetup.CompanyShortName + "',[CompanyShortName]) " +
                                               " ,[CompanySlogun] = ISNULL('" + objCompanyDetailsSetup.CompanySlogun + "',[CompanySlogun]) " +

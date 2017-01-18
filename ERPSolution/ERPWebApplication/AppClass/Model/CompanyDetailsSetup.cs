@@ -182,5 +182,27 @@ namespace ERPWebApplication.AppClass.Model
             get { return _youTubeID; }
             set { _youTubeID = value; }
         }
+
+        public BusinessType BusinessType
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        public OwnershipType OwnershipType
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
     }
 }

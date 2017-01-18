@@ -1017,8 +1017,6 @@
     <Content Include="CSS\HomePage\bootstrap.css.map" />
     <Content Include="WebService\ServiceSystem.asmx" />
     <Content Include="ClassDiagram1.cd" />
-    <Content Include="ClassDiagram2.cd" />
-    <Content Include="ClassDiagram3.cd" />
     <None Include="Properties\PublishProfiles\ERPApplicationPublish.pubxml" />
     <Content Include="README.docx" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
@@ -1121,7 +1119,12 @@
     <Compile Include="AppClass\Model\CompanySetup.cs" />
     <Compile Include="AppClass\Model\CountryDetailsSetup.cs" />
     <Compile Include="AppClass\Model\CountrySetup.cs" />
+    <Compile Include="AppClass\Model\DesignationSetup.cs" />
     <Compile Include="AppClass\Model\DistrictSetup.cs" />
+    <Compile Include="AppClass\Model\EmployeeCategorySetup.cs" />
+    <Compile Include="AppClass\Model\EmployeeDetailsSetup.cs" />
+    <Compile Include="AppClass\Model\EmployeeSetup.cs" />
+    <Compile Include="AppClass\Model\EmployeeTypeSetup.cs" />
     <Compile Include="AppClass\Model\FileUploadDetail.cs" />
     <Compile Include="AppClass\Model\FileUploadHeader.cs" />
     <Compile Include="AppClass\Model\ItemCategorySetup.cs" />
