@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
+using ERPWebApplication.CommonClass;
 
 namespace ERPWebApplication.AppClass.DataAccess
 {
@@ -266,6 +267,36 @@ namespace ERPWebApplication.AppClass.DataAccess
                   WHERE CompanyID = " + objCompanyDetailsSetup.CompanyID + "";
                 dtRecord = clsDataManipulation.GetData(this.ConnectionString, storedProcedureComandText);
                 return dtRecord;
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+        internal void LoadCompany(DropDownList ddlCompany)
+        {
+            try
+            {
+                ClsDropDownListController.LoadDropDownList(this.ConnectionString, this.SqlGetCompany(), ddlCompany, "CompanyName", "CompanyID");
+            }
+            catch (Exception msgException)
+            {
+                
+                throw msgException;
+            }
+        }
+        public string SqlGetCompany()
+        {
+            try
+            {
+                string sqlString = null;
+                sqlString = @"SELECT [CompanyID]
+                              ,[CompanyName]      
+                          FROM [comCompanySetup] WHERE [DataUsed] = 'A'";
+                return sqlString;
 
             }
             catch (Exception msgException)

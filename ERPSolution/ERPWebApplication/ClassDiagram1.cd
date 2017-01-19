@@ -610,7 +610,7 @@
       <FileName>WebService\ServiceSystem.asmx.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ERPWebApplication.AppClass.Model.DesignationSetup" Collapsed="true">
+  <Class Name="ERPWebApplication.AppClass.Model.DesignationSetup">
     <Position X="9.75" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -624,7 +624,7 @@
       <FileName>AppClass\Model\EmployeeCategorySetup.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ERPWebApplication.AppClass.Model.EmployeeDetailsSetup" Collapsed="true">
+  <Class Name="ERPWebApplication.AppClass.Model.EmployeeDetailsSetup">
     <Position X="4.75" Y="9.25" Width="1.5" />
     <InheritanceLine Type="ERPWebApplication.AppClass.Model.EmployeeSetup" FixedFromPoint="true">
       <Path>
@@ -639,9 +639,9 @@
       <FileName>AppClass\Model\EmployeeDetailsSetup.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="DesignationSetup" />
       <Property Name="EmployeeTypeSetup" />
       <Property Name="EmployeeCategorySetup" />
+      <Property Name="DesignationSetup" />
     </ShowAsAssociation>
   </Class>
   <Class Name="ERPWebApplication.AppClass.Model.EmployeeSetup" Collapsed="true">

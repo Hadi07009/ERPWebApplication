@@ -983,6 +983,7 @@
     <Content Include="MicrosoftMenuHtmlPage.html" />
     <Content Include="ModuleName\Accounts\CoaHeadSetup.aspx" />
     <Content Include="ModuleName\HRMS\MasterPage\CompanySetupForm.aspx" />
+    <Content Include="ModuleName\HRMS\MasterPage\EmployeeSetupForm.aspx" />
     <Content Include="ModuleName\Inventory\MasterPage\ItemCategorySetupForm.aspx" />
     <Content Include="ModuleName\Inventory\MasterPage\TemplateForm.aspx" />
     <Content Include="ModuleName\Inventory\Report\ReportForm\ReportViewer.aspx" />
@@ -1090,6 +1091,7 @@
     <Compile Include="AppClass\DataAccess\DataAccessBase.cs" />
     <Compile Include="AppClass\DataAccess\DepartmentSetupController.cs" />
     <Compile Include="AppClass\DataAccess\EmployeeInformationController.cs" />
+    <Compile Include="AppClass\DataAccess\EmployeeSetupController.cs" />
     <Compile Include="AppClass\DataAccess\ItemCategorySetupController.cs" />
     <Compile Include="AppClass\DataAccess\ItemDetailController.cs" />
     <Compile Include="AppClass\DataAccess\ItemRequisitionController.cs" />
@@ -1165,6 +1167,13 @@
     </Compile>
     <Compile Include="ModuleName\HRMS\MasterPage\CompanySetupForm.aspx.designer.cs">
       <DependentUpon>CompanySetupForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleName\HRMS\MasterPage\EmployeeSetupForm.aspx.cs">
+      <DependentUpon>EmployeeSetupForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuleName\HRMS\MasterPage\EmployeeSetupForm.aspx.designer.cs">
+      <DependentUpon>EmployeeSetupForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModuleName\Inventory\MasterPage\ItemCategorySetupForm.aspx.cs">
       <DependentUpon>ItemCategorySetupForm.aspx</DependentUpon>

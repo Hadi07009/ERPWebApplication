@@ -28,17 +28,7 @@ namespace ERPWebApplication.AppClass.Model
             get { return _lastName; }
             set { _lastName = value; }
         }
-
-        public DesignationSetup DesignationSetup
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
+        
 
         public EmployeeTypeSetup EmployeeTypeSetup
         {
@@ -52,6 +42,17 @@ namespace ERPWebApplication.AppClass.Model
         }
 
         public EmployeeCategorySetup EmployeeCategorySetup
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        public DesignationSetup DesignationSetup
         {
             get
             {
