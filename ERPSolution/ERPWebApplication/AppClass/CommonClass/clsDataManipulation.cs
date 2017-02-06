@@ -450,6 +450,27 @@ public class clsDataManipulation
             throw msgException;
         }
     }
+    public static bool ExecuteSqlCommand(SqlCommand myCommand, string QueryStr)
+    {
+        int noOfRowsAffected = 0;
+        try
+        {
+            myCommand.CommandText = QueryStr;
+            noOfRowsAffected = myCommand.ExecuteNonQuery();
+        }
+        catch (Exception exceptionObj)
+        {
+            return false;
+        }
+        if (noOfRowsAffected > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 }
 

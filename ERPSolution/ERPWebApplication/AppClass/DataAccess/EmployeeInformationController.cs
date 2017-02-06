@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
 namespace ERPWebApplication.AppClass.DataAccess
 {
-    public class EmployeeInformationController
+    public class EmployeeInformationController:DataAccessBase
     {
         public EmployeeInformationController()
         { 
@@ -21,9 +22,24 @@ namespace ERPWebApplication.AppClass.DataAccess
         {
             return "SELECT EmployeeID, FullName, DisplayName, PrimaryContactNo FROM  hrEmployeeSetup where (EmployeeID Like '" + keybal + "') OR (FullName Like '" + keybal + "') and CompanyID=" + companyID + " and BranchID=" + branchID + "";
         }
-        public static string GetEmployeeDetailByEmpID(string empID, int companyID, int branchID)
+
+        public  DataTable  GetEmployeeDetailByEmpID(string empID, int companyID, int branchID)
         {
-            return "SELECT EmployeeID, FullName, DisplayName, PrimaryContactNo FROM  hrEmployeeSetup where EmployeeID='" + empID + "' and  CompanyID=" + companyID + " and BranchID=" + branchID + " order by FullName";
+
+            try
+            {
+                DataTable dtEmployee = null;
+                var storedProcedureComandText = "SELECT EmployeeID, FullName, DisplayName, PrimaryContactNo FROM  hrEmployeeSetup where EmployeeID='" + empID + "' and  CompanyID=" + companyID + " and BranchID=" + branchID + " order by FullName";
+                dtEmployee = clsDataManipulation.GetData(this.ConnectionString, storedProcedureComandText);
+                return dtEmployee;
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+
         }
 
 

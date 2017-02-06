@@ -17,52 +17,111 @@ using CrystalDecisions.Shared;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
 using ERPWebApplication.AppClass.CommonClass;
+using ERPWebApplication.AppClass.Model;
+using System.Drawing;
+
+
+
 
 namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 {
     public partial class frmItemRequisition : System.Web.UI.Page
     {
+
         string _connectionString = ConfigurationManager.ConnectionStrings["dbERPSolutionConnection"].ToString();
         public static ArrayList Files = new ArrayList();
 
+       private ProritySetupController _objPrioritySetupController;
+
+
+      
+       string requisitionrefno="";
+
+       RequisitionHeader _objRequisitionHeader;
+       RequisitionDetail _objRequisitionDetail;
+       FileUploadHeader _objFileUploadHeader;
+       FileUploadDetail _objFileUploadDetail;
+
+       ItemRequisitionHeaderController _objItemRequisitionHeaderController;
+       ItemRequisitionDetailController _objItemRequisitionDetailController;
+
+       FileUploadHeaderController _objFileUploadHeaderController;
+       FileUploadDetailController _objFileUploadDetailController;
+       UnitSetupController _objUnitSetupController;
+
+       EmployeeInformationController _objEmployeeInformationController;
+       ClientInformationController _objClientInformationController;
+
+       ItemSetupController _objItemSetupController;
+
+       CompanySetup _objCompanySetup;
+       BranchSetup _objBranchSetup;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+           // ClsStatic.CheckUserAuthentication();
+          
             Session[ClsStatic.link3sessionUserId] = "MOS";
             string userid = Session[ClsStatic.link3sessionUserId].ToString();
 
 
-            Session[ClsStatic.sessionCompanyID]=1;
-            Session[ClsStatic.sessionBranchID]=0;
+            Session[ClsStatic.sessionCompanyID]="1";
+            Session[ClsStatic.sessionBranchID]="0";
 
-            ClsStatic.MsgConfirmBox(btnSubmit, clsMessages.GConfirmMessage);
-            ClsStatic.MsgConfirmBox(btnPost, clsMessages.GConfirmMessage);
-            ClsStatic.MsgConfirmBox(btnReject , clsMessages.GConfirmMessage);
-            tblsearch.BgColor = "#F0F8FF";
-           
+            ClsStatic.MsgConfirmBox(btnSubmit,"Are you sure to confirm submit?");
+            ClsStatic.MsgConfirmBox(btnPost, "Are you sure to confirm post?");
+            ClsStatic.MsgConfirmBox(btnReject , "Are you sure to confirm reject?");
+           // tblsearch.BgColor = "#F0F8FF";
+
+            
 
             if (!IsPostBack)
             {
+
                 AutoCompleteForReq.ContextKey = Session[ClsStatic.sessionCompanyID].ToString() + ":" + Session[ClsStatic.sessionBranchID].ToString();
                 AutoCompleteforEmployee.ContextKey = Session[ClsStatic.sessionCompanyID].ToString() + ":" + Session[ClsStatic.sessionBranchID].ToString();
                 autoCompleteforItemDeat.ContextKey = Session[ClsStatic.sessionCompanyID].ToString() + ":" + Session[ClsStatic.sessionBranchID].ToString();
-                
+
+
+
+                trSearchResult.Visible = false;
+                trItemDetail.Visible = false;
+           
+
+
+
+                // adv search
+
+                AutoCompleteadempserch.ContextKey = Session[ClsStatic.sessionCompanyID].ToString() + ":" + Session[ClsStatic.sessionBranchID].ToString();
+
+                AutoCompleteItemSearch.ContextKey = Session[ClsStatic.sessionCompanyID].ToString() + ":" + Session[ClsStatic.sessionBranchID].ToString();
+
+               
+                //table
+
                 tblattach.Visible = true;
                 tbladvsearch.Visible = false;
-                tbladvsearchresult.Visible = false;
-                tblitemdet.Visible = false;
-                
+              
+             
+
+                //hr 
+              //  searchbottom.Visible = true;
                 advsearchbottom.Visible = false;
                 headertop.Visible = false;
-                
+
+
+                //button
                 btnPrintRequisition.Enabled = true;
-                trtest.Visible = false;
+
+                //tr
+              
 
               //  mesg.Visible = false;
 
 
                 //panel
-                pnl.Visible = false;
-                pnlBillAttachment.Visible = true;
+             
+                //pnlBillAttachment.Visible = true;
 
                 //Collapsible
                 cpeheader.Collapsed = true;
@@ -70,15 +129,9 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
                 //label
 
-                lblstatus.Text = "";
+             
                 lblStatusforlabel.Visible = false;
 
-                //ddl
-
-                //ddlProject.Visible = false;
-
-                //Gridview
-                // gdvItemDetail.HeaderRow.Cells[0].Visible = true;
                 foreach (GridViewRow gvrow in gdvItemDetail.Rows)
                 {
                     gvrow.Cells[0].Enabled = true;
@@ -87,14 +140,10 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
                 txtFrmDate.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
                 txtToDate.Text = System.DateTime.Now.AddDays(15).ToString("dd/MM/yyyy");
-
-
                 txtrequestedDate.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
                 txtDateNeed.Text = System.DateTime.Now.AddDays(15).ToString("dd/MM/yyyy");
 
-                Loaddata();
-
-                //GenerateRefNo(_connectionString, Session[ClsStatic.sessionCompanyID].ToString(), Session[ClsStatic.sessionBranchID].ToString(), Convert.ToDateTime(txtrequestedDate.Text), 1);
+                LoadDataInDropdown();
 
             }
         }
@@ -111,95 +160,76 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             page.Controls.Add(ltr);
         }
 
-
-
-        private string GenerateRefNo(string connectionString, string companyID, string branchID, DateTime requisitionDate)
-        {
-            DateTime dt = Convert.ToDateTime(requisitionDate);
-            int maxnofromDate;
-            string refno;
-            string SQLStatement;
-
-            maxnofromDate = 0;
-            clsDateProcess objDateProcess = new clsDateProcess(); 
-            refno = objDateProcess.DateToNumber(requisitionDate);
-
-            // By Date
-            SQLStatement = "select count(ItemRequisitionNo)+1  as ItemRequisitionMaxNo from ItemRequisitionHeader WHERE  RequisitionDate =convert(datetime,'" + requisitionDate + "',103) and CompanyID = " + companyID + " AND BranchID = " + branchID + "";
-            maxnofromDate = clsDataManipulation.GetMaximumValueUsingSQL(connectionString, SQLStatement);
-            refno = refno + string.Format("{0:00}", maxnofromDate);
-
-            // By Month
-
-            SQLStatement = "select count(ItemRequisitionNo)+1  as ItemRequisitionMaxNo from ItemRequisitionHeader WHERE  month(RequisitionDate) =" + requisitionDate.Month + " and year(RequisitionDate) =" + requisitionDate.Year + " and CompanyID = " + companyID + " AND BranchID = " + branchID + "";
-            maxnofromDate = clsDataManipulation.GetMaximumValueUsingSQL(connectionString, SQLStatement);
-            refno = refno + string.Format("{0:0000}", maxnofromDate);
-            //txtRefNo.Text = refno;
-            return refno;
-
-        }
-
-
-       
-
-        private void Loaddata()
+        private void LoadDataInDropdown()
         {
 
-            ClsDropDownListController.LoadDropDownList(_connectionString, ProritySetupController.GetDataPriority(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlPriority, "PriorityName", "PriorityID");
+           //ClsDropDownListController.LoadListBox(_connectionString, ProritySetupController.GetDataPriority(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlPriority, "PriorityName", "PriorityID");
+            LoadPriorityDropDown(ddlPrioritySearch);
+
+
             ClsDropDownListController.LoadDropDownList(_connectionString, PurposeSetupController.GetDataPurposeSetup(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlPurpose, "ItemUsage", "ItemUsageID");
             ClsDropDownListController.LoadDropDownList(_connectionString, ProjectSetupController.GetDataProjectSetup(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlProject, "ProjectName", "ProjectID");
-            ClsDropDownListController.LoadDropDownList(_connectionString,PersonTypeSetupController.GetDataPersonTypeSetup(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32 (Session[ClsStatic.sessionBranchID])), ddlItemUserType, "PersonType", "PersonTypeID");
-            ClsDropDownListController.LoadDropDownList(_connectionString, ActivitySetupController.GetDataActivitySetup(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32 (Session[ClsStatic.sessionBranchID])), ddlRefType, "ActivityName", "KnownByID");
+            ClsDropDownListController.LoadDropDownList(_connectionString, PersonTypeSetupController.GetDataPersonTypeSetup(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlItemUserType, "PersonType", "PersonTypeID");
+            ClsDropDownListController.LoadDropDownList(_connectionString, ActivitySetupController.GetDataActivitySetup(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlRefType, "ActivityName", "KnownByID");
             ClsDropDownListController.LoadDropDownList(_connectionString, DepartmentSetupController.GetDataDepartmentSetup(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlRequestedDept, "DepartmentName", "DepartmentID");
 
             // For searching ddl
 
             ClsDropDownListController.LoadDropDownList(_connectionString, PurposeSetupController.GetDataPurposeSetup(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlPurposeSearch, "ItemUsage", "ItemUsageID");
-            ClsDropDownListController.LoadDropDownList(_connectionString, ProritySetupController.GetDataPriority(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlPrioritySearch, "PriorityName", "PriorityID");
+            ClsDropDownListController.LoadDropDownList(_connectionString, ProritySetupController.GetDataPriority(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlPriority, "PriorityName", "PriorityID");
             ClsDropDownListController.LoadDropDownList(_connectionString, DepartmentSetupController.GetDataDepartmentSetup(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddldepartment, "DepartmentName", "DepartmentID");
 
-        
+            _objUnitSetupController = new UnitSetupController ();
+            _objCompanySetup = new CompanySetup();
+            _objBranchSetup = new BranchSetup();
+            _objCompanySetup.CompanyID = Convert.ToInt32(Session[ClsStatic.sessionCompanyID]);
+            _objBranchSetup.BranchID = Convert.ToInt32(Session[ClsStatic.sessionBranchID]);
+            ClsDropDownListController.LoadDropDownList(_connectionString, _objUnitSetupController.UnitSql(_objCompanySetup, _objBranchSetup), ddlunit, "Unit", "UnitID");
+
+        }
+
+        private void LoadPriorityDropDown(DropDownList ddlCountry)
+        {
+            try
+            {
+                _objPrioritySetupController = new ProritySetupController();
+                _objPrioritySetupController.LoadPriority(ddlCountry);
+
+            }
+            catch (Exception msgException)
+            {
+                clsTopMostMessageBox.Show(msgException.Message);
+            }
         }
 
         protected void btnAdvSearch_Click(object sender, EventArgs e)
         {
-            tbladvsearch.Visible = true ;
-            //searchbottom.Visible = true;
+            tbladvsearch.Visible = true;
             advsearchbottom.Visible = true;
-          
-
-        CollapsiblePanelExtender5.Collapsed = true;
-        CollapsiblePanelExtender5.ClientState = "true";
-
-           
+            CollapsiblePanelExtender5.Collapsed = true;
+            CollapsiblePanelExtender5.ClientState = "true";   
         }
 
         protected void imgbtnadsearch_Click(object sender, ImageClickEventArgs e)
         {
             tbladvsearch.Visible = false ;
-           // searchbottom.Visible = true  ;
             advsearchbottom.Visible = false ;
 
         }
 
         protected void btnShow_Click(object sender, EventArgs e)
         {
-            tbladvsearchresult.Visible = true;          
+            //tbladvsearchresult.Visible = true;          
             advsearchbottom.Visible = true;
             headertop.Visible = true;
-
-
-            //======================
 
             DataTable dtadsearch = new DataTable();
             RequisitionHeader hdr = new RequisitionHeader();
 
+            _objItemRequisitionHeaderController = new ItemRequisitionHeaderController();
+
             hdr.CompanyID = Convert.ToInt32(Session[ClsStatic.sessionCompanyID]);
-            hdr.BranchID = Convert.ToInt32(Session[ClsStatic.sessionBranchID]);
-
-
-
-          
+            hdr.BranchID = Convert.ToInt32(Session[ClsStatic.sessionBranchID]);       
 
 
             string  fromdate = Convert.ToDateTime(txtFrmDate.Text).ToString("dd/MMM/yyyy");
@@ -220,7 +250,6 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
 
             }
-
 
             if (ddldepartment.SelectedItem.Value == "-1")
             {
@@ -268,25 +297,24 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 hdr.RequisitionBy = txtEmployeeSearch.Text.Split(':')[0].ToString();
             }
 
-            dtadsearch = DataProcess.GetData(_connectionString, ItemRequisitionController.GetDataRequisitionAdvancedSearch(hdr, Convert.ToDateTime(fromdate), Convert.ToDateTime(toDate), item));
+            _objItemRequisitionHeaderController = new ItemRequisitionHeaderController ();
+            dtadsearch = _objItemRequisitionHeaderController.GetDataRequisitionAdvancedSearch(hdr, Convert.ToDateTime(fromdate), Convert.ToDateTime(toDate), item);
 
             if (dtadsearch.Rows.Count == 0)
 
             {
-                tbladvsearchresult.Visible = false ;
+               // tbladvsearchresult.Visible = false ;
                 advsearchbottom.Visible = false ;
                 headertop.Visible = false ;
-
-                MessageBox("No data found");
+                clsTopMostMessageBox.Show("No data found");
 
             }
 
             advsearchbottom.Visible = true;
-
-            loadgrid2(dtadsearch);
+            LoadAdvancedSearch(dtadsearch);
         }
 
-        private void loadgrid2(DataTable dtadsearch)
+        private void LoadAdvancedSearch(DataTable dtadsearch)
         {
 
             DataTable dt = new DataTable();
@@ -299,17 +327,23 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
             foreach (DataRow dr in dtadsearch.Rows)
             {
-
-
                 dt.Rows.Add(dtadsearch.Rows.Count+1, dr["ItemRequisitionNo"].ToString(), Convert.ToDateTime(dr["RequisitionDate"]).ToShortDateString(), (dr["RequisitionID"] + ":" + dr["RequisitionBy"]).ToString(), dr["DepartmentName"], dr["PriorityName"]);
             }
             gdvSearchResult.DataSource = dt;
             gdvSearchResult.DataBind();
+
+            if (gdvSearchResult.Rows.Count > 0)
+            {
+
+                trSearchResult.Visible = true;
+            
+            }
+
+
         }
 
         protected void btnNewReq_Click(object sender, EventArgs e)
         {
-
             Response.Redirect(Request.Url.AbsoluteUri);
            
            // //Table
@@ -378,52 +412,45 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
         }
 
 
-        private string  CheckCompleteStatus()
+        private string CheckCompleteStatus(string ReqRefno,int companyID,int branchID)
         {
 
-            if (txtRefNo.Text != "")
+            if (ReqRefno != "")
             {
 
                 DataTable dtcount = new DataTable();
 
-                int branchID = Convert.ToInt32(Session[ClsStatic.sessionBranchID]);
-                int companyID = Convert.ToInt32(Session[ClsStatic.sessionCompanyID ]); 
-            
+                _objItemRequisitionHeaderController = new ItemRequisitionHeaderController();
 
-                dtcount = DataProcess.GetData(_connectionString, ItemRequisitionController.GetDataRequisitionHdr(txtRefNo.Text,branchID,companyID ));
+                dtcount = _objItemRequisitionHeaderController.GetDataRequisitionHdr(ReqRefno, companyID, branchID);
 
                 if (dtcount.Rows.Count > 0)
                 {
-
                     if (Convert.ToInt32(dtcount.Rows[0]["CompletionStatus"]) != 0)
                     {
                         return "Data Already Submitted.";
                     }
-
                 }
- 
+
             }
             return "";
-        
+
         }
-
-
 
         private string CheckEntryDetail()
         {
 
-            if (CheckCompleteStatus() != "")
-            {
+            //if (CheckCompleteStatus() != "")
+            //{
 
-                CheckCompleteStatus();
+            //    CheckCompleteStatus();
             
-            }
-           
+            //}
 
+            if (ddlunit.SelectedItem.Value == "-1") return "Please Select Unit ";
             if (txtItem.Text == "") return "Please Search Item ";
             if (txtQuantity.Text == "") return "Please Enter Quantity ";
-            if (txtRate.Text == "") return "Please Enter Rate";
-
+            if (txtRate.Text == "") return "Please Enter Quantity ";
             return "";
         
         }
@@ -432,30 +459,22 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
         protected void btnAdd_Click(object sender, EventArgs e)
         {
         
-            tblitemdet.Visible = true;
-           
-            pnl.Visible = true ;
 
             if (CheckEntryDetail() != "")
             {
-
                 string mesg = CheckEntryDetail();                
-                tblitemdet.Visible = false ;
+            
                 MessageBox(mesg);
                 return;
 
             }
-
-
             if (CheckDuplicate() == false)
             {
                 MessageBox("Item Already Added");
-                return;                     
+                return;
             }
 
-
             DataTable dt = new DataTable();
-
             if (ViewState[ClsStatic.link3sessionUserId] != null)
             {
                 dt = (DataTable)ViewState[ClsStatic.link3sessionUserId];
@@ -470,27 +489,50 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 dt.Columns.Add("Item desc", typeof(string));
                 dt.Columns.Add("UnitID", typeof(string));
                 dt.Columns.Add("UOM", typeof(string ));             
-                dt.Columns.Add("Quantity", typeof(decimal ));
-                dt.Columns.Add("Rate", typeof(decimal));         
+                dt.Columns.Add("Quantity", typeof(double ));
+                dt.Columns.Add("Rate", typeof(double));
+                dt.Columns.Add("Amount", typeof(double));
+            
                 dt.Columns.Add("Origin", typeof(string ));
                 dt.Columns.Add("Specification", typeof(string ));
                 dt.Columns.Add("Brand", typeof(string));
 
             }
 
-            dt.Rows.Add(dt.Rows.Count + 1, txtItem.Text.Split(':')[0].Trim(), txtItem.Text.Split(':')[1].Trim(), txtunit.Text.Split(':')[0].ToString(), txtunit.Text.Split(':')[1].ToString(), Convert.ToDecimal(txtQuantity.Text.ToString()), Convert.ToDecimal(txtRate.Text.ToString()), txtOrigin.Text.Replace("&nbsp;", ""), txtSpec.Text.Replace("&nbsp;", ""), txtBrand.Text.Replace("&nbsp;", ""));
+            ItemRequisitionDetailController dtcontroller = new ItemRequisitionDetailController();
+            string icode = "";
+            DataTable dtnewitem = new DataTable();
+
+            ItemRequisitionDetailController _objItemRequisitionDetail = new ItemRequisitionDetailController();
 
 
+            try
+            {
+                dtnewitem = _objItemRequisitionDetail.GetDataByItemDet(Convert.ToInt32(txtItem.Text.Split(':')[0]), Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID]));
+                dt.Rows.Add(dt.Rows.Count + 1, txtItem.Text.Split(':')[0].Trim(), txtItem.Text.Split(':')[1].Trim(), ddlunit.SelectedItem.Value, ddlunit.SelectedItem.Text, Convert.ToDecimal(txtQuantity.Text.ToString()), Convert.ToDecimal(txtRate.Text.ToString()), Convert.ToDecimal(txtQuantity.Text.ToString()) * Convert.ToDecimal(txtRate.Text.ToString()), txtOrigin.Text.Replace("&nbsp;", ""), txtSpec.Text.Replace("&nbsp;", ""), txtBrand.Text.Replace("&nbsp;", ""));
+            
+            }
+
+            catch
+
+            {
+
+                ItemSetupController _ObjItemSetupControoler = new ItemSetupController();
+                int sl = SlItemRefno();
+                icode = _ObjItemSetupControoler.GenerateTemporaryItemRefNo(_connectionString, Session[ClsStatic.sessionCompanyID].ToString(), Session[ClsStatic.sessionBranchID].ToString(), Convert.ToDateTime(txtrequestedDate.Text), 1, sl);
+                dt.Rows.Add(dt.Rows.Count + 1, icode, txtItem.Text.Trim(), ddlunit.SelectedItem.Value, ddlunit.SelectedItem.Text, Convert.ToDouble(txtQuantity.Text.ToString()), Convert.ToDouble(txtRate.Text.ToString()), Convert.ToDouble(txtQuantity.Text.ToString()) * Convert.ToDouble(txtRate.Text.ToString()), txtOrigin.Text.Replace("&nbsp;", ""), txtSpec.Text.Replace("&nbsp;", ""), txtBrand.Text.Replace("&nbsp;", ""));
+            }
+
+
+           
             ViewState[ClsStatic.link3sessionUserId] = new DataTable();
             ViewState[ClsStatic.link3sessionUserId] = dt;
             set_grid();
           //  GetTotal();
-
             if (dt.Rows.Count > 0)
-            {
-                trtest.Visible = true;
-                tblitemdetautho.Visible = true ;
-            
+            {              
+                trItemDetail.Visible = true;
+
             }
 
             gdvItemDetail.HeaderRow.Cells[0].Visible = true;
@@ -502,7 +544,7 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
             ClearAllItemDetail();
 
-            if (CheckCompleteStatus() == "")
+            if (CheckCompleteStatus(lblref.Text, Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])) == "")
             {
 
                 btnPost.Visible = false ;
@@ -519,19 +561,47 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             }
         }
 
+        private int SlItemRefno()
+        {
 
-        private void TotalAmount()
-        { 
-        double  qty;
-            double rate;
+         int sl = 1;
+         int lasttwonumber;
+         DataTable dt = new DataTable();
+         dt = (DataTable)ViewState[ClsStatic.link3sessionUserId];
 
+         if (dt != null)
+         {
+             foreach (DataRow dr in dt.Rows)
+             {
+                 string abc = dr["Icode"].ToString();
+                 if (abc.Length == 9)
+                 {
+                     if (abc.Substring(2, 1) == "9")
+                     {
+                         
+                        lasttwonumber=Convert.ToInt32 (abc.Substring(7, 2));
+                        lasttwonumber += 1;
+                        sl = lasttwonumber;
+                     }
 
-            qty = txtQuantity.Text == "" ? 0 : Convert.ToDouble(txtQuantity.Text);
-            rate = txtRate.Text == "" ? 0 : Convert.ToDouble(txtRate.Text);
-            txtTotal.Text = (qty * rate).ToString();
-        
-        
+                 }
+
+             }
+         }
+
+         return sl;
         }
+
+        //private void TotalAmount()
+        //{ 
+        //    double  qty;
+        //    double rate;
+
+        //    qty = txtQuantity.Text == "" ? 0 : Convert.ToDouble(txtQuantity.Text);
+        //    rate = txtRate.Text == "" ? 0 : Convert.ToDouble(txtRate.Text);
+        //    txtTotal.Text = (qty * rate).ToString();
+ 
+        //}
 
 
         private void GetTotal()
@@ -560,7 +630,6 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
         private void set_grid()
         {
 
-
             btnSubmit.Visible = false;
             gdvItemDetail.Visible = false;
 
@@ -585,8 +654,12 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                     dtgrid.Columns.Add("Item desc", typeof(string));
                     dtgrid.Columns.Add("UnitID", typeof(string));
                     dtgrid.Columns.Add("uom", typeof(string));
-                    dtgrid.Columns.Add("Quantity", typeof(decimal));
-                    dtgrid.Columns.Add("Rate", typeof(decimal));
+                    dtgrid.Columns.Add("Quantity", typeof(double));
+
+                    dtgrid.Columns.Add("Rate", typeof(double));
+                    dtgrid.Columns.Add("Amount", typeof(double));
+                   
+
                     dtgrid.Columns.Add("Origin", typeof(string));
                     dtgrid.Columns.Add("Specification", typeof(string));
                     dtgrid.Columns.Add("Brand", typeof(string)); 
@@ -594,34 +667,45 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                     foreach (DataRow dr in dt.Rows)
                     {
                         cnt += 1;
-                        dtgrid.Rows.Add(cnt, dr["Icode"].ToString(), dr["Item desc"].ToString(), dr["UnitID"].ToString(), dr["uom"].ToString(), dr["Quantity"].ToString(), dr["Rate"].ToString(), dr["Origin"].ToString(), dr["Specification"].ToString(), dr["Brand"].ToString());
+                        dtgrid.Rows.Add(cnt, dr["Icode"].ToString(), dr["Item desc"].ToString(), dr["UnitID"].ToString(), dr["uom"].ToString(), Convert.ToDouble(dr["Quantity"]), Convert.ToDouble(dr["Rate"]), Convert.ToDouble(Convert.ToDouble(dr["Quantity"]) * Convert.ToDouble(dr["Rate"])), dr["Origin"].ToString(), dr["Specification"].ToString(), dr["Brand"].ToString());
                     }
 
                     gdvItemDetail.DataSource = dtgrid;
                     gdvItemDetail.DataBind();
                     ViewState[ClsStatic.link3sessionUserId] = dtgrid;
 
+                    if (dtgrid.Rows.Count > 0)
+                    {
+
+
+                        double  total = dt.AsEnumerable().Sum(row => row.Field<Double>("Amount"));
+                        gdvItemDetail.FooterRow.Cells[7].Text = "Total";
+                        gdvItemDetail.FooterRow.Cells[7].Font.Bold = true;
+                        gdvItemDetail.FooterRow.Cells[7].HorizontalAlign = HorizontalAlign.Right;
+                        gdvItemDetail.FooterRow.Cells[8].Text = total.ToString();
+                        gdvItemDetail.FooterRow.Cells[8].Font.Bold = true;
+                        gdvItemDetail.FooterRow.Cells[7].Font.Bold = true;
+                    }
                 }
 
             }
         }
 
-
-
         private void Load_grid_for_adv(string refno)
         {
-            tblitemdet.Visible = true;
+            //tblitemdet.Visible = true;
             DataTable det = new DataTable();
             DataTable dtgrid = new DataTable();
 
-            det = DataProcess.GetData(_connectionString, ItemRequisitionController.GetDataRequisitionDet(refno));
+            _objItemRequisitionDetailController = new ItemRequisitionDetailController();
+            det = _objItemRequisitionDetailController.GetDataRequisitionDet(refno);
+
             int cnt = 0;
             if (det.Rows.Count > 0)
             {
-                pnl.Visible = true;
+                //pnl.Visible = true;
                 dtgrid.Rows.Clear();
                 dtgrid.Columns.Clear();
-
                 dtgrid.Columns.Add("SL", typeof(int));
                 dtgrid.Columns.Add("Icode", typeof(string));
                 dtgrid.Columns.Add("Item desc", typeof(string));
@@ -629,20 +713,33 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 dtgrid.Columns.Add("uom", typeof(string));
                 dtgrid.Columns.Add("Quantity", typeof(decimal));
                 dtgrid.Columns.Add("Rate", typeof(decimal));
+                dtgrid.Columns.Add("Amount", typeof(decimal));
                 dtgrid.Columns.Add("Origin", typeof(string));
                 dtgrid.Columns.Add("Specification", typeof(string));
                 dtgrid.Columns.Add("Brand", typeof(string));
 
-               
-
                 foreach (DataRow row in det.Rows)
                 {
                     cnt += 1;
-                    dtgrid.Rows.Add(cnt, row["InventoryItemID"].ToString(), row["RequiredItemName"].ToString(), row["UnitID"].ToString(), row["Unit"].ToString(), Convert.ToDecimal(row["RequestedQuantity"]), Convert.ToDecimal(row["PossibleRate"]), row["CountryOfOrigin"].ToString(), row["Specification"].ToString(), row["Brand"].ToString());
+                    dtgrid.Rows.Add(cnt, row["InventoryItemID"].ToString(), row["RequiredItemName"].ToString(), row["UnitID"].ToString(), row["Unit"].ToString(), Convert.ToDecimal(row["RequestedQuantity"]), Convert.ToDecimal(row["PossibleRate"]), Convert.ToDecimal(row["RequestedQuantity"])* Convert.ToDecimal(row["PossibleRate"]), row["CountryOfOrigin"].ToString(), row["Specification"].ToString(), row["Brand"].ToString());
                 }
 
                 gdvItemDetail.DataSource = dtgrid;
                 gdvItemDetail.DataBind();
+
+
+                if (dtgrid.Rows.Count > 0)
+                {
+
+
+                    double  total = dtgrid.AsEnumerable().Sum(row => row.Field<double>("Amount"));
+                    gdvItemDetail.FooterRow.Cells[7].Text = "Total";
+                    gdvItemDetail.FooterRow.Cells[7].Font.Bold = true;
+                    gdvItemDetail.FooterRow.Cells[7].HorizontalAlign = HorizontalAlign.Right;
+                    gdvItemDetail.FooterRow.Cells[8].Text = total.ToString();
+                    gdvItemDetail.FooterRow.Cells[8].Font.Bold = true;
+                    gdvItemDetail.FooterRow.Cells[7].Font.Bold = true;
+                }
 
             }
 
@@ -650,15 +747,16 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
         private void Load_grid( string requisitionNo)
         {
-            tblitemdet.Visible = true;
+            //tblitemdet.Visible = true;
             DataTable det = new DataTable();
             DataTable dtgrid = new DataTable();
 
-            det = DataProcess.GetData(_connectionString, ItemRequisitionController.GetDataRequisitionDet(requisitionNo));
+            _objItemRequisitionDetailController = new ItemRequisitionDetailController();
+            det = _objItemRequisitionDetailController.GetDataRequisitionDet(requisitionNo);
             int cnt = 0;
             if (det.Rows.Count > 0)
             {
-                pnl.Visible = true;
+                trItemDetail.Visible = true;
                 dtgrid.Rows.Clear();
                 dtgrid.Columns.Clear();
 
@@ -667,18 +765,18 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 dtgrid.Columns.Add("Item desc", typeof(string));
                 dtgrid.Columns.Add("UnitID", typeof(string));
                 dtgrid.Columns.Add("uom", typeof(string));
-                dtgrid.Columns.Add("Quantity", typeof(decimal));
-                dtgrid.Columns.Add("Rate", typeof(decimal));
+                dtgrid.Columns.Add("Quantity", typeof(double));
+                dtgrid.Columns.Add("Rate", typeof(double));
+                dtgrid.Columns.Add("Amount", typeof(double));
+
                 dtgrid.Columns.Add("Origin", typeof(string));
                 dtgrid.Columns.Add("Specification", typeof(string));
                 dtgrid.Columns.Add("Brand", typeof(string));
 
-             
-
                 foreach (DataRow row in det.Rows)
                 {
                        cnt += 1;
-                       dtgrid.Rows.Add(cnt, row["InventoryItemID"].ToString(), row["RequiredItemName"].ToString(), row["UnitID"].ToString(), row["Unit"].ToString(), Convert.ToDecimal(row["RequestedQuantity"]), Convert.ToDecimal(row["PossibleRate"]), row["CountryOfOrigin"].ToString().Trim(), row["Specification"].ToString().Trim(), row["Brand"].ToString().Trim());
+                       dtgrid.Rows.Add(cnt, row["InventoryItemID"].ToString(), row["RequiredItemName"].ToString(), row["UnitID"].ToString(), row["Unit"].ToString(), Convert.ToDouble(row["RequestedQuantity"]), Convert.ToDouble(row["PossibleRate"]), Convert.ToDouble(row["RequestedQuantity"]) * Convert.ToDouble(row["PossibleRate"]), row["CountryOfOrigin"].ToString().Trim(), row["Specification"].ToString().Trim(), row["Brand"].ToString().Trim());
                 }
 
                 gdvItemDetail.DataSource = dtgrid;
@@ -686,6 +784,19 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
                 ViewState[ClsStatic.link3sessionUserId] = dtgrid;
 
+
+                if (dtgrid.Rows.Count > 0)
+                {
+
+
+                    double total = dtgrid.AsEnumerable().Sum(row => row.Field<double>("Amount"));
+                    gdvItemDetail.FooterRow.Cells[7].Text = "Total";
+                    gdvItemDetail.FooterRow.Cells[7].Font.Bold = true;
+                    gdvItemDetail.FooterRow.Cells[7].HorizontalAlign = HorizontalAlign.Right;
+                    gdvItemDetail.FooterRow.Cells[8].Text = total.ToString();
+                    gdvItemDetail.FooterRow.Cells[8].Font.Bold = true;
+                    gdvItemDetail.FooterRow.Cells[7].Font.Bold = true;
+                }
 
             }
         }
@@ -695,18 +806,14 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
             DataTable dt = new DataTable();
             dt = (DataTable)ViewState[ClsStatic.link3sessionUserId];
-
-            int itemCode = Convert.ToInt32(txtItem.Text.Split(':')[0]);
-
+             string  itemCode = txtItem.Text.Split(':')[0].ToString();
 
             if (dt != null)
             {
                 if (dt.Rows.Count != 0)
                 {
-
                     foreach (DataRow dr in dt.Rows)
                     {
-
                         if (dr["Icode"].ToString() == itemCode.ToString())
                         {
                             return false;
@@ -721,65 +828,57 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
         protected void btnSearch_Click(object sender, EventArgs e)
         {
           
-            lblMesg.Text = "";
-        
+           
             cpeheader.Collapsed = true;
             cpeheader.ClientState = "true";
 
             if (txtSearch.Text == "")
             {
-                MessageBox("Please enter Requisition No.");
+                clsTopMostMessageBox.Show("Please enter Requisition No.");
                 return;          
             }
 
             int branchID=Convert.ToInt32(Session[ClsStatic.sessionBranchID]); 
-              int companyID=Convert.ToInt32(Session[ClsStatic.sessionCompanyID]); 
-
-
+            int companyID=Convert.ToInt32(Session[ClsStatic.sessionCompanyID]); 
             GetRequisitionInfo(txtSearch.Text.Split(':')[0].Trim(),branchID,companyID);
+
            // GetTotal();
            // tblauthorization.Visible = true;
 
-            if (CheckCompleteStatus() == "")
+            if (CheckCompleteStatus(lblref.Text, companyID, branchID) == "")
             {
                 btnPost.Visible = true;
                 btnReject.Visible = true;
             }
-
             else
             {
                 btnPost.Visible = false;
                 btnReject.Visible = false ;
-
             }
-
         }
 
 
         private void GetRequisitionInfo(string requisitionNo,int branchID,int CompID )
         {
-
             DataTable hdr = new DataTable();
-            trtest.Visible = true;
+           
 
-        
+            _objItemRequisitionHeaderController = new ItemRequisitionHeaderController();
+            _objItemRequisitionDetailController = new ItemRequisitionDetailController();
 
-
-
-            hdr = DataProcess.GetData(_connectionString, ItemRequisitionController.GetDataRequisitionHdr(requisitionNo,branchID,CompID));
+            hdr = _objItemRequisitionHeaderController.GetDataRequisitionHdr(requisitionNo, branchID, CompID);
 
             if (hdr.Rows.Count > 0)
             {
 
                 if (hdr.Rows[0]["CompletionStatus"].ToString() == "1")
                 {
-                    lblstatus.Text = "This Item Requisition has been Submitted";
-                    lblstatus.ForeColor = System.Drawing.Color.Red;
+                    clsTopMostMessageBox.Show("This Item Requisition has been Submitted");
                     ClearAllItemHeader();
                     gdvItemDetail.DataSource = null;
                     gdvItemDetail.DataBind();
                     FileList.Items.Clear();
-                    trtest.Visible = false;
+                  
                     return;
 
                 }
@@ -787,6 +886,9 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 {
                     lblstatus.Text = "You Can Modify this Item Requisition";
                     lblstatus.ForeColor = System.Drawing.Color.Blue;
+                    btnDownLoad.Visible = true;
+                    btnAttachFile.Visible = true;
+                    btnRemoveFile.Visible = true;
 
                 }
 
@@ -804,7 +906,6 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 }
 
 
-
                 if (chkproject.Checked == true)
                 {
 
@@ -820,7 +921,7 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
                 txtRequestedBy.Text = hdr.Rows[0]["RequisitionBy"].ToString();
                 ddlRequestedDept.Text = hdr.Rows[0]["RequestedDepartmentID"].ToString();
-                ddlItemUserType.Text = hdr.Rows[0]["UserType"].ToString();
+                ddlItemUserType.Text = hdr.Rows[0]["UserTypeID"].ToString();
                 txtUserName.Text = hdr.Rows[0]["UserID"].ToString();
                 txtLocAddress.Text = hdr.Rows[0]["LocationAddress"].ToString();
                 txtrequestedDate.Text = Convert.ToDateTime(hdr.Rows[0]["RequisitionDate"]).ToShortDateString();
@@ -828,17 +929,21 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 ddlPriority.Text = hdr.Rows[0]["PriorityID"].ToString();
                 ddlPurpose.Text = hdr.Rows[0]["PurposeID"].ToString();
                 ddlRefType.Text = hdr.Rows[0]["ReferenceTypeID"].ToString();
-                txtRefNo.Text = hdr.Rows[0]["ReferenceNumber"].ToString();
+               
                 txtComments.Text = hdr.Rows[0]["RequisitionComments"].ToString();
+                lblref.Text = hdr.Rows[0]["ItemRequisitionNo"].ToString();
 
                 DataTable filedet = new DataTable();
-                filedet = DataProcess.GetData(_connectionString, ItemRequisitionController.GetDataFileDet(requisitionNo,CompID,branchID));
+
+                _objFileUploadDetailController = new FileUploadDetailController();
+                filedet = _objFileUploadDetailController.GetDataFileDet(requisitionNo, CompID, branchID);
 
                 if (filedet.Rows.Count > 0)
                 {
-                    btnAttachFile.Visible = false;
-                    btnRemoveFile.Visible = false;
-                    pnlBillAttachment.Visible = true;
+                    btnAttachFile.Visible = true;
+                    btnRemoveFile.Visible = true;
+                    btnDownLoad.Visible = true;
+                   // pnlBillAttachment.Visible = true;
 
                     FileList.Items.Clear();
 
@@ -846,22 +951,21 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                     {
                         Files.Add(dr["OriginalFileName"]);
                         FileList.Items.Add(dr["OriginalFileName"].ToString());
-
                     }
-
                 }
 
-                DataTable detis = new DataTable();
-                detis = DataProcess.GetData(_connectionString, ItemRequisitionController.GetDataRequisitionDet(requisitionNo));
+                DataTable dtItemRequisition = new DataTable();
 
-                if (detis.Rows.Count > 0)
+                _objItemRequisitionDetailController = new ItemRequisitionDetailController();
+                dtItemRequisition = _objItemRequisitionDetailController.GetDataRequisitionDet(requisitionNo);
+
+                if (dtItemRequisition.Rows.Count > 0)
                 {
-
-                    tblitemdet.Visible = true;
+                   
                     Load_grid(requisitionNo);
-
                     DataTable dtcount = new DataTable();
-                    dtcount = DataProcess.GetData(_connectionString, ItemRequisitionController.GetDataRequisitionHdr(requisitionNo,branchID,CompID));
+                    _objItemRequisitionHeaderController = new ItemRequisitionHeaderController();
+                    dtcount = _objItemRequisitionHeaderController.GetDataRequisitionHdr(requisitionNo, branchID, CompID);
                     gdvItemDetail.HeaderRow.Cells[0].Visible = true;
 
                     if (dtcount.Rows.Count > 0)
@@ -869,7 +973,6 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
                         if (Convert.ToInt32(dtcount.Rows[0]["CompletionStatus"]) == 1)
                         {
-
                             foreach (GridViewRow gvrow in gdvItemDetail.Rows)
                             {
                                 gvrow.Cells[0].Enabled = false;
@@ -883,20 +986,15 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                                 gvrow.Cells[0].Enabled = true;
 
                             }
-
                         }
 
                     }
-
-
                 }
             }
 
-
             else
-            {
-               
-                MessageBox("No data found");
+            {               
+                clsTopMostMessageBox.Show("No data found");
                 return;
 
             }
@@ -905,26 +1003,19 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
         protected void btnPrintRequisition_Click(object sender, EventArgs e)
         {
-
-            lblMesSearch.Text = "";
          
             lblstatus.Text = "";
-           
+            ShowReport(lblref.Text);
 
-            ShowReport(txtRefNo.Text);
         }
-
 
         private void ShowReport(string requisitionNo)
         {
             if (requisitionNo == "")
             {
-                MessageBox("Please select Requisition");
-
-                return;          
-               
+                clsTopMostMessageBox.Show("Please select Requisition");
+                return;                         
             }
-
 
             ClsReport rpt = new ClsReport();
             ParameterFields myParams = new ParameterFields();
@@ -947,44 +1038,48 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
 
+            _objItemRequisitionHeaderController = new ItemRequisitionHeaderController();
             if (checkEntry() != "")
             {
                 MessageBox(checkEntry());
                 return;           
             }
 
-
-         bool flg=false ;
+            bool flg=false ;
+            string showpop;
 
             int branchID=Convert.ToInt32(Session[ClsStatic.sessionBranchID]);
-                int companyID=Convert.ToInt32(Session[ClsStatic.sessionCompanyID]);
+            int companyID=Convert.ToInt32(Session[ClsStatic.sessionCompanyID]);
 
+            requisitionrefno = _objItemRequisitionHeaderController.GenerateRefNo(_connectionString, Session[ClsStatic.sessionCompanyID].ToString(), Session[ClsStatic.sessionBranchID].ToString(), Convert.ToDateTime(txtrequestedDate.Text), 1);
 
            DataTable dtcount = new DataTable ();
-           dtcount = DataProcess.GetData(_connectionString, ItemRequisitionController.GetDataRequisitionHdr(txtRefNo.Text, branchID,companyID));
 
-
-           if (dtcount.Rows.Count > 0)
+           if (lblref.Text != "")
            {
+               requisitionrefno = lblref.Text.Trim();
 
+               _objItemRequisitionHeaderController = new ItemRequisitionHeaderController ();
+               dtcount = _objItemRequisitionHeaderController.GetDataRequisitionHdr(requisitionrefno, branchID, companyID);
 
-
-               if (Convert.ToInt32(dtcount.Rows[0]["CompletionStatus"]) == 0)
+               if (dtcount.Rows.Count > 0)
                {
 
-                   SaveitemDetail();
-               }
+                   if (Convert.ToInt32(dtcount.Rows[0]["CompletionStatus"]) == 0)
+                   {
+                       SaveitemDetail(requisitionrefno);
+                       goto showpop;
+                   }
 
-               else
-               {
-                   MessageBox("Data Already Submitted");
-               
-               }
-               return;
+                   else
+                   {
+                       clsTopMostMessageBox.Show("Data Already Submitted");
+                       return;
+                   }
 
+               }
            }
-
-
+           
             SqlConnection myConnection = new SqlConnection(_connectionString);
             myConnection.Open();
             SqlCommand cmd = myConnection.CreateCommand();
@@ -994,55 +1089,61 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             cmd.Connection = myConnection;
             cmd.Transaction = myTrans;
 
-             RequisitionHeader hdr = new RequisitionHeader();
-
+             RequisitionHeader _objRequisitionHeader = new RequisitionHeader();
             try
             {
 
-                hdr.CompanyID = Convert.ToInt32(Session[ClsStatic.sessionCompanyID]);
-                hdr.BranchID = Convert.ToInt32(Session[ClsStatic.sessionBranchID]); 
-                hdr.RequisitionBy = txtRequestedBy.Text.Split(':')[0].ToString();
-                hdr.RequisitionDate = Convert.ToDateTime(txtrequestedDate.Text);
-                hdr.ItemRequisitionNo = GenerateRefNo(_connectionString, hdr.CompanyID.ToString(), hdr.BranchID.ToString(), hdr.RequisitionDate);
-                hdr.RequiredDate = Convert.ToDateTime(txtDateNeed.Text);
-                hdr.RequestedDepartment = ddlRequestedDept.SelectedItem.Value;
-                hdr.UserType = Convert.ToInt32(ddlItemUserType.SelectedItem.Value);
-                hdr.UserID = txtUserName.Text.Split(':')[0].ToString();
-                hdr.LocationOfUse = 0;
-                hdr.LocationAddress = txtLocAddress.Text;
-                hdr.PriorityID = Convert.ToInt32(ddlPriority.SelectedItem.Value);
-                hdr.PurposeID = Convert.ToInt32(ddlPurpose.SelectedItem.Value);
-                hdr.ReferenceTypeID = Convert.ToInt32(ddlRefType.SelectedItem.Value);
-                hdr.ReferenceNumber = txtRefNo.Text;
-                hdr.RequisitionComments = txtComments.Text;
-                hdr.CompletionStatus = 0;
-                
-
+                _objRequisitionHeader.CompanyID = Convert.ToInt32(Session[ClsStatic.sessionCompanyID]);
+                _objRequisitionHeader.BranchID = Convert.ToInt32(Session[ClsStatic.sessionBranchID]);
+                _objRequisitionHeader.ItemRequisitionNo = requisitionrefno;
+                _objRequisitionHeader.RequisitionBy = txtRequestedBy.Text.Split(':')[0].ToString();
+                _objRequisitionHeader.RequisitionDate = Convert.ToDateTime(txtrequestedDate.Text);
+                _objRequisitionHeader.RequiredDate = Convert.ToDateTime(txtDateNeed.Text);
+                _objRequisitionHeader.RequestedDepartment = ddlRequestedDept.SelectedItem.Value;
+                _objRequisitionHeader.UserType = Convert.ToInt32(ddlItemUserType.SelectedItem.Value);
+                _objRequisitionHeader.UserID = txtUserName.Text.Split(':')[0].ToString();
+                _objRequisitionHeader.LocationOfUse = 0;
+                _objRequisitionHeader.LocationAddress = txtLocAddress.Text;
+                _objRequisitionHeader.PriorityID = Convert.ToInt32(ddlPriority.SelectedItem.Value);
+                _objRequisitionHeader.PurposeID = Convert.ToInt32(ddlPurpose.SelectedItem.Value);
+                _objRequisitionHeader.ReferenceTypeID = Convert.ToInt32(ddlRefType.SelectedItem.Value);
+                _objRequisitionHeader.ReferenceNumber = requisitionrefno;
+                _objRequisitionHeader.RequisitionComments = txtComments.Text;
+                _objRequisitionHeader.CompletionStatus = 0;
 
                 if (chkproject.Checked == true)
                 {
-                    hdr.ProjectID = ddlProject.SelectedItem.Value;               
+                    _objRequisitionHeader.ProjectID = ddlProject.SelectedItem.Value;               
                 }
 
                 else
                 {
-                    hdr.ProjectID = null;              
+                    _objRequisitionHeader.ProjectID = null;              
                 }
 
-                hdr.ProjectID = ddlProject.SelectedItem.Value;
-                hdr.RequisitionCurrentStatus = 1;
-                hdr.RequisitionComments = txtComments.Text.Trim();
+                _objRequisitionHeader.ProjectID = ddlProject.SelectedItem.Value;
+                _objRequisitionHeader.RequisitionCurrentStatus = 1;
+                _objRequisitionHeader.RequisitionComments = txtComments.Text.Trim();
 
-                hdr.EntryDate = System.DateTime.Now;
-                hdr.EntryUserID = Guid.NewGuid();
-                hdr.ModifiedDate = System.DateTime.Now;
-                hdr.ModifiedUserID = Guid.NewGuid();
+                _objRequisitionHeader.EntryDate = System.DateTime.Now;
+                _objRequisitionHeader.EntryUserID = Guid.NewGuid();
+                _objRequisitionHeader.ModifiedDate = System.DateTime.Now;
+                _objRequisitionHeader.ModifiedUserID = Guid.NewGuid();
 
 
-                if (!DataProcess.ExecuteSqlCommand(cmd, ItemRequisitionController.SqlInsert(hdr)))
+                //if (!DataProcess.ExecuteSqlCommand(cmd, ItemRequisitionHeaderController.SqlInsert(hdr)))
+                //{
+                //    myTrans.Rollback();
+                //    return;
+                //}
+
+
+                _objItemRequisitionHeaderController = new ItemRequisitionHeaderController ();
+
+                if (_objItemRequisitionHeaderController.SqlInsert(cmd, _objRequisitionHeader) == false)
                 {
                     myTrans.Rollback();
-                    return; 
+                    return;               
                 }
 
                 RequisitionDetail dett = new RequisitionDetail();
@@ -1052,23 +1153,26 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 {
                     RequisitionDetail det = new RequisitionDetail();
 
-                    det.ItemRequisitionNo =txtRefNo.Text;
+                    det.ItemRequisitionNo = requisitionrefno;
                     det.InventoryItemID  = Convert.ToInt32(dr.Cells[2].Text.Split(':')[0]);
                     det.RequiredItemName  = dr.Cells[3].Text.Split(':')[0].ToString();
                     det.UnitID = Convert.ToInt32(dr.Cells[4].Text);
-                    det.RequestedQuantity = Convert.ToDecimal(dr.Cells[6].Text);                 
-                    det.PossibleRate = Convert.ToDecimal(dr.Cells[7].Text);
+                    det.RequestedQuantity = Convert.ToDecimal(dr.Cells[6].Text);
+                    det.PossibleRate = Convert.ToDecimal(dr.Cells[7].Text);   
                     det.FinalQuantity = 0;
-                    det.CountryOfOrigin = dr.Cells[8].Text.Replace("&nbsp;", "");
-                    det.Specification = dr.Cells[9].Text.Replace("&nbsp;", "");
-                    det.Brand = dr.Cells[10].Text.Replace("&nbsp;", "");
+                    det.CountryOfOrigin = dr.Cells[9].Text.Replace("&nbsp;", "");
+                    det.Specification = dr.Cells[10].Text.Replace("&nbsp;", "");
+                    det.Brand = dr.Cells[11].Text.Replace("&nbsp;", "");
          
                     ItemList.Add(det);
                 }
 
-                if (ItemRequisitionController.SqlInsertDet(cmd, dett, ItemList))
+
+                _objItemRequisitionDetailController=new ItemRequisitionDetailController ();
+
+                if (_objItemRequisitionDetailController.SqlInsertDet(cmd, dett, ItemList))
                 {
-                    myTrans.Commit();
+                   // myTrans.Commit();
 
                     flg = true;
 
@@ -1084,12 +1188,15 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                                 FileUploadHeader fileHdr = new FileUploadHeader();
 
                                 fileHdr.CompanyID = Convert.ToInt32(Session[ClsStatic.sessionCompanyID]);
-                                fileHdr.BranchID = Convert.ToInt32(Session[ClsStatic.sessionBranchID]); 
-                                fileHdr.ReferenceNo = txtRefNo.Text;
+                                fileHdr.BranchID = Convert.ToInt32(Session[ClsStatic.sessionBranchID]);
+                                fileHdr.ReferenceNo = requisitionrefno;
                                 fileHdr.FileCategoryID = 1;
-                                fileHdr.UploadedScreenName = this.Form.Name;
+                                fileHdr.UploadedScreenName = Path.GetFileName(Request.PhysicalPath);
 
-                                if (!DataProcess.ExecuteSqlCommand(cmd, ItemRequisitionController.SqlInsertFileHdr(fileHdr)))
+                                _objFileUploadHeaderController= new FileUploadHeaderController ();
+
+
+                                if (_objFileUploadHeaderController.SqlInsertFileHdr(cmd, fileHdr) == false)
                                 {
                                     myTrans.Rollback();
                                     return;
@@ -1108,8 +1215,8 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
 
                                     filedet.CompanyID = Convert.ToInt32(Session[ClsStatic.sessionCompanyID]);
-                                    filedet.BranchID = Convert.ToInt32(Session[ClsStatic.sessionBranchID]); 
-                                    filedet.ReferenceNo = txtRefNo.Text;
+                                    filedet.BranchID = Convert.ToInt32(Session[ClsStatic.sessionBranchID]);
+                                    filedet.ReferenceNo = requisitionrefno;
                                     filedet.OriginalFileName = FileList.Items[indexCounter].Text;
                                     filedet.FileID = Guid.NewGuid();
                                     filedet.FileType = null;
@@ -1132,30 +1239,49 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                                     lstfileDet.Add(filedet);
                                 }
 
+                                _objFileUploadDetailController= new FileUploadDetailController ();
 
-                                if (ItemRequisitionController.SqlInsertFileDet(cmd, filedett, lstfileDet))
+                                if (_objFileUploadDetailController.SqlInsertFileDet(cmd, filedett, lstfileDet))
                                 {
 
                                     ClearAllItemHeader();
-                                  
+
                                 }
+
+                                else
+                                {
+
+                                    myTrans.Rollback();
+                                    return;
+                                }
+
+                            }
+
+                            else
+                            {
+
 
                             }
 
 
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
 
-                            lblMesg.Text = ex.Message;
-                          
+                            clsTopMostMessageBox.Show(ex.Message);
 
-                        
                         }
+
+                        myTrans.Commit();
+                        ClearAllItemHeader();
                     }
 
-
-                    ClearAllItemHeader();
+                    else
+                    {
+                        myTrans.Rollback();
+                        return;
+                      
+                    }
                    
                 }
 
@@ -1176,13 +1302,18 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 myConnection.Close();
             }
 
-            lblporef.Text = hdr.ItemRequisitionNo;
+            lblporef.Text = _objRequisitionHeader.ItemRequisitionNo;
+            showpop:
+            if (lblref.Text != "")
+            {
+                lblporef.Text = lblref.Text;
+            }
 
             ModalPopupExtender5.Show();   
 
         }
 
-        private void SaveitemDetail()
+        private void SaveitemDetail( string refno)
         {
 
             SqlConnection myConnection = new SqlConnection(_connectionString);
@@ -1197,11 +1328,12 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             try
             {
 
-                RequisitionDetail detdelete = new RequisitionDetail();
+                RequisitionDetail _objRequisitionDetail = new RequisitionDetail();
 
-                detdelete.ItemRequisitionNo = txtRefNo.Text;
+                _objRequisitionDetail.ItemRequisitionNo = refno;
+                _objItemRequisitionDetailController = new ItemRequisitionDetailController();
 
-                if (!ItemRequisitionController.DeleteRequisitionDetByRequisitionNo(cmd, detdelete))
+                if (!_objItemRequisitionDetailController.DeleteRequisitionDetByRequisitionNo(cmd, _objRequisitionDetail))
                 {
                     myTrans.Rollback();
                     return;
@@ -1214,25 +1346,92 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 {
                     RequisitionDetail det = new RequisitionDetail();
 
-                    det.ItemRequisitionNo = txtRefNo.Text;
+                    det.ItemRequisitionNo = requisitionrefno;
                     det.InventoryItemID = Convert.ToInt32(dr.Cells[2].Text.Split(':')[0]);
                     det.RequiredItemName = dr.Cells[3].Text.Split(':')[0].ToString();
                     det.UnitID = Convert.ToInt32(dr.Cells[4].Text);
                     det.RequestedQuantity = Convert.ToDecimal(dr.Cells[6].Text);
                     det.PossibleRate = Convert.ToDecimal(dr.Cells[7].Text);
                     det.FinalQuantity = 0;         
-                    det.CountryOfOrigin = dr.Cells[8].Text.Replace("&nbsp;", "");
-                    det.Specification = dr.Cells[9].Text.Replace("&nbsp;", "");
-                    det.Brand = dr.Cells[10].Text.Replace("&nbsp;", "");
+                    det.CountryOfOrigin = dr.Cells[9].Text.Replace("&nbsp;", "");
+                    det.Specification = dr.Cells[10].Text.Replace("&nbsp;", "");
+                    det.Brand = dr.Cells[11].Text.Replace("&nbsp;", "");
 
                     ItemList.Add(det);
 
                 }
 
-                if (ItemRequisitionController.SqlInsertDet(cmd, dett, ItemList))
+                _objFileUploadDetailController = new FileUploadDetailController();
+
+                _objFileUploadDetail = new FileUploadDetail();
+
+                _objFileUploadDetail.ReferenceNo = refno;
+
+                if (!_objFileUploadDetailController.DeleteFileUploadDetByRequisitionNo(cmd, _objFileUploadDetail))
                 {
-                    myTrans.Commit();
-                    ClearAllItemHeader();
+                    myTrans.Rollback();
+                    return;
+                }
+
+
+                if (_objItemRequisitionDetailController.SqlInsertDet(cmd, dett, ItemList))
+                {
+
+                    FileUploadDetail filedett = new FileUploadDetail();
+                    List<FileUploadDetail> lstfileDet = new List<FileUploadDetail>();
+
+
+                    string fpath, floc;
+
+                    for (int indexCounter = 0; indexCounter < FileList.Items.Count; indexCounter++)
+                    {
+
+                        FileUploadDetail filedet = new FileUploadDetail();
+
+
+                        filedet.CompanyID = Convert.ToInt32(Session[ClsStatic.sessionCompanyID]);
+                        filedet.BranchID = Convert.ToInt32(Session[ClsStatic.sessionBranchID]);
+                        filedet.ReferenceNo = requisitionrefno;
+                        filedet.OriginalFileName = FileList.Items[indexCounter].Text;
+                        filedet.FileID = Guid.NewGuid();
+                        filedet.FileType = null;
+                        filedet.UserDefinedFileName = FileList.Items[indexCounter].Text;
+                        filedet.UploadedFilename = FileList.Items[indexCounter].Text;
+                        filedet.FileLength = 100;
+                        filedet.UploadBy = "";
+
+
+                        filedet.UploadDateTime = System.DateTime.Now;
+
+
+                        fpath = Server.MapPath("~/Upload") + "\\";
+                        floc = fpath + filedet.FileID;
+
+                        filedet.RelativePath = floc;
+                        filedet.AbsolutePath = floc;
+                        filedet.DownloadLink = floc;
+
+                        lstfileDet.Add(filedet);
+                    }
+
+                    _objFileUploadDetailController = new FileUploadDetailController();
+
+                    if (_objFileUploadDetailController.SqlInsertFileDet(cmd, filedett, lstfileDet))
+                    {
+
+                        myTrans.Commit();
+                        ClearAllItemHeader();
+
+                    }
+
+                    else
+                    {
+
+                        myTrans.Rollback();
+                        return;
+                    }
+
+                  
                   
                 }
 
@@ -1240,6 +1439,7 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 {
 
                     myTrans.Rollback();
+                    return;
 
                 }
 
@@ -1248,7 +1448,10 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             catch (Exception ex)
             {
 
-                string exception = ex.Message;
+                clsTopMostMessageBox.Show(ex.Message);
+                return;
+
+                
 
             }
 
@@ -1258,8 +1461,8 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 myConnection.Close();
             
             }
-
-            Response.Redirect(Request.Url.AbsoluteUri);
+           
+           // Response.Redirect(Request.Url.AbsoluteUri);
 
         }
 
@@ -1350,7 +1553,7 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             if (ddlPriority.Text == "-1") return "Please Select Priority ";
             if (ddlPurpose.Text == "-1") return "Please Select Purpose ";
             if (ddlRefType.Text == "-1") return "Please Select Reference Type ";
-            if (txtRefNo.Text == "") return "Please Enter Reference No.";
+           
 
             if (chkproject.Checked == true)
             {
@@ -1358,24 +1561,20 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                         
             }
 
-            DataTable dt = new DataTable ();
+            DataTable dtemployee = new DataTable ();
 
-           dt= DataProcess.GetData(_connectionString,EmployeeInformationController.GetEmployeeDetailByEmpID(txtRequestedBy.Text.Split(':')[0].ToString(),Convert.ToInt32(Session[ClsStatic.sessionCompanyID]),Convert.ToInt32(Session[ClsStatic.sessionBranchID])));
+            _objEmployeeInformationController = new EmployeeInformationController();
 
-           if (dt.Rows.Count == 0)
+            dtemployee = _objEmployeeInformationController.GetEmployeeDetailByEmpID(txtRequestedBy.Text.Split(':')[0].ToString(), Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID]));
+
+            if (dtemployee.Rows.Count == 0)
            {
-
                return "Please enter valid employee ID";
            
            }
 
-
             return "";
 
-
-
-
-        
         }
 
         protected void chkproject_CheckedChanged(object sender, EventArgs e)
@@ -1390,7 +1589,6 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             {
                 ddlProject.Visible = false ;
                 lblisproject.Visible = false;
-
             
             }
         }
@@ -1406,13 +1604,14 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                 dt = (DataTable)ViewState[ClsStatic.link3sessionUserId];
                 dt.Rows.RemoveAt(indx);
                 ViewState[ClsStatic.link3sessionUserId] = dt;
+
                 set_grid();
                // GetTotal();
 
                 if (dt.Rows.Count == 0)
                 {
-                    trtest.Visible = false;
-                    tblitemdetautho.Visible = false;
+                    //trtest.Visible = false;
+                    //tblitemdetautho.Visible = false;
                 }
             }
         }
@@ -1428,15 +1627,9 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             myParams.Add(param);
         }
 
-        protected void txtQuantity_TextChanged(object sender, EventArgs e)
-        {
-            TotalAmount();
-        }
-
+       
         protected void gdvSearchResult_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblMesg.Text = "";
-            lblMesSearch.Text = "";
             lblStatusforlabel.Visible = true;
             int indx = gdvSearchResult.SelectedIndex;
 
@@ -1448,7 +1641,7 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
               int companyID = Convert.ToInt32(Session[ClsStatic.sessionCompanyID]);
               GetRequisitionInfo(reqNo, branchID, companyID);
 
-              if (CheckCompleteStatus() == "")
+              if (CheckCompleteStatus(reqNo, companyID, branchID) == "")
               {
 
                   btnPost.Visible = true;
@@ -1458,7 +1651,6 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
               else
               {
-
                   btnPost.Visible = false;
                   btnReject.Visible = false;
 
@@ -1492,15 +1684,13 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
         private void ClearAllItemDetail()
         {
-
             txtItem.Text = "";
             txtQuantity.Text = "";
-            txtunit.Text = "";
-            txtRate.Text = "";
+            //ddlunit.SelectedItem.Value  = "-1";      
             txtSpec.Text = "";
             txtBrand.Text = "";
             txtOrigin.Text = "";
-            txtTotal.Text = "";
+           
         
         }
 
@@ -1534,12 +1724,11 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                         FileNameWithoutExten = Path.GetFileNameWithoutExtension(flAttachmentInBill.PostedFile.FileName);
                         strexten = Path.GetExtension(flAttachmentInBill.PostedFile.FileName);
                         savename = FileNameWithoutExten.Replace(FileNameWithoutExten,FileNameWithoutExten) + strexten;
-                        pnlBillAttachment.Visible = true;
+                      //  pnlBillAttachment.Visible = true;
 
                         if (FileList.Items.Contains(new ListItem(savename)))
                         {
-                            MessageBoxShow(this, "File already in the ListBox");
-
+                            clsTopMostMessageBox.Show("File already in the ListBox");
                             return;
                         }
                         else
@@ -1561,23 +1750,21 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                     }
                     else
                     {
-                    
-                        MessageBoxShow(this, "File size cannot be 0");
+            
+                        clsTopMostMessageBox.Show("File size cannot be 0");
 
                         return;
                     }
                 }
                 else
                 {
-
-                    MessageBoxShow(this, "Please select a file to attach");
+                    clsTopMostMessageBox.Show("Please select a file to attach");
                     return;
                 }
 
             }
             catch (Exception)
             {
-               // System.Windows.Forms.MessageBox.Show("An error occured. Please try again.");
                 return;
             }
         }
@@ -1591,8 +1778,7 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
                     if (FileList.SelectedIndex < 0)
                     {
-                        MessageBoxShow(this, "Please select a file to attach");
-
+                        clsTopMostMessageBox.Show("Please select a file to attach");
                         return;
 
                     }
@@ -1609,9 +1795,9 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
                         Files.RemoveAt(FileList.SelectedIndex);
 
                         FileList.Items.Remove(FileList.SelectedItem.Text);
+                        clsTopMostMessageBox.Show("File removed");
 
 
-                        MessageBoxShow(this, "File removed");
 
                         if (FileList.Items.Count == 0)
                         {
@@ -1622,11 +1808,10 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             }
             catch
             {
-                MessageBoxShow(this, "Please try again with valid information");
+                clsTopMostMessageBox.Show("Please try again with valid information");
                               
             }
         }
-
 
         protected void FileList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1638,16 +1823,13 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
         {
             if (chkproject.Checked == false)
             {
-
-                Label35.Visible = false;
+               
                 ddlProject.Visible = false;
-
             }
 
             else
-
             {
-                Label35.Visible = true ;
+               
                 ddlProject.Visible = true;
             
             }
@@ -1664,12 +1846,22 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
         
             if (ddlItemUserType.Text == "-1")
             {              
-              MessageBoxShow(this,"Please select user type");
-                return;
+              clsTopMostMessageBox.Show("Please select user type");
+               return;
             }
-            
-            
-            GetClientAddress(txtUserName.Text.Split(':')[0].ToString());
+
+            try
+            {
+
+                GetClientAddress(txtUserName.Text.Split(':')[0].ToString());
+            }
+
+            catch( Exception ex)
+            {
+
+                clsTopMostMessageBox.Show(ex.Message);
+           
+            }
         }
 
         private void GetClientAddress(string address)
@@ -1677,26 +1869,22 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
             txtLocAddress.Text = "";
 
-           
             DataTable dtaddreess = new DataTable();
-            dtaddreess = DataProcess.GetData(_connectionString, ClientInformationController.GetClientAddress(address, Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])));
+
+            ClientInformationController _objClientInformationController = new ClientInformationController ();
+            dtaddreess =  _objClientInformationController.GetClientAddress(address, Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID]));
 
             if (dtaddreess.Rows.Count > 0)
             {
-
                 foreach (DataRow dr in dtaddreess.Rows)
                 {
-
                     txtLocAddress.Text += dr["ContactAddressType"].ToString() + "-" + dr["DisplayAddress"].ToString() + "." + "\r\n";
-
                 }
             }
+
             else
-
             {
-
                 txtLocAddress.Text = "";
-            
             }
         
         }
@@ -1706,23 +1894,19 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
         {
 
             string userNmae="";
-
             txtUserName.Text = "";
             txtLocAddress.Text = "";
-
-            lblMesg.Text = "";
+           
 
             if (ddlItemUserType.Text == "-1")
             {
                 txtUserName.Text = "";
                 txtLocAddress.Text = "";
-
                 userNmae = "";
             }
             else
             {
-                userNmae = ddlItemUserType.SelectedItem.Value;
-            
+                userNmae = ddlItemUserType.SelectedItem.Value;            
             }
 
             AutoUserName.ContextKey = userNmae.ToString() + ":" + Session[ClsStatic.sessionCompanyID].ToString() + ":" + Session[ClsStatic.sessionBranchID].ToString();
@@ -1731,8 +1915,27 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
         protected void gdvItemDetail_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            e.Row.Cells[4].Visible = false;
-            e.Row.Cells[3].Attributes["width"] = "200px";
+
+                e.Row.Cells[4].Visible = false;
+                e.Row.Cells[3].Attributes["width"] = "200px";
+
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    string refno = e.Row.Cells[2].Text;
+
+                    foreach (TableCell cell in e.Row.Cells)
+                    {
+
+                       if (refno.Substring(2, 1) == "9")
+                        {
+                            cell.BackColor = Color.Bisque;
+                        }
+
+                    }
+                }
+
+
+
         }
 
         protected void btnClearAdSearch_Click(object sender, EventArgs e)
@@ -1746,57 +1949,120 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             txtEmployeeSearch.Text = ""; 
         }
 
-        protected void txtRate_TextChanged(object sender, EventArgs e)
-        {
-            TotalAmount();
-        }
+       
 
         protected void btnPost_Click(object sender, EventArgs e)
-        {
-            bool flg = false;
-            if (txtRefNo.Text == "")
-            {           
-                MessageBoxShow(this,"Enter Item Requisition No");
-                return;
-            }
-
-            DataProcess.GetData(_connectionString, ItemRequisitionController.SqlUpdateCompleteStatus(txtRefNo.Text));
-            flg = true;
-            if (flg)
+        {        
+            if (lblref.Text != "")
             {
 
-                Response.Redirect(Request.Url.AbsoluteUri);
+                try
+                {
+                        string refno = lblref.Text;
+                        DataTable dtItemRequisitionHdr = new DataTable();
 
-            }
+                      _objItemRequisitionHeaderController = new ItemRequisitionHeaderController ();
+                      dtItemRequisitionHdr = _objItemRequisitionHeaderController.GetDataRequisitionHdr(refno, Convert.ToInt32(Session[ClsStatic.sessionBranchID]), Convert.ToInt32(Session[ClsStatic.sessionCompanyID]));
+
+                        if (dtItemRequisitionHdr.Rows.Count > 0)
+                        {
+
+                            try
+                            {
+
+                                _objItemRequisitionHeaderController.SqlUpdateCompleteStatus(refno, Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID]));
+                                Response.Redirect(Request.Url.AbsoluteUri);
+
+                              
+
+                            }
+
+                            catch(Exception ex)
+
+                            {
+
+                                clsTopMostMessageBox.Show(ex.Message);
+                                return;
+                            
+                            }
+
+                            
+                        }
+                  }
+
+                catch (Exception ex)
+                {
+                    clsTopMostMessageBox.Show(ex.Message);
+                
+                }
+            }   
 
         }
 
         protected void txtItem_TextChanged(object sender, EventArgs e)
         {
+            ItemSetup _objItemSetup = new ItemSetup();
 
-            DataTable dtunit= new DataTable ();
-            dtunit = DataProcess.GetData(_connectionString, ItemSetupController.GetItemUnit(txtItem.Text.Split(':')[0].ToString(), Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])));
-            if (dtunit.Rows.Count > 0)
+            GetUnit(txtItem.Text.Split(':')[0].ToString(), Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID]));
+            _objItemSetup.ItemCode = txtItem.Text.Split(':')[0].ToString();
+
+            GetLastPurchaseCost(_objItemSetup);
+        }
+
+        private void GetUnit(string ItemCode ,int companyID, int branchID)
+        {
+            DataTable dtNewItem = new DataTable();
+            ItemSetupController _objItemSetup = new ItemSetupController ();
+            try
             {
-                txtunit.Text = dtunit.Rows[0]["UnitID"].ToString() + ":" + dtunit.Rows[0]["Unit"].ToString();
+                int icode = Convert.ToInt32(ItemCode);
+
+                DataTable dtunit = new DataTable();
+                dtunit = _objItemSetup.GetItemUnit(icode, companyID, branchID);
+
+                if (dtunit.Rows.Count > 0)
+                {
+                    ddlunit.Text = dtunit.Rows[0]["UnitID"].ToString();
+                    ddlunit.Enabled = false;
+                }
+            }
+
+            catch
+
+            {
+
+                ddlunit.Text = "-1";
+                ddlunit.Enabled = true;
+
+            }
+            
+
+        }
+
+
+        private void GetLastPurchaseCost(ItemSetup _objItemSetup)
+        {
+            DataTable dtItem = new DataTable();
+
+            _objItemSetupController = new ItemSetupController();
+            dtItem = _objItemSetupController.GetItemDetails2(_connectionString, _objItemSetup);
+
+            if (dtItem != null)
+            {
+
+                if (dtItem.Rows.Count > 0)
+                {
+                    txtRate.Text = dtItem.Rows[0]["LastPurchaseCost"].ToString();
+                    txtRate.Enabled = false;
+                }
             }
 
             else
             {
-                txtunit.Text = "";
-            
+                txtRate.Text = "";
+                txtRate.Enabled = true;
+
             }
-        }
-
-
-        
-
-
-
-        protected void txtrequestedDate_TextChanged(object sender, EventArgs e)
-        {
-
-             //GenerateRefNo(_connectionString, Session[ClsStatic.sessionCompanyID].ToString(), Session[ClsStatic.sessionBranchID].ToString(), Convert.ToDateTime(txtrequestedDate.Text), 1);
         }
 
         protected void btnok_Click(object sender, EventArgs e)
@@ -1806,17 +2072,26 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
         protected void btnDownLoad_Click(object sender, EventArgs e)
         {
-
             string gg = lblDownloadSelectedFile.Text.Replace("amp;", "");
             String F1Path, F1Name;
-            string abc = Server.MapPath("~/UtilityBillPaperTempAttachment/") + gg.ToString();
+            string abc = Server.MapPath("~/UploadFile/") + gg.ToString();
             F1Path = abc.ToString();
+
+          
+
             F1Name = Path.GetFileName(F1Path);
             GetFile(F1Path, F1Name);       
 
         }
         private void GetFile(String strPath, String strSuggestedName)
         {
+            if (strSuggestedName == "")
+            {
+
+                clsTopMostMessageBox.Show("Please select download file");
+                return;
+            }
+
             String strServerPath;
             System.IO.FileInfo objSourceFileInfo;
             strServerPath = this.Server.MapPath(strSuggestedName);
@@ -1834,14 +2109,15 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
         }
 
-        protected void txtFrmDate_TextChanged(object sender, EventArgs e)
+        protected void Button2_Click(object sender, EventArgs e)
         {
 
         }
 
+  
 
-      
-
+       
+        
 
     }
 }

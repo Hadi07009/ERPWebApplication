@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
 namespace ERPWebApplication.AppClass.DataAccess
 {
-    public class ClientInformationController
+    public class ClientInformationController:DataAccessBase 
     {
 
         public ClientInformationController()
@@ -44,14 +45,41 @@ namespace ERPWebApplication.AppClass.DataAccess
                     + " WHERE  (b.ContactTypeID = " + Convert.ToInt32(personTypeID) + ") and (a.ContactID like '" + keybal + "' or a.FullName like '" + keybal + "') and a.CompanyID=" + companyID + " and a.BranchID=" + branchID + "";
         }
 
-        public static string GetClientAddress(string keybal, int companyID, int branchID)
+
+        //public static string GetClientAddress(string keybal, int companyID, int branchID)
+        //{
+        //    string sqlString = null;
+        //    sqlString = "SELECT      ty.ContactAddressType, ad.DisplayAddress, na.ContactID FROM  dbo.conContactAddressDetails ad"
+        //    + " INNER JOIN dbo.conContactDetailsName na ON ad.ContactAdreessID = na.ContactAdreessID "
+        //    + " INNER JOIN dbo.conSetupContactAddressType ty ON ad.ContactAddressTypeID = ty.ContactAddressTypeID"
+        //    + " WHERE (na.ContactID = '" + keybal + "' and na.CompanyID=" + companyID + " and na.BranchID=" + branchID + ")";
+        //    return sqlString;
+        //}
+
+
+
+        public DataTable GetClientAddress(string keybal, int companyID, int branchID)
         {
-            string sqlString = null;
-            sqlString = "SELECT      ty.ContactAddressType, ad.DisplayAddress, na.ContactID FROM  dbo.conContactAddressDetails ad"
+            
+
+             try
+            {
+                DataTable dtAddress = null;
+                var storedProcedureComandText = "SELECT      ty.ContactAddressType, ad.DisplayAddress, na.ContactID FROM  dbo.conContactAddressDetails ad"
             + " INNER JOIN dbo.conContactDetailsName na ON ad.ContactAdreessID = na.ContactAdreessID "
             + " INNER JOIN dbo.conSetupContactAddressType ty ON ad.ContactAddressTypeID = ty.ContactAddressTypeID"
             + " WHERE (na.ContactID = '" + keybal + "' and na.CompanyID=" + companyID + " and na.BranchID=" + branchID + ")";
-            return sqlString;
+                dtAddress = clsDataManipulation.GetData(this.ConnectionString, storedProcedureComandText);
+                return dtAddress;
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+
         }
+
     }
 }

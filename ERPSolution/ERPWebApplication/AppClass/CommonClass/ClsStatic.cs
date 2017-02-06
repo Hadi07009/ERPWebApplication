@@ -18,13 +18,40 @@ namespace ERPWebApplication.CommonClass
         public static string link3sessionUserId = "*_%^&**link3sessionUserId*_%^&**";
         public static String sessionTempDatatable = "*_%^&**link3TempDatatable*_%^&**";
         public static String sessionReport = "*_%^&**scblsessionsessionReport*_%^&**";
-
-
-
-
         public static string  sessionCompanyID = "*_%^&**scblsessionCompanyID*_%^&**";
-
         public static string sessionBranchID = "*_%^&**scblsessionbranchID*_%^&**";
+
+
+        public static void CheckUserAuthentication(bool isPermissionChk)
+        {
+            CheckUserAuthentication();
+            if (!isPermissionChk) return;
+
+
+            string[] tmp;
+            string curpath = HttpContext.Current.Request.Url.AbsoluteUri.ToUpper();
+
+            tmp = curpath.Split(new string[] { "MODULES" }, StringSplitOptions.None);
+
+            if (current.UserNode.ToString().ToUpper().Contains(tmp[1])) return;
+
+            //foreach (dsLinkoffice.tblNodePermRow dr in current.UserNode.Rows)
+            //{
+            //    tmp = dr.NodeUrl.Split('~');
+            //    if(tmp.Length>1)
+            //        if(curpath.Contains(tmp[1]))
+            //        {
+            //            current.PermissionPrm = dr.NodePerm;
+            //            current.FormParameter = dr.NodeParam;
+            //            return;
+            //        }
+            //}
+
+            HttpContext.Current.Response.Redirect("~/Default.aspx");
+
+
+        }
+
 
 
         public static void CheckUserAuthentication()
@@ -39,7 +66,6 @@ namespace ERPWebApplication.CommonClass
                 HttpContext.Current.Response.Redirect("~/frmLogin.aspx");
 
         }
-
 
         public static void MsgConfirmBox(Button btn, string strMessage)
         {
@@ -136,5 +162,17 @@ namespace ERPWebApplication.CommonClass
             get { return (ReportDocument)HttpContext.Current.Session["@#$$%@)ReportDocument(@^&^&%"]; }
             set { HttpContext.Current.Session["@#$$%@)FormParameter(@^&^&%"] = value; }
         }
+
+        public static String UserNode
+        {
+            get
+            {
+                if (HttpContext.Current.Session["@#$$%@)UserNode(@^&^&%"] == null) { return ""; }
+                return HttpContext.Current.Session["@#$$%@)UserNode(@^&^&%"].ToString();
+            }
+
+            set { HttpContext.Current.Session["@#$$%@)UserNode(@^&^&%"] = value; }
+        }
+
     }
 }

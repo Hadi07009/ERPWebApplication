@@ -70,6 +70,32 @@ namespace ERPWebApplication.CommonClass
             gv.Rows[0].Cells[0].Text = "NO RESULT FOUND!";
             gv.FooterRow.Visible = true;
         }
+        public static DataSet GetData(String queryString, GridView GridViewName)
+        {
+            String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["dbERPSolutionConnection"].ToString();
+            DataSet ds = new DataSet();
+            try
+            {
+                SqlConnection connection = new SqlConnection(connectionString);
+                SqlDataAdapter adapter = new SqlDataAdapter(queryString, connection);
+                adapter.Fill(ds);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    GridViewName.DataSource = ds;
+                    GridViewName.DataBind();
+                }
+                else if (ds.Tables[0].Rows.Count == 0)
+                {
+                    DataTable dt = ds.Tables[0];
+                    ShowNoResultFound(dt, GridViewName);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return ds;
+        }
 
     }
 }

@@ -70,6 +70,7 @@
                                 <asp:MenuItem NavigateUrl="~/Default.aspx" Text="HRMS">
                                     <asp:MenuItem NavigateUrl="~/Default.aspx" Text="MasterPage">
                                         <asp:MenuItem NavigateUrl="~/ModuleName/HRMS/MasterPage/CompanySetupForm.aspx" Text="Company Setup" Value="11"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="~/ModuleName/HRMS/MasterPage/EmployeeSetupForm.aspx" Text="Employee Setup" Value="12"></asp:MenuItem>
                                     </asp:MenuItem>
                                 </asp:MenuItem>
 

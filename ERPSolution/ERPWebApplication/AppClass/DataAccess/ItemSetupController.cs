@@ -1,4 +1,5 @@
 ﻿using ERPWebApplication.AppClass.Model;
+using ERPWebApplication.CommonClass;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,7 +8,7 @@ using System.Web;
 
 namespace ERPWebApplication.AppClass.DataAccess
 {
-    public class ItemSetupController
+    public class ItemSetupController:DataAccessBase 
     {
         internal void Save(string connectionString, ItemSetup objItemSetup)
         {
@@ -106,20 +107,61 @@ namespace ERPWebApplication.AppClass.DataAccess
                 throw msgException;
             }
         }
+
+
+
+        internal DataTable GetItemDetails2(string connectionString, ItemSetup _objItemSetup)
+        {
+            DataTable dtItemDetails = null;
+            try
+            {
+
+                var storedProcedureComandTest = "  SELECT * FROM matMaterialSetup where  ItemID =" + _objItemSetup.ItemCode + "";
+                dtItemDetails = clsDataManipulation.GetData(connectionString, storedProcedureComandTest);
+                return dtItemDetails;
+
+            }
+            catch
+            {
+                return dtItemDetails;
+           
+            }
+        }
+
+
+
+
+
         public static string GetItemDetail(int companyID, int branchID)
         {
             return "SELECT * FROM  matMaterialSetup where  CompanyID=" + companyID + " and branchID=" + branchID + "";
         }
         public static string GetItemDetailSearch(string keybal, int companyID, int branchID)
         {
-            return "SELECT  ItemCode, ModelNo FROM matMaterialSetup where (ItemCode Like '" + keybal + "') OR (ModelNo Like '" + keybal + "') and CompanyID=" + companyID + " and BranchID=" + branchID + " ";
+            return "SELECT  ItemID,ItemCode, ModelNo FROM matMaterialSetup where (ItemCode Like '" + keybal + "') OR (ModelNo Like '" + keybal + "') and CompanyID=" + companyID + " and BranchID=" + branchID + " ";
         }
 
-        public static string GetItemUnit(string itemId, int companyID, int branchID)
-        {
-            return "select a.ItemID,a.ItemCode,b.UnitID,b.Unit,b.DataUsed from matMaterialSetup a "
 
-               + " inner join matUnitSetup b on a.UnitID=b.UnitID where (a.ItemCode= " + Convert.ToInt32(itemId) + " and b.CompanyID=" + companyID + " and b.branchID=" + branchID + ")";
+        public DataTable  GetItemUnit(int itemId, int companyID, int branchID)
+        {
+
+            try
+            {
+                DataTable dtUnit = null;
+
+               var storedProcedureComandText= "select a.ItemID,a.ItemCode,b.UnitID,b.Unit,b.DataUsed from matMaterialSetup a "
+               + " inner join matUnitSetup b on a.UnitID=b.UnitID where (b.DataUsed='A' and a.ItemID= " + Convert.ToInt32(itemId) + " and b.CompanyID=" + companyID + " and b.branchID=" + branchID + ")";
+
+               dtUnit = clsDataManipulation.GetData(this.ConnectionString, storedProcedureComandText);
+               return dtUnit;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            
+            }
         }
 
         public string GetCategoryAndItem()
@@ -138,6 +180,32 @@ namespace ERPWebApplication.AppClass.DataAccess
                             " inner join matCategoryList  B on A.ItemCategoryID=B.ItemCategoryID  where (ModelNo Like '" + keyValue + "') " +
                             " ORDER BY CategoryName";
             return sqlString;
+        }
+
+
+
+        public string GenerateTemporaryItemRefNo(string connectionString, string companyID, string branchID, DateTime requisitionDate, int refNoFor,int sl)
+        {
+
+            try
+            {
+
+                DateTime dt = Convert.ToDateTime(requisitionDate);
+                string refno;
+                string RefFormate;
+
+                RefFormate = companyID + branchID + "9" + string.Format("{0:00}", requisitionDate.Month) + string.Format("{0:00}", requisitionDate.Year.ToString().Substring(2, 2));
+                refno = RefFormate + string.Format("{0:00}", sl);
+                return refno;
+            }
+
+            catch (Exception ex)
+            {
+
+                throw ex;
+            
+            }
+
         }
     }
 }
