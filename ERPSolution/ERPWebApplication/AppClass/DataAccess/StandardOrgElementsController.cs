@@ -1,9 +1,11 @@
-﻿using ERPWebApplication.CommonClass;
+﻿using ERPWebApplication.AppClass.CommonClass;
+using ERPWebApplication.CommonClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Windows.Forms;
+using System.Web.UI.WebControls;
+
 
 namespace ERPWebApplication.AppClass.DataAccess
 {
@@ -13,9 +15,7 @@ namespace ERPWebApplication.AppClass.DataAccess
         {
             try
             {
-                //ClsL.LoadListBox(this.ConnectionString, this.SqlGetCompany(), ddlCompany, "CompanyName", "CompanyID");
-                
-
+                ClsListBoxController.LoadListBox(this.ConnectionString, this.SqlGetStandardOrgElements(), listBoxStandardOrgElements, "OrgElementName", "OrgElementID");
             }
             catch (Exception msgException)
             {

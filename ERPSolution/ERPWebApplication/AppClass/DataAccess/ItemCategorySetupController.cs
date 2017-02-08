@@ -1,4 +1,5 @@
-﻿using ERPWebApplication.AppClass.Model;
+﻿using ERPWebApplication.AppClass.CommonClass;
+using ERPWebApplication.AppClass.Model;
 using ERPWebApplication.CommonClass;
 using System;
 using System.Collections.Generic;

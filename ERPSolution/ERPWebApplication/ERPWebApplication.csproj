@@ -1077,6 +1077,7 @@
     <Compile Include="AppClass\CommonClass\ClsDropDownListController.cs" />
     <Compile Include="AppClass\CommonClass\ClsGridViewLoad.cs" />
     <Compile Include="AppClass\CommonClass\clsImageHandler.cs" />
+    <Compile Include="AppClass\CommonClass\ClsListBoxController.cs" />
     <Compile Include="AppClass\CommonClass\ClsReport.cs" />
     <Compile Include="AppClass\CommonClass\ClsStatic.cs" />
     <Compile Include="AppClass\CommonClass\DataProcess.cs" />

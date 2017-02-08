@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 
-namespace ERPWebApplication.CommonClass
+namespace ERPWebApplication.AppClass.CommonClass
 {
     public class ClsDropDownListController
     {

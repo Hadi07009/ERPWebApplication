@@ -146,7 +146,7 @@ namespace ERPWebApplication.AppClass.Model
             set {
                 if (value == -1)
                 {
-                    throw new Exception("please select item type ID");
+                    throw new Exception("please select listItem type ID");
                     
                 }
                 _itemTypeID = value; }
@@ -166,7 +166,7 @@ namespace ERPWebApplication.AppClass.Model
             set {
                 if (value == -1)
                 {
-                    throw new Exception("please select item usage ID");
+                    throw new Exception("please select listItem usage ID");
                     
                 }
                 _itemUsageID = value; }
@@ -180,7 +180,7 @@ namespace ERPWebApplication.AppClass.Model
             {
                 if (value == null)
                 {
-                    throw new Exception(" Please type item name");
+                    throw new Exception(" Please type listItem name");
 
                 } _modelNo = value;
             }
