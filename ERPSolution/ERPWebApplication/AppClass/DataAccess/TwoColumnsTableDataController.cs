@@ -113,6 +113,37 @@ namespace ERPWebApplication.AppClass.DataAccess
             }
 
         }
+        private void LoadRecordDynamicDDL(DropDownList givenDDLID, TwoColumnsTableData objTwoColumnsTableData)
+        {
+            try
+            {
+                string sqlString = @"SELECT [FieldOfID]
+                 ,[FieldOfName]
+                 FROM [TwoColumnsTable] 
+                 WHERE DataUsed = 'A' AND [TableID] = " + objTwoColumnsTableData.TableID + "";
+
+                if (objTwoColumnsTableData.CompanyID != 0)
+                {
+                    sqlString += " AND [CompanyID] = " + objTwoColumnsTableData.CompanyID + "";
+
+                }
+
+                if (objTwoColumnsTableData.BranchID != 0)
+                {
+                    sqlString += " AND[BranchID] = " + objTwoColumnsTableData.BranchID + "";
+                }
+
+                sqlString += " ORDER BY [FieldOfName]";
+                ClsDropDownListController.LoadDropDownList(this.ConnectionString, sqlString, givenDDLID, "FieldOfName", "FieldOfID");
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+
+        }
 
         internal void LoadDesignationDDL(DropDownList givenDDL, TwoColumnsTableData objTwoColumnsTableData)
         {
@@ -120,6 +151,20 @@ namespace ERPWebApplication.AppClass.DataAccess
             {
                 objTwoColumnsTableData.TableID = 22;
                 this.LoadRecordDDL(givenDDL, objTwoColumnsTableData);
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+        internal void LoadCategory(TwoColumnsTableData objTwoColumnsTableData, DropDownList ddlCategory)
+        {
+            try
+            {
+                this.LoadRecordDynamicDDL(ddlCategory, objTwoColumnsTableData);
 
             }
             catch (Exception msgException)

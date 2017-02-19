@@ -67,6 +67,28 @@ public class clsDataManipulation
         }
 
     }
+    public int GetSingleValue(string connectionString, string sqlString)
+    {
+        try
+        {
+            int seqNo = 0;
+            var storedProcedureComandText = @"" + sqlString + " ";
+            var dtSeq = clsDataManipulation.GetData(connectionString, storedProcedureComandText);
+            foreach (DataRow item in dtSeq.Rows)
+            {
+                seqNo = Convert.ToInt32(item.ItemArray[0].ToString());
+
+            }
+            return seqNo;
+
+
+        }
+        catch (Exception msgException)
+        {
+
+            throw msgException;
+        }
+    }
 
     public static bool DuplicateDataCheckfunction(string ConnectionString, string SQLStatementpar)
     {
@@ -375,7 +397,7 @@ public class clsDataManipulation
         catch (Exception msgException)
         {
             throw msgException;
-            
+
         }
 
         return retValue;

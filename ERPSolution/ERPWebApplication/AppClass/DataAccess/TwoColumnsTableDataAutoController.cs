@@ -187,5 +187,20 @@ namespace ERPWebApplication.AppClass.DataAccess
                 throw msgException;
             }
         }
+
+        internal void GetDivision(DropDownList ddlDivision)
+        {
+            try
+            {
+                string sqlString = "DivisionSetup";
+                this.GetTwoColumnsTableDataAuto(ddlDivision, sqlString);
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
     }
 }

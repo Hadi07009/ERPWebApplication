@@ -92,8 +92,29 @@ namespace ERPWebApplication.AppClass.CommonClass
                 {
                     dtTargetData = DistrictSetup();
                 }
+                else if (TableID == 24)
+                {
+                    dtTargetData = DivisionSetup();
+                }
 
                 return dtTargetData;
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+        private DataTable DivisionSetup()
+        {
+            try
+            {
+                DataRow dr;
+                dr = dtAutoData.NewRow(); dr[0] = "100241"; dr[1] = "DHAKA"; dtAutoData.Rows.Add(dr);
+                dr = dtAutoData.NewRow(); dr[0] = "100242"; dr[1] = "RAJSHAHI"; dtAutoData.Rows.Add(dr);
+                return dtAutoData;
 
             }
             catch (Exception msgException)
