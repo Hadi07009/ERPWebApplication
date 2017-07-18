@@ -49,7 +49,6 @@
                                     <td>:</td>
                                     <td>
                                         <asp:DropDownList ID="ddlRelatedUserRoleID" runat="server">
-                                            <asp:ListItem Value="1">HR</asp:ListItem>
                                         </asp:DropDownList>
                                     </td>
                                 </tr>
@@ -70,7 +69,7 @@
                         </div>
                     </td>
                     <td colspan="2" style="text-align: left; float: left">
-                        <div style="position: fixed; width: 425px; background-color: #00817F; height: 50px">
+                        <div style="position: fixed; width: 425px; background-color: white; height: 50px">
                             <table style="width: 55%;">
                                 <tr>
                                     <td>

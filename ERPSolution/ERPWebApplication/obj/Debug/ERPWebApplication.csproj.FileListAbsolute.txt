@@ -103,6 +103,55 @@ C:\Users\Admin\Desktop\20-November-2016\ERPSolution\ERPWebApplication\bin\DotNet
 C:\Users\Admin\Desktop\20-November-2016\ERPSolution\ERPWebApplication\obj\Debug\ERPWebApplication.csprojResolveAssemblyReference.cache
 C:\Users\Admin\Desktop\20-November-2016\ERPSolution\ERPWebApplication\obj\Debug\ERPWebApplication.dll
 C:\Users\Admin\Desktop\20-November-2016\ERPSolution\ERPWebApplication\obj\Debug\ERPWebApplication.pdb
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\ERPWebApplication.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\ERPWebApplication.pdb
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\AjaxControlToolkit.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\AjaxControlToolkit.HtmlEditor.Sanitizer.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\Antlr3.Runtime.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\AspNet.ScriptManager.jQuery.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\AspNet.ScriptManager.jQuery.UI.Combined.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\ControlLibrary.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\CrystalDecisions.CrystalReports.Design.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\CrystalDecisions.CrystalReports.Engine.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\CrystalDecisions.Data.AdoDotNetInterop.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\CrystalDecisions.ReportSource.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\CrystalDecisions.Shared.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\CrystalDecisions.VSDesigner.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\CrystalDecisions.Web.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\CrystalDecisions.Windows.Forms.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.AspNet.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.Core.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OAuth.Consumer.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OAuth.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OpenId.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\EntityFramework.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\FlashControlV71.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\HtmlAgilityPack.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\Microsoft.AspNet.Membership.OpenAuth.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\Microsoft.ScriptManager.MSAjax.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\Microsoft.ScriptManager.WebForms.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\Microsoft.Web.Infrastructure.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\SAPBusinessObjects.WPF.Viewer.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\SAPBusinessObjects.WPF.ViewerShared.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\System.Web.Optimization.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\System.Web.Providers.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\WebGrease.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\ControlLibrary.pdb
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\HtmlAgilityPack.pdb
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\HtmlAgilityPack.xml
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\EntityFramework.xml
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.Core.xml
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OAuth.xml
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OAuth.Consumer.xml
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OpenId.xml
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+E:\Project Archaive\ERPSolution\ERPWebApplication\bin\DotNetOpenAuth.AspNet.xml
+E:\Project Archaive\ERPSolution\ERPWebApplication\obj\Debug\ERPWebApplication.csprojResolveAssemblyReference.cache
+E:\Project Archaive\ERPSolution\ERPWebApplication\obj\Debug\ERPWebApplication.dll
+E:\Project Archaive\ERPSolution\ERPWebApplication\obj\Debug\ERPWebApplication.pdb
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\ERPWebApplication.dll
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\ERPWebApplication.pdb
 D:\ProjectArchives\Project\ERPSolution And Version Control\ERPSolution\ERPWebApplication\bin\AjaxControlToolkit.dll

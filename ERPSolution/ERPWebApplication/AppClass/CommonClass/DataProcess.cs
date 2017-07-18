@@ -218,7 +218,7 @@ namespace ERPWebApplication.CommonClass
 
                 string selectQuery = "select count(" + colName + ")+1  as " + colName + " from " + tableName + " " + "WHERE CompanyID = " + companyID + " AND BranchID = " + branchID + " and RequisitionDate=convert(datetime,'" + whereClause + "',103)";
 
-                // string selectQuery = "select isnull( max(" + colName + "),0)+1  as " + colName + " from " + tableName + " " + "WHERE CompanyID = " + companyID + " AND BranchID = " + branchID + " ";
+                // string selectQuery = "select isnull( max(" + colName + "),0)+1  as " + colName + " from " + tableName + " " + "WHERE CompanyID = " + lastPositionNo + " AND BranchID = " + branchID + " ";
 
                 sqlConn = new SqlConnection(connectionString);
                 sqlConn.Open();
@@ -299,9 +299,9 @@ namespace ERPWebApplication.CommonClass
 
                 //string selectQuery = selectQuery;
 
-                //string selectQuery = "select count(" + colName + ")+1  as " + colName + " from " + tableName + " " + "WHERE CompanyID = " + companyID + " AND BranchID = " + branchID + " and RequisitionDate=convert(datetime,'" + whereClause + "',103)";
+                //string selectQuery = "select count(" + colName + ")+1  as " + colName + " from " + tableName + " " + "WHERE CompanyID = " + lastPositionNo + " AND BranchID = " + branchID + " and RequisitionDate=convert(datetime,'" + whereClause + "',103)";
 
-                // string selectQuery = "select isnull( max(" + colName + "),0)+1  as " + colName + " from " + tableName + " " + "WHERE CompanyID = " + companyID + " AND BranchID = " + branchID + " ";
+                // string selectQuery = "select isnull( max(" + colName + "),0)+1  as " + colName + " from " + tableName + " " + "WHERE CompanyID = " + lastPositionNo + " AND BranchID = " + branchID + " ";
 
                 sqlConn = new SqlConnection(connectionString);
                 sqlConn.Open();

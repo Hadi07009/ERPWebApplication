@@ -163,7 +163,7 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
         private void LoadDataInDropdown()
         {
 
-           //ClsDropDownListController.LoadListBox(_connectionString, ProritySetupController.GetDataPriority(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlPriority, "PriorityName", "PriorityID");
+           //ClsDropDownListController.LoadGridView(_connectionString, ProritySetupController.GetDataPriority(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlPriority, "PriorityName", "PriorityID");
             LoadPriorityDropDown(ddlPrioritySearch);
 
 
@@ -171,13 +171,13 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
             ClsDropDownListController.LoadDropDownList(_connectionString, ProjectSetupController.GetDataProjectSetup(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlProject, "ProjectName", "ProjectID");
             ClsDropDownListController.LoadDropDownList(_connectionString, PersonTypeSetupController.GetDataPersonTypeSetup(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlItemUserType, "PersonType", "PersonTypeID");
             ClsDropDownListController.LoadDropDownList(_connectionString, ActivitySetupController.GetDataActivitySetup(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlRefType, "ActivityName", "KnownByID");
-            ClsDropDownListController.LoadDropDownList(_connectionString, DepartmentSetupController.GetDataDepartmentSetup(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlRequestedDept, "DepartmentName", "DepartmentID");
+            //ClsDropDownListController.LoadDropDownList(_connectionString, DepartmentSetupController.GetDataDepartmentSetup(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlRequestedDept, "DepartmentName", "DepartmentID");
 
-            // For searching ddl
+            // For searching ddlSelected
 
             ClsDropDownListController.LoadDropDownList(_connectionString, PurposeSetupController.GetDataPurposeSetup(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlPurposeSearch, "ItemUsage", "ItemUsageID");
             ClsDropDownListController.LoadDropDownList(_connectionString, ProritySetupController.GetDataPriority(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddlPriority, "PriorityName", "PriorityID");
-            ClsDropDownListController.LoadDropDownList(_connectionString, DepartmentSetupController.GetDataDepartmentSetup(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddldepartment, "DepartmentName", "DepartmentID");
+            //ClsDropDownListController.LoadDropDownList(_connectionString, DepartmentSetupController.GetDataDepartmentSetup(Convert.ToInt32(Session[ClsStatic.sessionCompanyID]), Convert.ToInt32(Session[ClsStatic.sessionBranchID])), ddldepartment, "DepartmentName", "DepartmentID");
 
             _objUnitSetupController = new UnitSetupController ();
             _objCompanySetup = new CompanySetup();
@@ -1744,7 +1744,7 @@ namespace ERPWebApplication.ModuleName.Inventory.TransactionPage
 
                             }
                             flAttachmentInBill.SaveAs(Server.MapPath("~/UploadFile/") + savename);
-                           // MessageBoxShow(this, "Add another file and click attach to attach in the list");
+                           // MessageBoxShow(this, "Add another file and click attach to attach in the listNode");
                         }
 
                     }

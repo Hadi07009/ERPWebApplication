@@ -476,17 +476,26 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
 
         protected void ddlElement_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _objOrganizationalChartSetup = new OrganizationalChartSetup();
-            _objOrganizationalChartSetup.EntityTypeID = Convert.ToInt32(ddlElement.SelectedValue);
-            if (_objOrganizationalChartSetup.EntityTypeID == -1)
+            try
             {
-                ddlCategory.Items.Clear();
+                _objOrganizationalChartSetup = new OrganizationalChartSetup();
+                _objOrganizationalChartSetup.EntityTypeID = Convert.ToInt32(ddlElement.SelectedValue);
+                if (_objOrganizationalChartSetup.EntityTypeID == -1)
+                {
+                    ddlCategory.Items.Clear();
+
+                }
+                else
+                {
+                    _objOrganizationalChartSetupController = new OrganizationalChartSetupController();
+                    _objOrganizationalChartSetupController.LoadCategory(_objOrganizationalChartSetup, ddlCategory);
+                }
 
             }
-            else
+            catch (Exception msgExecption)
             {
-                _objOrganizationalChartSetupController = new OrganizationalChartSetupController();
-                _objOrganizationalChartSetupController.LoadCategory(_objOrganizationalChartSetup, ddlCategory);
+
+                clsTopMostMessageBox.Show(msgExecption.Message);
             }
         }
 
@@ -663,6 +672,9 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
         {
             try
             {
+                this.PopulateOrganizationalChart();
+                this.ClearChartControl();
+                TreeViewCompanyChart.ExpandAll();
                 btnUpdate.Visible = false;
                 btnClearUpdate.Visible = false;
                 btnSaveChart.Visible = true;

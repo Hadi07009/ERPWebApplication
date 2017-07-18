@@ -26,7 +26,7 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
                 if (!Page.IsPostBack)
                 {
                     PanelFormDetails.Visible = false;
-                    Session["companyID"] = 1;
+                    Session["lastPositionNo"] = 1;
                     Session["branchID"] = 1;
                     lblParentText.Visible = false;
                     lblParentValue.Visible = false;
@@ -122,7 +122,7 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
                 _objNodeList.ActivityID = Convert.ToInt32(ddlType.SelectedValue);
                 _objNodeList.ActivityName = txtTitle.Text == string.Empty ? null : txtTitle.Text;
                 _objNodeList.BranchID = Convert.ToInt32(Session["branchID"].ToString());
-                _objNodeList.CompanyID = Convert.ToInt32(Session["companyID"].ToString());
+                _objNodeList.CompanyID = Convert.ToInt32(Session["lastPositionNo"].ToString());
                 _objNodeList.FormDescription = txtDescription.Text == string.Empty ? null : txtDescription.Text;
                 _objNodeList.FormName = ddlFormURL.SelectedValue == "-1" ? null : ddlFormURL.SelectedValue;
                 _objNodeList.ShowPosition = Convert.ToInt32( ddlShowPosition.SelectedValue);

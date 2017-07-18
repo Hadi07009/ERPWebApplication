@@ -28,7 +28,7 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
             {
                 if (!Page.IsPostBack)
                 {
-                    Session["companyID"] = 1;
+                    Session["lastPositionNo"] = 1;
                     Session["branchID"] = 1;
 
                     PanelDetails.Visible = false;
@@ -265,8 +265,8 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
             {
                 _objTwoColumnsTableDataController = new TwoColumnsTableDataController();
                 _objTwoColumnsTableData = new TwoColumnsTableData();
-                _objTwoColumnsTableData.CompanyID = Convert.ToInt32(Session["companyID"].ToString());
-                _objTwoColumnsTableData.BranchID = Convert.ToInt32(Session["branchID"].ToString());
+                _objTwoColumnsTableData.CompanyID = Convert.ToInt32(Session["lastPositionNo"].ToString());
+                //objTwoColumnsTableData.BranchID = Convert.ToInt32(Session["branchID"].ToString());
                 _objTwoColumnsTableDataController.LoadDesignationDDL(givenDDL, _objTwoColumnsTableData);
 
             }

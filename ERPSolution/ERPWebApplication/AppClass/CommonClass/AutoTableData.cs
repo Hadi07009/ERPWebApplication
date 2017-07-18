@@ -96,6 +96,10 @@ namespace ERPWebApplication.AppClass.CommonClass
                 {
                     dtTargetData = DivisionSetup();
                 }
+                else if (TableID == 36)
+                {
+                    dtTargetData = EmployeeTitle();
+                }
 
                 return dtTargetData;
 
@@ -103,6 +107,26 @@ namespace ERPWebApplication.AppClass.CommonClass
             catch (Exception msgException)
             {
 
+                throw msgException;
+            }
+        }
+
+        private DataTable EmployeeTitle()
+        {
+            try
+            {
+                DataRow dr;
+                dr = dtAutoData.NewRow(); dr[0] = "100361"; dr[1] = "Mr."; dtAutoData.Rows.Add(dr);
+                dr = dtAutoData.NewRow(); dr[0] = "100362"; dr[1] = "Ms."; dtAutoData.Rows.Add(dr);
+                dr = dtAutoData.NewRow(); dr[0] = "100363"; dr[1] = "Mrs."; dtAutoData.Rows.Add(dr);
+                dr = dtAutoData.NewRow(); dr[0] = "100364"; dr[1] = "Dr."; dtAutoData.Rows.Add(dr);
+                dr = dtAutoData.NewRow(); dr[0] = "100365"; dr[1] = "Prof."; dtAutoData.Rows.Add(dr);
+                return dtAutoData;
+
+            }
+            catch (Exception msgException)
+            {
+                
                 throw msgException;
             }
         }

@@ -31,6 +31,60 @@ namespace ERPWebApplication {
         protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
+        /// lblWelcomeMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblWelcomeMessage;
+        
+        /// <summary>
+        /// lblLoginEmployeeName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLoginEmployeeName;
+        
+        /// <summary>
+        /// lblAt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAt;
+        
+        /// <summary>
+        /// lblPageTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPageTitle;
+        
+        /// <summary>
+        /// lnkbtnChangeCompany control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkbtnChangeCompany;
+        
+        /// <summary>
+        /// lnkbtnLoginoff control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkbtnLoginoff;
+        
+        /// <summary>
         /// NavigationMenu control.
         /// </summary>
         /// <remarks>

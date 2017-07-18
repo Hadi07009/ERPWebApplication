@@ -1,60 +1,154 @@
-﻿
-         
-  .ajax__myTabm .ajax__tab_header {  
-    font-family:Arial ;  
-    font-size: 13px; 
-     color: #0072B0;
-    border-bottom: solid 1px #D3D3D3;  
- 
-}  
-  
-.ajax__myTabm .ajax__tab_outer {  
-    padding-right: 4px;  
-    height: 30px;  
- 
-    margin-right: 0px;  
-    border-right: solid 1px #D3D3D3;  
-    border-top: solid 0px #D3D3D3;  
-   
-}  
-  
-.ajax__myTabm .ajax__tab_inner {  
-    padding-left: 3px;  
-   
-}  
-  
-.ajax__myTabm .ajax__tab_tab {  
-    height: 20px;  
-    padding: 4px;  
-    margin: 0;  
-}  
-.ajax__myTabm .ajax__tab_active .ajax__tab_outer {  
-   
-   border-right: solid 1px #D3D3D3;  
-  
-   color: #EFAA00;
-  
-      border-top :solid 1px #D3D3D3;
-      background-color:#E7F4FC
-  
-}  
-.ajax__myTabm .ajax__tab_active .ajax__tab_tab  
+﻿/*.tab 
 {
-      
-     border-top :5px #333333; 
-}  
-  
-.ajax__myTabm .ajax__tab_body {  
+    border: 0px solid #DDD;
+    padding-left:3px;
+    
+}
+
+.tab .ajax__tab_body
+
+{
+    font-family:Arial ;  
+    font-size: 12pt;
+    border: 0px solid #999999; 
+    border-bottom: solid 1px #D3D3D3;
+    
+     
+ }
+
+.tab .ajax__tab_header
+
+{
+    cursor:pointer;
+    font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+    font-size: 11pt; 
+    font-weight:bold;
+    color:gray;
+    }
+
+.tab .ajax__tab_header .ajax__tab_active .ajax__tab_outer
+
+{
+    cursor:pointer;
+    height: 15px;
+    font-family:Arial;
+    font-size:12pt;
+}
+
+.tab .ajax__tab_header .ajax__tab_active .ajax__tab_tab
+
+{
+    cursor:default;
+    height:15px;
+    color:Black;
+    font-size: 12pt;
+}
+
+.tab .ajax__tab_header .ajax__tab_active .ajax__tab_inner
+
+{
+    cursor:default ;
+    border-bottom:2px solid #bbb;
+    border-top:2px solid #f8a04b ;
+}
+
+.tab .ajax__tab_tab 
+{
+    cursor: pointer;
+    color:gray;
+    height:15px ;
+    font-size:12pt;
+    border-top:0px solid #f8a04b;
+    
+}*/
+
+.tab 
+{
+    border: 0px solid #DDD;
+    padding-left:3px;
+}
+
+.tab .ajax__tab_body
+
+{
     font-family:Arial ;  
     font-size: 10pt;  
     
     border: 0px solid #999999;  
-    border-top: 0px;  
-    padding: 8px;  
-    background-color: #ffffff;  
-     border-bottom: solid 1px #D3D3D3;
-     border-right :solid 1px #D3D3D3;
+    border-top: solid 1px #D3D3D3;  
+    padding:6px;  
+    border-bottom: solid 1px #D3D3D3;
+    margin-top:19px;
+    
+    
+ }
 
- 
+.tab .ajax__tab_header
 
-}  
+{
+    cursor:pointer;
+    font-family:Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+    font-size: 12pt; 
+    font-weight:bold;
+    color:#333;
+    display: inline-block;
+    }
+
+.tab .ajax__tab_header .ajax__tab_active .ajax__tab_outer
+
+{
+    cursor:pointer;
+    height: auto;
+    
+}
+
+.tab .ajax__tab_header .ajax__tab_active .ajax__tab_tab
+
+{
+    cursor:default;
+    height:auto;
+    border-top:1px solid blue;
+    color:#333;
+    font-size: 11.5pt;
+    background-color:#DDD;
+           
+}
+
+.tab .ajax__tab_header .ajax__tab_active .ajax__tab_inner
+
+{
+    cursor:default;
+    border-bottom:2px solid #bbb;
+          
+}
+
+.tab .ajax__tab_tab
+{
+    cursor: pointer;
+    padding:6px;
+    color:#333;
+    border-right: 0px solid  #E6E6E6;
+    border-left: 0px solid  #E6E6E6;
+    font-size:10pt;
+}
+
+
+/*.Tab .ajax__tab_header:after {
+    clear: both;
+}
+
+.Tab .ajax__tab_header:before, .tab .ajax__tab_header:after {
+    content: "";
+    display: table;
+}
+.Tab.ajax__tab_header{
+    display: inline-block;
+}*/
+
+
+
+
+
+
+
+

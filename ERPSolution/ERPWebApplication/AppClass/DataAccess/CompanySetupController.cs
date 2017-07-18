@@ -13,6 +13,8 @@ namespace ERPWebApplication.AppClass.DataAccess
 {
     public class CompanySetupController : DataAccessBase
     {
+        private OrganizationalChartSetupController _objOrganizationalChartSetupController;
+        private OrganizationalChartSetup _objOrganizationalChartSetup;
         internal void LoadCountry(DropDownList ddlCountry)
         {
             try
@@ -56,6 +58,33 @@ namespace ERPWebApplication.AppClass.DataAccess
                     this.UpdateLogo(objCompanyDetailsSetup);
 
                 }
+
+                SaveCompanyChart(objCompanyDetailsSetup);
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+        private void SaveCompanyChart(CompanyDetailsSetup objCompanyDetailsSetup)
+        {
+            try
+            {
+                _objOrganizationalChartSetup = new OrganizationalChartSetup();
+                objCompanyDetailsSetup.EntryUserName = "160ea939-7633-46a8-ae49-f661d12abfd5";
+                _objOrganizationalChartSetup.CompanyID = objCompanyDetailsSetup.CompanyID;
+                _objOrganizationalChartSetup.ParentEntityID = 111;
+                _objOrganizationalChartSetup.EntityID = objCompanyDetailsSetup.CompanyID;
+                _objOrganizationalChartSetup.AddressTag = "N";
+                _objOrganizationalChartSetup.AddressID = objCompanyDetailsSetup.CompanyID;
+                _objOrganizationalChartSetup.EntityName = objCompanyDetailsSetup.CompanyName;
+                _objOrganizationalChartSetup.EntityTypeID = 1;
+                _objOrganizationalChartSetup.EntryUserName = objCompanyDetailsSetup.EntryUserName;
+                _objOrganizationalChartSetupController = new OrganizationalChartSetupController();
+                _objOrganizationalChartSetupController.SaveChart(_objOrganizationalChartSetup);
+
             }
             catch (Exception msgException)
             {
@@ -112,6 +141,8 @@ namespace ERPWebApplication.AppClass.DataAccess
                 var storedProcedureComandText = "UPDATE [comCompanySetup] SET DataUsed	= 'I' WHERE CompanyID = " + objCompanyDetailsSetup.CompanyID + "";
                 clsDataManipulation.StoredProcedureExecuteNonQuery(this.ConnectionString, storedProcedureComandText);
 
+                DeleteCompanyChart(objCompanyDetailsSetup);
+
             }
             catch (Exception msgException)
             {
@@ -119,6 +150,23 @@ namespace ERPWebApplication.AppClass.DataAccess
                 throw msgException;
             }
 
+        }
+
+        private void DeleteCompanyChart(CompanyDetailsSetup objCompanyDetailsSetup)
+        {
+            try
+            {
+                _objOrganizationalChartSetup = new OrganizationalChartSetup();
+                _objOrganizationalChartSetup.EntityID = objCompanyDetailsSetup.CompanyID;
+                _objOrganizationalChartSetupController = new OrganizationalChartSetupController();
+                _objOrganizationalChartSetupController.DeleteChart(_objOrganizationalChartSetup);
+
+            }
+            catch (Exception msgException)
+            {
+                
+                throw msgException;
+            }
         }
         internal void Update(CompanyDetailsSetup objCompanyDetailsSetup)
         {
@@ -146,6 +194,8 @@ namespace ERPWebApplication.AppClass.DataAccess
 
                 }
 
+                UpdateCompanyChart(objCompanyDetailsSetup);
+
             }
             catch (Exception msgException)
             {
@@ -153,6 +203,26 @@ namespace ERPWebApplication.AppClass.DataAccess
                 throw msgException;
             }
 
+        }
+
+        private void UpdateCompanyChart(CompanyDetailsSetup objCompanyDetailsSetup)
+        {
+            try
+            {
+                _objOrganizationalChartSetup = new OrganizationalChartSetup();
+                objCompanyDetailsSetup.EntryUserName = "160ea939-7633-46a8-ae49-f661d12abfd5";
+                _objOrganizationalChartSetup.EntityID = objCompanyDetailsSetup.CompanyID;
+                _objOrganizationalChartSetup.EntityName = objCompanyDetailsSetup.CompanyName;
+                _objOrganizationalChartSetup.EntryUserName = objCompanyDetailsSetup.EntryUserName;
+                _objOrganizationalChartSetupController = new OrganizationalChartSetupController();
+                _objOrganizationalChartSetupController.UpdateChart(_objOrganizationalChartSetup);
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
         }
         internal void UpdateLogo(CompanyDetailsSetup objCompanyDetailsSetup)
         {
@@ -227,6 +297,8 @@ namespace ERPWebApplication.AppClass.DataAccess
                                           " WHERE [CompanyID] = " + objCompanyDetailsSetup.CompanyID + "";
                 clsDataManipulation.StoredProcedureExecuteNonQuery(this.ConnectionString, storedProcedureComandText);
 
+                this.UpdateCompanyChart(objCompanyDetailsSetup);
+
             }
             catch (Exception msgException)
             {
@@ -285,7 +357,7 @@ namespace ERPWebApplication.AppClass.DataAccess
             }
             catch (Exception msgException)
             {
-                
+
                 throw msgException;
             }
         }
@@ -296,7 +368,7 @@ namespace ERPWebApplication.AppClass.DataAccess
                 string sqlString = null;
                 sqlString = @"SELECT [CompanyID]
                               ,[CompanyName]      
-                          FROM [comCompanySetup] WHERE [DataUsed] = 'A'";
+                          FROM [comCompanySetup] WHERE [DataUsed] = 'A' ORDER BY [CompanyName]";
                 return sqlString;
 
             }

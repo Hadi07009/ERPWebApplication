@@ -112,12 +112,57 @@ namespace ERPWebApplication.AppClass.DataAccess
                 throw msgException;
             }
         }
+        private string SqlGetOrganizationalElementsWithCompany(OrganizationalChartSetup objOrganizationalChartSetup)
+        {
+            try
+            {
+                string sqlQuery = null;
+                sqlQuery = @"SELECT A.[OrgElementID],B.OrgElementName,B.[HierarchyID]      
+                             FROM [orgOrganizationElements] A 
+                             INNER JOIN orgStandardOrgElements B ON A.OrgElementID = B.OrgElementID
+                             WHERE A.[DataUsed] = 'A' AND A.[CompanyID]= " + objOrganizationalChartSetup.CompanyID + "" +
+                             " UNION SELECT 1 AS [OrgElementID],'Company' AS OrgElementName,1 AS [HierarchyID] ORDER BY B.[HierarchyID]";
+                return sqlQuery;
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
         internal void LoadOrganizationalElements(OrganizationalChartSetup objOrganizationalChartSetup, DropDownList dropDownListOrganizationElements)
         {
             try
             {
                 ClsDropDownListController.LoadDropDownList(this.ConnectionString, this.SqlGetOrganizationalElements(objOrganizationalChartSetup), dropDownListOrganizationElements,
                     "OrgElementName", "OrgElementID");
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+        internal void LoadOrganizationalElements(OrganizationalChartSetup objOrganizationalChartSetup, GridView gridViewOrganizationElements)
+        {
+            try
+            {
+                ClsGridViewLoad.LoadGridView(this.ConnectionString, this.SqlGetOrganizationalElements(objOrganizationalChartSetup), gridViewOrganizationElements);
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+        internal void LoadOrganizationalElementsWithCompany(OrganizationalChartSetup objOrganizationalChartSetup, GridView gridViewOrganizationElements)
+        {
+            try
+            {
+                ClsGridViewLoad.LoadGridView(this.ConnectionString, this.SqlGetOrganizationalElementsWithCompany(objOrganizationalChartSetup), gridViewOrganizationElements);
 
             }
             catch (Exception msgException)
@@ -163,7 +208,7 @@ namespace ERPWebApplication.AppClass.DataAccess
                 var myConnection = new SqlConnection(this.ConnectionString);
                 var sqlString = @" SELECT 111 as EntityID,'Organizational Chart' as EntityName,childnodecount = 
                                     (SELECT Count(*) FROM orgOrganizationalChartSetup  
-                                    WHERE ParentEntityID = 111)";
+                                    WHERE [DataUsed] = 'A' AND ParentEntityID = 111)";
                 var dt = clsDataManipulation.GetData(this.ConnectionString, sqlString);
                 PopulateNodes(dt, TreeViewCompanyChart.Nodes);
 
@@ -196,7 +241,7 @@ namespace ERPWebApplication.AppClass.DataAccess
         {
             try
             {
-                var sqlString = @"select EntityID,EntityName,(select count(*) FROM orgOrganizationalChartSetup WHERE ParentEntityID=e.EntityID) childnodecount FROM orgOrganizationalChartSetup e where ParentEntityID= " + parentid + "";
+                var sqlString = @"select EntityID,EntityName,(select count(*) FROM orgOrganizationalChartSetup WHERE [DataUsed] = 'A' AND ParentEntityID=e.EntityID) childnodecount FROM orgOrganizationalChartSetup e where [DataUsed] = 'A' AND ParentEntityID= " + parentid + "";
                 var dt = clsDataManipulation.GetData(this.ConnectionString, sqlString);
                 PopulateNodes(dt, parentNode.ChildNodes);
                 parentNode.CollapseAll();
@@ -257,6 +302,31 @@ namespace ERPWebApplication.AppClass.DataAccess
             }
         }
 
+        internal void SaveChart(OrganizationalChartSetup objOrganizationalChartSetup)
+        {
+            try
+            {
+                var storedProcedureComandText = @"INSERT INTO [orgOrganizationalChartSetup] ([CompanyID],[ParentEntityID],[EntityID],[EntityTypeID]
+                                               ,[AddressTag],[AddressID],[EntityName],[DataUsed],[EntryUserID],[EntryDate]) VALUES ( " +
+                                                 objOrganizationalChartSetup.CompanyID + "," +
+                                                 objOrganizationalChartSetup.ParentEntityID + "," +
+                                                 objOrganizationalChartSetup.EntityID + "," +
+                                                 objOrganizationalChartSetup.EntityTypeID + ",'" +
+                                                 objOrganizationalChartSetup.AddressTag + "'," +
+                                                 objOrganizationalChartSetup.EntityID + ",'" +
+                                                 objOrganizationalChartSetup.EntityName + "','" +
+                                                 "A" + "', '" +
+                                                 objOrganizationalChartSetup.EntryUserName + "'," +
+                                                 "CAST(GETDATE() AS DateTime));";
+                clsDataManipulation.StoredProcedureExecuteNonQuery(this.ConnectionString, storedProcedureComandText);
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
         private string SqlSaveAddress(OrganizationalChartSetup objOrganizationalChartSetup)
         {
             try
@@ -490,6 +560,25 @@ namespace ERPWebApplication.AppClass.DataAccess
                 throw msgException;
             }
         }
+        internal void UpdateChart(OrganizationalChartSetup objOrganizationalChartSetup)
+        {
+            try
+            {
+                var storedProcedureComandText = @"UPDATE [orgOrganizationalChartSetup]
+                                                   SET [EntityName] = '" + objOrganizationalChartSetup.EntityName + "'," +
+                                                                         "[DataUsed] = 'A' ," +
+                                                      "[LastUpdateDate] = CAST(GETDATE() AS DateTime) " +
+                                                      ",[LastUpdateUserID] = '" + objOrganizationalChartSetup.EntryUserName + "'" +
+                                                 " WHERE [EntityID] = " + objOrganizationalChartSetup.EntityID + ";";
+                clsDataManipulation.StoredProcedureExecuteNonQuery(this.ConnectionString, storedProcedureComandText);
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
 
         private string SqlUpdateAddress(OrganizationalChartSetup objOrganizationalChartSetup)
         {
@@ -569,5 +658,129 @@ namespace ERPWebApplication.AppClass.DataAccess
             }
 
         }
+        internal void DeleteChart(OrganizationalChartSetup objOrganizationalChartSetup)
+        {
+            try
+            {
+                var storedProcedureComandText = " UPDATE [orgOrganizationalChartSetup] SET DataUsed	= 'I' WHERE [EntityID] = " + objOrganizationalChartSetup.EntityID + "";
+                clsDataManipulation.StoredProcedureExecuteNonQuery(this.ConnectionString, storedProcedureComandText);
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+
+        }
+        TwoColumnsTableData _objTwoColumnsTableData = new TwoColumnsTableData();
+        internal void LoadDepartmentDDL(DropDownList givenDDLID, BranchSetup objBranchSetup)
+        {
+            try
+            {
+                _objTwoColumnsTableData.TableName = "[orgDepartment]";
+                SectionSetup objSectionSetup = new SectionSetup();
+                objSectionSetup.CompanyID = objBranchSetup.CompanyID;
+                objSectionSetup.BranchID = objBranchSetup.BranchID;
+                ClsDropDownListController.LoadDropDownList(this.ConnectionString, this.SqlOrgDepartment(objSectionSetup), givenDDLID, "EntityName", "EntityID");
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+        internal void LoadBranchDDL(DropDownList givenDDLID, CompanySetup objCompanySetup)
+        {
+            try
+            {
+                _objTwoColumnsTableData.TableName = "[orgBranch]";
+                SectionSetup objSectionSetup = new SectionSetup();
+                objSectionSetup.CompanyID = objCompanySetup.CompanyID;
+                ClsDropDownListController.LoadDropDownList(this.ConnectionString, this.SqlOrgDepartment(objSectionSetup), givenDDLID, "EntityName", "EntityID");
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+
+        }
+        internal void LoadSectionDDL(DropDownList givenDDLID, DepartmentSetup objDepartmentSetup)
+        {
+            try
+            {
+                _objTwoColumnsTableData.TableName = "[orgSection]";
+                SectionSetup objSectionSetup = new SectionSetup();
+                objSectionSetup.CompanyID = objDepartmentSetup.CompanyID;
+                objSectionSetup.BranchID = objDepartmentSetup.BranchID;
+                objSectionSetup.DepartmentID = objDepartmentSetup.DepartmentID;
+                ClsDropDownListController.LoadDropDownList(this.ConnectionString, this.SqlOrgDepartment(objSectionSetup), givenDDLID, "EntityName", "EntityID");
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+
+        }
+
+        internal void LoadTeamDDL(DropDownList givenDDLID, SectionSetup objSectionSetup)
+        {
+            try
+            {
+                _objTwoColumnsTableData.TableName = "[orgTeam]";
+                ClsDropDownListController.LoadDropDownList(this.ConnectionString, this.SqlOrgDepartment(objSectionSetup), givenDDLID, "EntityName", "EntityID");
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+        private string SqlOrgDepartment(SectionSetup objSectionSetup)
+        {
+            try
+            {
+                string sqlString = null;
+                sqlString = @"SELECT [EntityID]
+                          ,[EntityName]
+                      FROM " + _objTwoColumnsTableData.TableName + " WHERE DataUsed = 'A' AND CompanyID = " + objSectionSetup.CompanyID + "";
+                if (objSectionSetup.BranchID != 0)
+                {
+                    sqlString += " AND ParentEntityID = " + objSectionSetup.BranchID + "";
+
+                }
+
+                if (objSectionSetup.DepartmentID != 0)
+                {
+                    sqlString += " OR ParentEntityID = " + objSectionSetup.DepartmentID + "";
+
+                }
+
+                if (objSectionSetup.SectionID != 0)
+                {
+                    sqlString += " OR ParentEntityID = " + objSectionSetup.SectionID + "";
+
+                }
+
+                sqlString += " ORDER BY EntityName  ";
+                return sqlString;
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+
+
     }
 }

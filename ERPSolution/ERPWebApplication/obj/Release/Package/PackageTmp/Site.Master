@@ -4,6 +4,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
@@ -22,6 +23,8 @@
     <link href="CSS/GridViewCSS.css" rel="stylesheet" />
     <link href="CSS/StyleSheetGridView.css" rel="stylesheet" />
     <link href="CSS/menuStyle.css" rel="stylesheet" />
+    <link href="CSS/StyleSheetSpecial.css" rel="stylesheet" />
+    <link href="CSS/MasterPageTabCSS.css" rel="stylesheet" />
     <script type="text/javascript">
         function isNumberKey(evt) {
             var charCode = (evt.which) ? evt.which : event.keyCode
@@ -63,49 +66,17 @@
                     <div style="float: left">
                         <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/logo_120_100.png" />
                     </div>
-                    <div style="float: left; padding-left: 60px; margin-top: 31px">
-
-                        <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
-                            <Items>
-                                <asp:MenuItem NavigateUrl="~/Default.aspx" Text="HRMS">
-                                    <asp:MenuItem NavigateUrl="~/Default.aspx" Text="MasterPage">
-                                        <asp:MenuItem NavigateUrl="~/ModuleName/HRMS/MasterPage/CompanySetupForm.aspx" Text="Company Setup" Value="11"></asp:MenuItem>
-                                        <asp:MenuItem NavigateUrl="~/ModuleName/HRMS/MasterPage/EmployeeSetupForm.aspx" Text="Employee Setup" Value="12"></asp:MenuItem>
-                                    </asp:MenuItem>
-                                </asp:MenuItem>
-
-                                <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Inventory">
-                                    <asp:MenuItem NavigateUrl="~/Default.aspx" Text="MasterPage">
-                                        <asp:MenuItem NavigateUrl="~/ModuleName/Inventory/MasterPage/ItemCategorySetupForm.aspx" Text="Item Category Setup" Value="22"></asp:MenuItem>
-                                        <asp:MenuItem NavigateUrl="~/ModuleName/Inventory/MasterPage/TemplateForm.aspx" Text="Template Form" Value="23"></asp:MenuItem>
-                                    </asp:MenuItem>
-                                    <asp:MenuItem NavigateUrl="~/Default.aspx" Text="TransactionPage">
-                                        <asp:MenuItem NavigateUrl="~/ModuleName/Inventory/TransactionPage/frmItemRequisition.aspx" Text="Item Requisition" Value="aaaaa"></asp:MenuItem>
-
-                                    </asp:MenuItem>
-                                </asp:MenuItem>
-                                <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Accounts">
-                                    <asp:MenuItem NavigateUrl="~/Default.aspx" Text="MasterPage">
-                                        <asp:MenuItem NavigateUrl="~/ModuleName/Accounts/CoaHeadSetup.aspx" Text="Account Head Setup" Value="51"></asp:MenuItem>
-                                    </asp:MenuItem>
-
-                                </asp:MenuItem>
-                                <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Organization">
-                                    <asp:MenuItem NavigateUrl="~/Default.aspx" Text="MasterPage">
-                                        <asp:MenuItem NavigateUrl="~/ModuleName/Organization/MasterPage/NewCompany.aspx" Text="New Company..." Value="60"></asp:MenuItem>
-                                        <asp:MenuItem NavigateUrl="~/ModuleName/Organization/MasterPage/TwoColumnTablesForm.aspx" Text="Two Column Tables" Value="61"></asp:MenuItem>
-                                        <asp:MenuItem NavigateUrl="~/ModuleName/Organization/MasterPage/TwoColumnsTableDataForm.aspx" Text="Two Columns Table Data" Value="62"></asp:MenuItem>
-                                        <asp:MenuItem NavigateUrl="~/ModuleName/Organization/MasterPage/TwoColumnsTableDataAutoForm.aspx" Text="Two Columns Table Data(Auto)" Value="63"></asp:MenuItem>
-                                        <asp:MenuItem NavigateUrl="~/ModuleName/Organization/MasterPage/NodeListForm.aspx" Text="Default Node List" Value="64"></asp:MenuItem>
-                                    </asp:MenuItem>
-
-                                </asp:MenuItem>
-                            </Items>
-                        </asp:Menu>
-
+                    <div style="float: left; padding-left: 90px; padding-top: 36px">
+                        <hgroup class="title">
+                            <h2 style="font-size: .9em;font-family:Tahoma;color:#606163">
+                                <asp:Label ID="lblWelcomeMessage" runat="server" Text=""></asp:Label><asp:Label ID="lblLoginEmployeeName" runat="server" Font-Bold="True"></asp:Label><asp:Label ID="lblAt" runat="server" Text=""></asp:Label><asp:Label ID="lblPageTitle" runat="server" Font-Bold="True"></asp:Label></h2>
+                        </hgroup>
                     </div>
                     <div style="float: right; padding-right: 10px">
                         <div class="content-wrapper">
+                            <section style="padding-top: 15px" id="login">
+                                <asp:LinkButton ID="lnkbtnChangeCompany" runat="server" OnClick="lnkbtnChangeCompany_Click" >Change Company</asp:LinkButton><asp:LinkButton ID="lnkbtnLoginoff" runat="server" OnClick="lnkbtnLoginoff_Click">Log off</asp:LinkButton>
+                            </section>
                         </div>
                     </div>
                 </div>
@@ -117,18 +88,16 @@
 
                 <div id="div2">
                     <section class="featured">
-                        <div class="content-wrapperHeader">
-                            <hgroup class="title">
-                                <h2 style="font-size: 1.5em;"><%: Page.Title %>.</h2>
-                            </hgroup>
+                        <div class="content-wrapperHeaderInside">
+                            <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+                                </asp:Menu>
                         </div>
                     </section>
                 </div>
             </div>
 
         </header>
-
-        <div id="body" style="padding-top: 122px; width: 100%">
+        <div id="body" style="padding-top: 109px; width: 100%">
             <div id="fixedImage" style="position: fixed; background-color: #fff">
                 <section style="margin-left: 80px; max-width: 960px">
                     <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/heroAccent.png" />
@@ -136,16 +105,17 @@
 
             </div>
             <%--<asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />--%>
-            <section class="content-wrapper main-content clear-fix">
+            <section class="content-wrapper main-content clear-fix" style="min-height:470px" >
                 <asp:ContentPlaceHolder runat="server" ID="MainContent" />
             </section>
         </div>
         <footer>
-            <div class="content-wrapper">
+            <div class="content-wrapper" >
                 <div class="float-left">
                     <p>&copy; <%--<li><a id="registerLink" runat="server" href="~/Account/Register.aspx">Register</a></li>--%>- My ASP.NET Application</p>
                 </div>
             </div>
+                
         </footer>
     </form>
 </body>

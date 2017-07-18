@@ -58,25 +58,25 @@ namespace ERPWebApplication.ModuleName.Approval
         public void LoadProcessDescription()
         {
             String queryString = "SELECT ProcessId, ProcessDescription, [Status] FROM dbo.ProcessDescription";
-            ClsGridViewLoad.GetData(queryString, grdViewProcessDescription);
+            //ClsGridViewLoad.GetData(queryString, grdViewProcessDescription);
         }
 
         public void LoadProcessFlowDefinition()
         {
             String queryString = "SELECT [ProcessFlowDefinition].[ProcessId],[ProcessDescription].ProcessDescription,[ProcessFlowDefinition].[CategoryId],CASE WHEN [ProcessFlowDefinition].[CategoryId] = '1' THEN 'Staff' WHEN [ProcessFlowDefinition].[CategoryId] = '2' THEN 'Officer' WHEN [ProcessFlowDefinition].[CategoryId] = '5' THEN 'All' ELSE '-' END AS [Category Id Text],[ProcessFlowDefinition].[ProcessFlowId],[ProcessFlowDefinition].[FlowDescription] FROM [dbo].[ProcessFlowDefinition] INNER JOIN [ProcessDescription] ON [ProcessFlowDefinition].[ProcessId] = [ProcessDescription].[ProcessId]";
-            ClsGridViewLoad.GetData(queryString, grdViewProcessFlowDefinition);
+            //ClsGridViewLoad.GetData(queryString, grdViewProcessFlowDefinition);
         }
 
         public void LoadProcessLevelDescription()
         {
             String queryString = "SELECT[ProcessLevelDescription].[ProcessId],[ProcessDescription].ProcessDescription,[ProcessLevelDescription].[ProcessLevelId],[ProcessLevelDescription].[LevelDescription]FROM [dbo].[ProcessLevelDescription] INNER JOIN [ProcessDescription] ON [ProcessLevelDescription].[ProcessId] = [ProcessDescription].[ProcessId]";
-            ClsGridViewLoad.GetData(queryString, grdViewProcessLevelDescription);
+            //ClsGridViewLoad.GetData(queryString, grdViewProcessLevelDescription);
         }
 
         public void LoadProcessActionType()
         {
             String queryString = "SELECT[ProcessActionType].[ProcessId],[ProcessDescription].ProcessDescription,[ProcessActionType].[ActionTypeId],[ProcessActionType].[Action]FROM [dbo].[ProcessActionType] INNER JOIN [ProcessDescription] ON [ProcessActionType].[ProcessId] = [ProcessDescription].[ProcessId]";
-            ClsGridViewLoad.GetData(queryString, grdViewProcessActionType);
+            //ClsGridViewLoad.GetData(queryString, grdViewProcessActionType);
         }
 
         private void ShowNoResultFound(DataTable source, GridView gv)

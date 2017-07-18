@@ -18,14 +18,17 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
         private EmployeeTypeSetup _objEmployeeTypeSetup;
         private EmployeeCategorySetup _objEmployeeCategorySetup;
         private DesignationSetup _objDesignationSetup;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
                 if (!Page.IsPostBack)
                 {
-                    LoadAllDDL();
-
+                    LoadorgDesignation();
+                    LoadEmployeeType();
+                    LoadEmployeeCategory();
+                    LoadEmployeeTitle();
                 }
 
             }
@@ -37,16 +40,62 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
 
         }
 
-        private void LoadAllDDL()
+        private void LoadEmployeeTitle()
         {
             try
             {
                 _objEmployeeSetupController = new EmployeeSetupController();
-                _objEmployeeSetupController.LoadCompanyDDL(ddlCompany);
-                //_objEmployeeSetupController.LoadBranchDDL(ddlBranch);
-                //_objEmployeeSetupController.LoadEmployeeType(ddlEmployeeType);
-                //_objEmployeeSetupController.LoadEmployeeCategoryDDL(ddlEmployeeCategory);
-                //_objEmployeeSetupController.LoadDesignationDDL(ddlDesignation);
+                _objEmployeeSetupController.GetEmployeeTitle(ddlTitle);
+
+            }
+            catch (Exception msgException)
+            {
+                
+                throw msgException;
+            }
+        }
+
+        private void LoadEmployeeCategory()
+        {
+            try
+            {
+                _objEmployeeDetailsSetup = new EmployeeDetailsSetup();
+                _objEmployeeDetailsSetup.CompanyID = LoginUserInformation.CompanyID;
+                _objEmployeeSetupController.GetEmployeeCategory(ddlEmployeeCategory,_objEmployeeDetailsSetup);
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+        private void LoadEmployeeType()
+        {
+            try
+            {
+                _objEmployeeSetupController = new EmployeeSetupController();
+                _objEmployeeDetailsSetup = new EmployeeDetailsSetup();
+                _objEmployeeDetailsSetup.CompanyID = LoginUserInformation.CompanyID;
+                _objEmployeeSetupController.GetEmployeeType(ddlEmployeeType, _objEmployeeDetailsSetup);
+
+            }
+            catch (Exception msgException)
+            {
+                
+                throw msgException;
+            }
+        }
+
+        private void LoadorgDesignation()
+        {
+            try
+            {
+                TwoColumnsTableDataController objTwoColumnsTableDataController = new TwoColumnsTableDataController();
+                TwoColumnsTableData objTwoColumnsTableData = new TwoColumnsTableData();
+                objTwoColumnsTableData.CompanyID = LoginUserInformation.CompanyID;
+                objTwoColumnsTableDataController.LoadDesignationDDL(ddlDesignationEmployee, objTwoColumnsTableData);
+
             }
             catch (Exception msgException)
             {
@@ -75,20 +124,26 @@ namespace ERPWebApplication.ModuleName.HRMS.MasterPage
             try
             {
                 _objEmployeeDetailsSetup = new EmployeeDetailsSetup();
-                _objEmployeeDetailsSetup.CompanyID = Convert.ToInt32(ddlCompany.SelectedValue);
-                _objEmployeeDetailsSetup.BranchID = 1;//Convert.ToInt32(ddlBranch.SelectedValue);
+
+                _objEmployeeDetailsSetup.CompanyID = this.OrganizationalChartControl1.empCompany;
+                _objEmployeeDetailsSetup.dtEmployeeChart = this.OrganizationalChartControl1.empValueAsTable;
                 _objEmployeeDetailsSetup.EmployeeID = txtEmployeeID.Text == string.Empty ? null : txtEmployeeID.Text;
                 _objEmployeeTypeSetup = new EmployeeTypeSetup();
-                _objEmployeeTypeSetup.EmployeeTypeID = 1;//Convert.ToInt32(ddlEmployeeType.SelectedValue);
+                _objEmployeeTypeSetup.EmployeeTypeID = Convert.ToInt32(ddlEmployeeType.SelectedValue);
                 _objEmployeeCategorySetup = new EmployeeCategorySetup();
-                _objEmployeeCategorySetup.EmployeeCategoryID = 1; //Convert.ToInt32(ddlEmployeeCategory.SelectedValue);
+                _objEmployeeCategorySetup.EmployeeCategoryID = Convert.ToInt32(ddlEmployeeCategory.SelectedValue);
+                _objEmployeeDetailsSetup.EmployeeTitle = Convert.ToInt32(ddlTitle.SelectedValue);
                 _objDesignationSetup = new DesignationSetup();
-                _objDesignationSetup.DesignationID = "1";//ddlDesignation.SelectedValue;
+                _objDesignationSetup.DesignationID = ddlDesignationEmployee.SelectedValue;
                 _objEmployeeDetailsSetup.FirstName = txtFirstName.Text == string.Empty ? null : txtFirstName.Text;
                 _objEmployeeDetailsSetup.MiddleName = txtMiddleName.Text == string.Empty ? null : txtMiddleName.Text;
                 _objEmployeeDetailsSetup.LastName = txtLastName.Text == string.Empty ? null : txtLastName.Text;
+                _objEmployeeDetailsSetup.Email = txtEmail.Text == string.Empty ? null : txtEmail.Text;
+                _objEmployeeDetailsSetup.EntryUserName = LoginUserInformation.UserID;
+                IsUser objIsUser = new IsUser();
+                objIsUser.UserPermission = Convert.ToInt32( ddlUserPermission.SelectedValue);
                 _objEmployeeSetupController = new EmployeeSetupController();
-                _objEmployeeSetupController.Save(_objEmployeeDetailsSetup, _objEmployeeTypeSetup, _objEmployeeCategorySetup, _objDesignationSetup);
+                _objEmployeeSetupController.Save(_objEmployeeDetailsSetup, _objEmployeeTypeSetup, _objEmployeeCategorySetup, _objDesignationSetup,objIsUser);
 
             }
             catch (Exception msgException)

@@ -7,7 +7,7 @@
         <tr>
             <td colspan="2">&nbsp;</td>
             <td colspan="2">
-                <div style="position: fixed; width: 350px; background-color: #00817F; height: 60px">
+                <div style="position: fixed; width: 350px; background-color: white; height: 60px">
                     <table style="width: 100%; text-align: left">
                             <tr>
                                 <td colspan="2">

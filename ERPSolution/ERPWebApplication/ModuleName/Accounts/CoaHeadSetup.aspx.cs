@@ -301,41 +301,23 @@ namespace ERPWebApplication.ModuleName.Accounts
             PanelAnalysisRequired.Visible = false;
         }
 
-        private string CheckVaidation()
-        {
-            const string checkValidation = "";
-            if (txtAccountHead.Text == "")
-            {
-                txtAccountHead.Focus();
-                return "Must Enter Account Head !";
-            }
-            return checkValidation;
-        }
+
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            var validationMsg = CheckVaidation();
-            switch (validationMsg)
+            try
             {
-                case "":
-                    try
-                    {
-                        InitiateCoaHead();
-                        treeCOAHead.Nodes.Clear();
-                        PopulateRootLevel();
-                        LoadParentAccountDdl();
-                        ClearAllControl();
+                InitiateCoaHead();
+                treeCOAHead.Nodes.Clear();
+                PopulateRootLevel();
+                LoadParentAccountDdl();
+                ClearAllControl();
 
-                    }
-                    catch (Exception msgException)
-                    {
+            }
+            catch (Exception msgException)
+            {
 
-                        clsTopMostMessageBox.Show(msgException.Message);
-                    }
-                    break;
-                default:
-                    clsTopMostMessageBox.Show(validationMsg);
-                    break;
+                clsTopMostMessageBox.Show(msgException.Message);
             }
         }
         protected void treeCOAHead_TreeNodePopulate(object sender, TreeNodeEventArgs e)
@@ -377,7 +359,7 @@ namespace ERPWebApplication.ModuleName.Accounts
                         "alert(' " + msg + " ');",
                         true);
         }
-        
+
 
         protected void rblAccountType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -405,31 +387,21 @@ namespace ERPWebApplication.ModuleName.Accounts
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            var validationMsg = CheckVaidation();
-            switch (validationMsg)
+            try
             {
-                case "":
-                    try
-                    {
-                        UpdateCoaHead();
-                        treeCOAHead.Nodes.Clear();
-                        PopulateRootLevel();
-                        LoadParentAccountDdl();
-                        ClearAllControl();
-                        treeCOAHead.ExpandAll();
+                UpdateCoaHead();
+                treeCOAHead.Nodes.Clear();
+                PopulateRootLevel();
+                LoadParentAccountDdl();
+                ClearAllControl();
+                treeCOAHead.ExpandAll();
 
-                    }
-                    catch (Exception msgException)
-                    {
-
-                        clsTopMostMessageBox.Show(msgException.Message);
-                    }
-                    break;
-                default:
-                    clsTopMostMessageBox.Show(validationMsg);
-                    break;
             }
+            catch (Exception msgException)
+            {
 
+                clsTopMostMessageBox.Show(msgException.Message);
+            }
         }
 
         private void UpdateCoaHead()

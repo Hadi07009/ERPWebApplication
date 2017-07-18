@@ -25,6 +25,35 @@ namespace ERPWebApplication.AppClass.DataAccess
                                         objTwoColumnsTableData.FieldDescription + "','" +
                                         objTwoColumnsTableData.EntryUserName + "'";
                 clsDataManipulation.StoredProcedureExecuteNonQuery(connectionString, storedProcedureComandTest);
+                clsDataManipulation.StoredProcedureExecuteNonQuery(connectionString, this.SqlCreateView(objTwoColumnsTableData));
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+
+        }
+
+        private string SqlCreateView(TwoColumnsTableData objTwoColumnsTableData)
+        {
+            try
+            {
+                string sqlForView = null;
+                sqlForView = @" if exists(Select * from sysobjects where name = '" + objTwoColumnsTableData.TableName.Replace(" ", String.Empty) + "' and type = 'V' ) begin drop view " + objTwoColumnsTableData.TableName.Replace(" ", String.Empty) + " end;";
+                sqlForView += " exec('create view " + objTwoColumnsTableData.TableName.Replace(" ", string.Empty) +
+                             @" as   SELECT  CompanyID
+			                ,[FieldOfID]
+			                ,[FieldOfName]
+			                ,FieldDescription
+                            ,[DataUsed]
+                            ,[EntryUserID]
+                            ,[EntryDate]
+                            ,[LastUpdateDate]
+                            ,[LastUpdateUserID]
+                            FROM [TwoColumnsTable] WHERE CompanyID = " + objTwoColumnsTableData.CompanyID + " AND [TableID] = " + objTwoColumnsTableData.TableID + "');";
+                return sqlForView;
 
             }
             catch (Exception msgException)
@@ -63,6 +92,7 @@ namespace ERPWebApplication.AppClass.DataAccess
             {
                 string sqlString = "UPDATE TwoColumnsTable SET DataUsed	= 'I' WHERE FieldOfID = '" + objTwoColumnsTableData.FieldOfID + "'";
                 clsDataManipulation.StoredProcedureExecuteNonQuery(connectionString, sqlString);
+                clsDataManipulation.StoredProcedureExecuteNonQuery(connectionString, this.SqlCreateView(objTwoColumnsTableData));
 
             }
             catch (Exception msgException)
@@ -85,6 +115,7 @@ namespace ERPWebApplication.AppClass.DataAccess
                                         objTwoColumnsTableData.FieldDescription + "','" +
                                         objTwoColumnsTableData.EntryUserName + "'";
                 clsDataManipulation.StoredProcedureExecuteNonQuery(connectionString, storedProcedureComandTest);
+                clsDataManipulation.StoredProcedureExecuteNonQuery(connectionString, this.SqlCreateView(objTwoColumnsTableData));
 
             }
             catch (Exception msgException)
@@ -149,8 +180,30 @@ namespace ERPWebApplication.AppClass.DataAccess
         {
             try
             {
-                objTwoColumnsTableData.TableID = 22;
-                this.LoadRecordDDL(givenDDL, objTwoColumnsTableData);
+                ClsDropDownListController.LoadDropDownList(this.ConnectionString, SqlGetDesignation(objTwoColumnsTableData), givenDDL, "FieldOfName", "FieldOfID");
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+        private static string SqlGetDesignation(TwoColumnsTableData objTwoColumnsTableData)
+        {
+            try
+            {
+                string sqlString = @"SELECT [FieldOfID]
+                 ,[FieldOfName]
+                 FROM [orgDesignation] 
+                 WHERE DataUsed = 'A' AND [CompanyID] = " + objTwoColumnsTableData.CompanyID + "";
+                if (objTwoColumnsTableData.BranchID != 0)
+                {
+                    sqlString += " AND [BranchID] = " + objTwoColumnsTableData.BranchID + "";
+                }
+
+                sqlString += " ORDER BY [FieldOfName]";
+                return sqlString;
 
             }
             catch (Exception msgException)
@@ -170,6 +223,112 @@ namespace ERPWebApplication.AppClass.DataAccess
             catch (Exception msgException)
             {
 
+                throw msgException;
+            }
+        }
+
+        internal void LoadRoleType(DropDownList ddlRoleType)
+        {
+            try
+            {
+                TwoColumnsTableData objTwoColumnsTableData = new TwoColumnsTableData();
+                objTwoColumnsTableData.TableID = 25;
+                this.LoadRecordDynamicDDL(ddlRoleType, objTwoColumnsTableData);
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+
+        }
+
+        internal void LoadEmployeeTypeDDL(DropDownList ddlEmployeeType, TwoColumnsTableData objTwoColumnsTableData)
+        {
+            try
+            {
+                ClsDropDownListController.LoadDropDownList(this.ConnectionString, SqlForEmployeeType(objTwoColumnsTableData), ddlEmployeeType, "FieldOfName", "FieldOfID");
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+        private string SqlForEmployeeType(TwoColumnsTableData objTwoColumnsTableData)
+        {
+            try
+            {
+                string sqlString = null;
+                sqlString = "SELECT [FieldOfID],[FieldOfName] FROM [EmployeeType] WHERE [DataUsed] = 'A' AND [CompanyID] = " + objTwoColumnsTableData.CompanyID + " ORDER BY [FieldOfName]";
+                return sqlString;
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+        internal void LoadEmployeeCategoryDDL(DropDownList ddlEmployeeCategory, TwoColumnsTableData objTwoColumnsTableData)
+        {
+            try
+            {
+                ClsDropDownListController.LoadDropDownList(this.ConnectionString, SqlGetEmployeeCategory(objTwoColumnsTableData), ddlEmployeeCategory, "FieldOfName", "FieldOfID");
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+        private string SqlGetEmployeeCategory(TwoColumnsTableData objTwoColumnsTableData)
+        {
+            try
+            {
+                string sqlString = null;
+                sqlString = "SELECT [FieldOfID],[FieldOfName] FROM [EmployeeCategory] WHERE [DataUsed] = 'A' AND [CompanyID] = " + objTwoColumnsTableData.CompanyID + " ORDER BY [FieldOfName]";
+                return sqlString;
+
+            }
+            catch (Exception msgException)
+            {
+
+                throw msgException;
+            }
+        }
+
+        internal void LoadEmployeeTitle(DropDownList ddlTitle)
+        {
+            try
+            {
+                ClsDropDownListController.LoadDropDownList(this.ConnectionString, SqlGetEmployeeTitle(), ddlTitle, "FieldOfName", "FieldOfID");
+
+            }
+            catch (Exception msgException)
+            {
+                
+                throw msgException;
+            }
+        }
+
+        private string SqlGetEmployeeTitle()
+        {
+            try
+            {
+                string sqlString = null;
+                sqlString = "SELECT [FieldOfID],[FieldOfName] FROM [EmployeeTitle] WHERE [DataUsed] = 'A' ORDER BY [FieldOfName]";
+                return sqlString;
+
+            }
+            catch (Exception msgException)
+            {
+                
                 throw msgException;
             }
         }

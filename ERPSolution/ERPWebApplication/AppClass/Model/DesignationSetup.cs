@@ -14,5 +14,7 @@ namespace ERPWebApplication.AppClass.Model
             get { return _designationID; }
             set { _designationID = value; }
         }
+
+        public int LastPositionNo { get; set; }
     }
 }

@@ -128,7 +128,7 @@ public class ClsCompanySetup
         {
             qr = @"SELECT " + BusinessTypecolumn + " FROM " + tablenam + "  order by " + colnam[1] + " asc";
         }
-        //DataLoadProcess.LoadDataInComboBox(ref ddl, qr, myCommad);
+        //DataLoadProcess.LoadDataInComboBox(ref ddlSelected, qr, myCommad);
 
     }
 

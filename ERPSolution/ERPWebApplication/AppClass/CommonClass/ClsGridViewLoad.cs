@@ -6,14 +6,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 
-namespace ERPWebApplication.CommonClass
+
+namespace ERPWebApplication.AppClass.CommonClass
 {
-    public class ClsGridViewLoad
+    public class ClsGridViewLoad 
     {
 
         public ClsGridViewLoad()
         { }
-
         public static void ShowDataInGridView(DataTable dt, GridView GridViewName)
         {
             if (dt.Rows.Count > 0)
@@ -25,33 +25,6 @@ namespace ERPWebApplication.CommonClass
             {
                 ShowNoResultFound(dt, GridViewName);
             }
-        }
-
-        public static DataSet ShowDataInGridView(String queryString, GridView GridViewName)
-        {
-            String connectionString = System.Configuration.ConfigurationManager.AppSettings["UbasysConnectionString"].ToString();
-            DataSet ds = new DataSet();
-            try
-            {
-                SqlConnection connection = new SqlConnection(connectionString);
-                SqlDataAdapter adapter = new SqlDataAdapter(queryString, connection);
-                adapter.Fill(ds);
-                if (ds.Tables[0].Rows.Count > 0)
-                {
-                    GridViewName.DataSource = ds;
-                    GridViewName.DataBind();
-                }
-                else if (ds.Tables[0].Rows.Count == 0)
-                {
-                    DataTable dt = ds.Tables[0];
-                    ShowNoResultFound(dt, GridViewName);
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return ds;
         }
         public static void ShowNoResultFound(DataTable source, GridView gv)
         {
@@ -70,32 +43,28 @@ namespace ERPWebApplication.CommonClass
             gv.Rows[0].Cells[0].Text = "NO RESULT FOUND!";
             gv.FooterRow.Visible = true;
         }
-        public static DataSet GetData(String queryString, GridView GridViewName)
+        public static void LoadGridView(string connectionString, string sqlQueryString, GridView givenGridViewID)
         {
-            String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["dbERPSolutionConnection"].ToString();
             DataSet ds = new DataSet();
+            SqlConnection connection = new SqlConnection(connectionString);
             try
             {
-                SqlConnection connection = new SqlConnection(connectionString);
-                SqlDataAdapter adapter = new SqlDataAdapter(queryString, connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlQueryString, connection);
                 adapter.Fill(ds);
-                if (ds.Tables[0].Rows.Count > 0)
+                DataTable dt = ds.Tables[0];
+                givenGridViewID.DataSource = null;
+                givenGridViewID.DataBind();
+                if (dt.Rows.Count > 0)
                 {
-                    GridViewName.DataSource = ds;
-                    GridViewName.DataBind();
+                    givenGridViewID.DataSource = dt;
+                    givenGridViewID.DataBind();
                 }
-                else if (ds.Tables[0].Rows.Count == 0)
-                {
-                    DataTable dt = ds.Tables[0];
-                    ShowNoResultFound(dt, GridViewName);
-                }
+
             }
-            catch (Exception ex)
+            catch (Exception msgException)
             {
-
+                throw msgException;
             }
-            return ds;
         }
-
     }
 }

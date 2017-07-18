@@ -28,7 +28,7 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
                 {
                     Session["relatedUserRoleID"] = 1;
                     Session["entryUserCode"] = 1;
-                    Session["companyID"] = 1;
+                    Session["lastPositionNo"] = 1;
                     Session["branchID"] = 1;
                     ShowsysTwoColumnTables();
                 }
@@ -47,10 +47,12 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
             try
             {
                 _objTwoColumnTables = new TwoColumnTables();
-                _objTwoColumnTables.RelatedUserRoleID = Convert.ToInt32(Session["relatedUserRoleID"].ToString());
                 _objTwoColumnTables.EntrySystem = "M";
+                EmployeeSetup objEmployeeSetup = new EmployeeSetup();
+                objEmployeeSetup.CompanyID = LoginUserInformation.CompanyID;
+                objEmployeeSetup.EmployeeID = LoginUserInformation.EmployeeCode;
                 _objTwoColumnTablesController = new TwoColumnTablesController();
-                DataTable dtTablesName = _objTwoColumnTablesController.GetRecord(_connectionString, _objTwoColumnTables);
+                DataTable dtTablesName = _objTwoColumnTablesController.GetRecord(_connectionString, _objTwoColumnTables,objEmployeeSetup);
                 grdTableName.DataSource = null;
                 grdTableName.DataBind();
                 if (dtTablesName.Rows.Count > 0)
@@ -107,7 +109,7 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
             try
             {
                 _objTwoColumnsTableData = new TwoColumnsTableData();
-                _objTwoColumnsTableData.CompanyID = Convert.ToInt32(Session["companyID"].ToString());
+                _objTwoColumnsTableData.CompanyID = Convert.ToInt32(Session["lastPositionNo"].ToString());
                 _objTwoColumnsTableData.BranchID = Convert.ToInt32(Session["branchID"].ToString());
                 _objTwoColumnsTableData.TableID = Convert.ToInt32(Session["tableID"].ToString());
                 _objTwoColumnsTableDataController = new TwoColumnsTableDataController();
@@ -166,12 +168,13 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
             try
             {
                 _objTwoColumnsTableData = new TwoColumnsTableData();
-                _objTwoColumnsTableData.CompanyID = Convert.ToInt32(Session["companyID"].ToString());
+                _objTwoColumnsTableData.CompanyID = Convert.ToInt32(Session["lastPositionNo"].ToString());
                 _objTwoColumnsTableData.BranchID = Convert.ToInt32(Session["branchID"].ToString());
                 _objTwoColumnsTableData.TableID = Convert.ToInt32(Session["tableID"].ToString());
                 _objTwoColumnsTableData.FieldOfName = txtFieldOfName.Text == string.Empty ? null : txtFieldOfName.Text;
                 _objTwoColumnsTableData.FieldDescription = txtFieldDescription.Text == string.Empty ? null : txtFieldDescription.Text;
                 _objTwoColumnsTableData.EntryUserName = Session["entryUserCode"].ToString();
+                _objTwoColumnsTableData.TableName = lblSelectedTableName.Text == string.Empty ? null : lblSelectedTableName.Text;
                 _objTwoColumnsTableDataController = new TwoColumnsTableDataController();
                 if (btnSave.Text == "Save")
                 {
@@ -244,6 +247,9 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
                 {
                     _objTwoColumnsTableData = new TwoColumnsTableData();
                     _objTwoColumnsTableData.FieldOfID = lblFieldOfID;
+                    _objTwoColumnsTableData.CompanyID = LoginUserInformation.CompanyID;
+                    _objTwoColumnsTableData.TableID = Convert.ToInt32(Session["tableID"].ToString());
+                    _objTwoColumnsTableData.TableName = lblSelectedTableName.Text == string.Empty ? null : lblSelectedTableName.Text;
                     _objTwoColumnsTableDataController = new TwoColumnsTableDataController();
                     _objTwoColumnsTableDataController.Delete(_connectionString,_objTwoColumnsTableData);
                     ShowTwoColumnsTableData();

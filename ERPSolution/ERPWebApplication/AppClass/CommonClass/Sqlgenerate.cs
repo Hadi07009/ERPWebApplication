@@ -22,13 +22,13 @@ using System.Data.SqlClient;
 
         public static string SqlGetUserById(string userId, string companyCode)
         {
-            return "SELECT UserId, UserName, UserDiaplayName, CompanyCode, UserPassword, UserEmpId, UserDesignation, UserDepartment, UserEmail, UserMob, UserImage, UserCreateDate, UserLastAccessed, UserStatus, UserClass, UserHtml FROM tblUserInfo WHERE (UserId = '" + userId +"') AND (CompanyCode = '"+companyCode+"')";
+            return "SELECT UserId, txtUserName, UserDiaplayName, CompanyCode, UserPassword, UserEmpId, UserDesignation, UserDepartment, UserEmail, UserMob, UserImage, UserCreateDate, UserLastAccessed, UserStatus, UserClass, UserHtml FROM tblUserInfo WHERE (UserId = '" + userId +"') AND (CompanyCode = '"+companyCode+"')";
  
         }
 
         public static string SqlGetUserByIdPass(string userId, string passWord, string companyCode)
         {
-            return "SELECT UserId, UserName, UserDiaplayName, CompanyCode, UserPassword, UserEmpId, UserDesignation, UserDepartment, UserEmail, UserMob, UserImage, UserCreateDate, UserLastAccessed, UserStatus FROM tblUserInfo where UserId= '"+userId+"' and UserPassword='"+passWord+"' and UserStatus=1 and CompanyCode='"+companyCode+"'";
+            return "SELECT UserId, txtUserName, UserDiaplayName, CompanyCode, UserPassword, UserEmpId, UserDesignation, UserDepartment, UserEmail, UserMob, UserImage, UserCreateDate, UserLastAccessed, UserStatus FROM tblUserInfo where UserId= '"+userId+"' and UserPassword='"+passWord+"' and UserStatus=1 and CompanyCode='"+companyCode+"'";
         }
 
         #endregion Login
@@ -299,10 +299,7 @@ using System.Data.SqlClient;
 
         # region Employee Information Setup
 
-        public static string SqlGetDesignationIntoDDL()
-        {
-            return "SELECT DISTINCT JobCode,JobTitle FROM Hrms_Job_Master WHERE T_C1 = '1' ORDER BY JobTitle";
-        }
+        
 
         public static string SqlGetLeaveTypeIntoDDL()
         {
@@ -697,7 +694,7 @@ using System.Data.SqlClient;
         public static string UpdateUserInformationByempidCompanyCode(string userid, string userempid, string username, string userdesig, string userdept, string useremail, string usermobile, string usershortname, int userstatus, string companyCode)
         {
             string sql = "";
-            sql = @"UPDATE tblUserInfo SET UserId ='" + userid + "', UserName ='" + username + "', UserDiaplayName ='" + usershortname + "', CompanyCode ='" + companyCode + "', UserDesignation ='" + userdesig + "',"
+            sql = @"UPDATE tblUserInfo SET UserId ='" + userid + "', txtUserName ='" + username + "', UserDiaplayName ='" + usershortname + "', CompanyCode ='" + companyCode + "', UserDesignation ='" + userdesig + "',"
                          + " UserDepartment ='" + userdept + "', UserEmail ='" + useremail + "', UserMob ='" + usermobile + "', UserStatus ='" + userstatus + "'"
                          + " WHERE (UserEmpId ='" + userempid + "') AND (CompanyCode ='" + companyCode + "')";
 

@@ -35,7 +35,7 @@
                         <table style="width: 100%;">
                             <tr>
                                 <td colspan="3" style="margin-top: -5px">
-                                    <div style="position: fixed; width: 425px; background-color: #00817F; height: 50px">
+                                    <div style="position: fixed; width: 425px; background-color: white; height: 50px">
                                         <table style="width: 55%;margin-left:5px">
                                             <tr>
                                                 <td>
@@ -57,6 +57,10 @@
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    &nbsp;</td>
                             </tr>
                             <tr>
                                 <td colspan="3">

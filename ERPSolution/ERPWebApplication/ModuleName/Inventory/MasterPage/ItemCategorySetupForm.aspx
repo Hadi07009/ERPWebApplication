@@ -45,11 +45,11 @@
 
                     </td>
                     <td colspan="2" style="float: right; margin-right: 430px">
-                        <div style="position: fixed; width: 425px; background-color: #00817F; height: 50px">
+                        <div style="position: fixed; width: 425px; background-color: white; height: 50px">
                             <table style="width: 100%;">
                                 <tr>
-                                    <td>&nbsp;<asp:CheckBox runat="server" ID="CheckBoxAddItem" CssClass="checkbox" ForeColor="White" AutoPostBack="True" OnCheckedChanged="CheckBoxAddItem_CheckedChanged" />
-                                        <asp:Label ID="Label3" runat="server" AssociatedControlID="CheckBoxAddItem" CssClass="checkbox" ForeColor="White">Add Item?</asp:Label>
+                                    <td>&nbsp;<asp:CheckBox runat="server" ID="CheckBoxAddItem" CssClass="checkbox" ForeColor="Gray" AutoPostBack="True" OnCheckedChanged="CheckBoxAddItem_CheckedChanged" />
+                                        <asp:Label ID="Label3" runat="server" AssociatedControlID="CheckBoxAddItem" CssClass="checkbox" ForeColor="Gray">Add Item?</asp:Label>
                                     </td>
                                     <td style="text-align: right">
                                         <asp:Button ID="btnSave" CssClass="CssBtnSave" runat="server" Text="Save" Width="75px" OnClick="btnSave_Click" />
@@ -89,21 +89,9 @@
                                                         <tr>
                                                             <td colspan="3">
                                                                 <asp:TreeView ID="TreeViewCategory"
-                                                                    NodeStyle-CssClass="treeNode"
-                                                                    RootNodeStyle-CssClass="rootNode"
-                                                                    LeafNodeStyle-CssClass="leafNode"
-                                                                    SelectedNodeStyle-CssClass="selectedNode"
-                                                                    ParentNodeStyle-CssClass="parentNode"
-                                                                    HoverNodeStyle-CssClass="hoverNode"
                                                                     runat="server" OnTreeNodePopulate="TreeViewCategory_TreeNodePopulate"
                                                                     OnSelectedNodeChanged="TreeViewCategory_SelectedNodeChanged"
-                                                                    ImageSet="Msdn" ForeColor="#428BCA" Width="80%">
-                                                                    <HoverNodeStyle CssClass="hoverNode" />
-                                                                    <LeafNodeStyle CssClass="leafNode" />
-                                                                    <NodeStyle CssClass="treeNode" />
-                                                                    <ParentNodeStyle CssClass="parentNode" />
-                                                                    <RootNodeStyle CssClass="rootNode" />
-                                                                    <SelectedNodeStyle CssClass="selectedNode" />
+                                                                     Width="80%">
                                                                 </asp:TreeView>
                                                             </td>
                                                         </tr>

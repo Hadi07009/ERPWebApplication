@@ -21,7 +21,20 @@ namespace ERPWebApplication.AppClass.Model
         public int AccountNo { get; set; }
         public int ParentAccNo { get; set; }
         public int AccountTypeId { get; set; }
-        public string AccountName { get; set; }
+
+        private string _accountName;
+
+        public string AccountName
+        {
+            get { return _accountName; }
+            set {
+                if (value == null || value == "" )
+                {
+                    throw new Exception("Account Head is required ");
+                    
+                } _accountName = value;
+            }
+        } 
         public string AccountDescription { get; set; }
         public string EntryUserId { get; set; }
         public int SeqNo { get; set; }

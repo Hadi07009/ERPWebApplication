@@ -19,11 +19,23 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
         private TwoColumnTablesController _objTwoColumnTablesController;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            try
             {
-                Session["entryUserCode"] = "ADM";
-                ShowRecord();
+                if (!Page.IsPostBack)
+                {
+                    Session["entryUserCode"] = "ADM";
+                    ShowRecord();
+                    CompanySetup objCompanySetup = new CompanySetup();
+                    objCompanySetup.CompanyID = LoginUserInformation.CompanyID;
+                    _objTwoColumnTablesController.LoadRelatedUserRoleDDL(ddlRelatedUserRoleID, objCompanySetup);
 
+                }
+
+            }
+            catch (Exception msgException)
+            {
+
+                clsTopMostMessageBox.Show(msgException.Message);
             }
 
         }
@@ -53,6 +65,7 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
                 txtRelatedTo.Text = string.Empty;
                 btnSave.Text = "Save";
                 ddlEntrySystem.SelectedValue = "-1";
+                ddlRelatedUserRoleID.SelectedValue = "-1";
 
             }
             catch (Exception msgException)
@@ -127,10 +140,11 @@ namespace ERPWebApplication.ModuleName.Organization.MasterPage
                     string lblEntryMode = ((Label)grdTwoColumnTables.Rows[selectedIndex].FindControl("lblEntryMode")).Text;
                     string lblRelatedTo = ((Label)grdTwoColumnTables.Rows[selectedIndex].FindControl("lblRelatedTo")).Text;
                     string lblEntrySystem = ((Label)grdTwoColumnTables.Rows[selectedIndex].FindControl("lblEntrySystem")).Text;
+                    string lblRelatedUserRoleID = ((Label)grdTwoColumnTables.Rows[selectedIndex].FindControl("lblRelatedUserRoleID")).Text;
                     txtTableName.Text = lblTableName;
                     txtEntryMode.Text = lblEntryMode;
                     txtRelatedTo.Text = lblRelatedTo;
-                    ddlRelatedUserRoleID.SelectedValue = lblRelatedTo;
+                    ddlRelatedUserRoleID.SelectedValue = lblRelatedUserRoleID;
                     ddlEntrySystem.SelectedValue = lblEntrySystem;
                     btnSave.Text = "Update";
                     Session["selectedIndex"] = lblTableID;

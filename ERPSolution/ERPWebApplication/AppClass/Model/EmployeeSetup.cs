@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ERPWebApplication.AppClass.Model
 {
-    public class EmployeeSetup : BranchSetup
+    public class EmployeeSetup : TeamSetup
     {
         private string _employeeID;
 

@@ -1,31 +1,30 @@
 ﻿.GridviewScrollHeader TH, .GridviewScrollHeader TD 
 { 
-    height:27px;
-    text-align:left;
-     border:1px solid #dddddd; 
+    height:25px;
+    border:1px solid #dddddd;
+    font-family:Tahoma;
+    font-size:.9em;
+    font-weight:bold;
     background-image:-webkit-gradient(
 	linear,
 	color-stop(0, #D9DBD7),
 	color-stop(1, #FFFFFF)
 );
+
 background-image: -o-linear-gradient(left top, #D9DBD7 0%, #FFFFFF 100%);
 background-image: -moz-linear-gradient(left top, #D9DBD7 0%, #FFFFFF 100%);
 background-image: -webkit-linear-gradient(left top, #D9DBD7 0%, #FFFFFF 100%);
 background-image: -ms-linear-gradient(left top, #D9DBD7 0%, #FFFFFF 100%);
 background-image: linear-gradient(to left top, #D9DBD7 0%, #FFFFFF 100%);    
 padding:5px;
-
-
 }
 .GridviewScrollItem TD {
     cursor: default;
     padding: 5px;
     background-color: #FFFFFF;
-    text-align: left;
     height: 27px;
-  /*max-width:0;
-    white-space:normal;*/
-   
+    border-bottom: 1px solid #BDC3C7;
+    
 } 
 .GridviewScrollPager  
 { 
@@ -47,20 +46,27 @@ padding:5px;
 .GridviewScrollPager SPAN
 
 {
-
     font-size: 16px;
-
     font-weight: bold;
 
 }
 .GridviewScrollfooter TD {
-    background-color: #E2DED6;
-    font-weight: bold;
-    color: #333333;  
+    background-color: #dddddd;
+    font-family:Tahoma;
+    font-size:.9em;
+    font-weight:bold;
     height: 20px;
-  /*max-width:0;
-    white-space:normal;*/
-   
-} 
-
-
+    padding: 5px;
+    border-bottom: 1px solid #BDC3C7;
+}
+a.cssSelect
+{
+    font-family: Tahoma;
+    font-size: 0.9em;
+    font-weight: normal;    
+    color:#000;
+    text-align: left;
+    padding-top:5px;
+    padding-bottom:5px;
+       
+}

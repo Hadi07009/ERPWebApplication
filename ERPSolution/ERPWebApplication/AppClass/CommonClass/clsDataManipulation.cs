@@ -24,10 +24,6 @@ public class clsDataManipulation
             new SqlCommand(storedProcedureCommandTest, myConnection).ExecuteNonQuery();
 
         }
-        //catch (SqlException msgException)
-        //{
-        //    throw msgException;
-        //}
         catch (Exception msgException)
         {
             throw msgException;
@@ -80,6 +76,29 @@ public class clsDataManipulation
 
             }
             return seqNo;
+
+
+        }
+        catch (Exception msgException)
+        {
+
+            throw msgException;
+        }
+    }
+
+    public string GetSingleValueAsString(string connectionString, string sqlString)
+    {
+        try
+        {
+            string targetValue = null;
+            var storedProcedureComandText = @"" + sqlString + " ";
+            var dtTargetValue = clsDataManipulation.GetData(connectionString, storedProcedureComandText);
+            foreach (DataRow item in dtTargetValue.Rows)
+            {
+                targetValue = item.ItemArray[0].ToString();
+
+            }
+            return targetValue;
 
 
         }
@@ -461,7 +480,7 @@ public class clsDataManipulation
             var sqlCom = new SqlCommand(queryStr, sqlConn);
             var noOfRowsAffected = sqlCom.ExecuteNonQuery();
             sqlConn.Close();
-            return noOfRowsAffected.ToString(CultureInfo.InvariantCulture) + "  row(s) affected";
+            return noOfRowsAffected.ToString(CultureInfo.InvariantCulture) + "  rowSelected(s) affected";
         }
         catch (SqlException msgException)
         {

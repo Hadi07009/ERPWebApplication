@@ -46,13 +46,13 @@ namespace ERPWebApplication.AppClass.DataAccess
         }
 
 
-        //public static string GetClientAddress(string keybal, int companyID, int branchID)
+        //public static string GetClientAddress(string keybal, int lastPositionNo, int branchID)
         //{
         //    string sqlString = null;
         //    sqlString = "SELECT      ty.ContactAddressType, ad.DisplayAddress, na.ContactID FROM  dbo.conContactAddressDetails ad"
         //    + " INNER JOIN dbo.conContactDetailsName na ON ad.ContactAdreessID = na.ContactAdreessID "
         //    + " INNER JOIN dbo.conSetupContactAddressType ty ON ad.ContactAddressTypeID = ty.ContactAddressTypeID"
-        //    + " WHERE (na.ContactID = '" + keybal + "' and na.CompanyID=" + companyID + " and na.BranchID=" + branchID + ")";
+        //    + " WHERE (na.ContactID = '" + keybal + "' and na.CompanyID=" + lastPositionNo + " and na.BranchID=" + branchID + ")";
         //    return sqlString;
         //}
 
